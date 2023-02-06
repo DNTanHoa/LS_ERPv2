@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="DailyTargetDetailSummaryParam_DailyTargetDetailReports_ListView" IsGroupPanelVisible="True">
+      <Columns Id="Columns">
+        <ColumnInfo Id="CustomerStyle" SortIndex="0" SortOrder="Ascending" Width="127" />
+        <ColumnInfo Id="CustomerID" Width="116" />
+        <ColumnInfo Id="GarmentColorCode" Width="126" />
+        <ColumnInfo Id="Operation" SortOrder="None" GroupIndex="-1" />
+        <ColumnInfo Id="LSStyle" SortOrder="None" GroupIndex="-1" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

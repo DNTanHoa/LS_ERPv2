@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ImportStorageParam_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ImportStorageParam">
+              <LayoutItem Id="Customer" Index="1" RelativeSize="50.92478421701603" />
+              <LayoutItem Id="FilePath" ViewItem="FilePath" Index="2" RelativeSize="41.88267394270123" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="IssuedFabricParam_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="FabricInfo">
+            <LayoutGroup Id="FabricRequestDetails">
+              <LayoutItem Id="FabricRequestDetails" ViewItem="FabricRequestDetail" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ShipmentImportParam_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ShipmentImportParam">
+              <LayoutGroup Id="Auto74235ca6-4c34-4fba-a5e0-f604eb85c7d0">
+                <LayoutItem Id="Browse" ViewItem="Browse" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

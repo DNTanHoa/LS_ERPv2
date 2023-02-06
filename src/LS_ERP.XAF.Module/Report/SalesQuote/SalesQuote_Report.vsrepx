@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.1.6.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.1, Version=21.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="SalesQuote_Report" Margins="21, 17, 25, 76" PaperKind="Custom" PageWidth="995" PageHeight="1169" Version="21.1" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Extensions>
+    <Item1 Ref="2" Key="VSReportExtInfo" Value=".vsrepx" />
+  </Extensions>
+  <Bands>
+    <Item1 Ref="3" ControlType="TopMarginBand" Name="TopMargin" HeightF="25" />
+    <Item2 Ref="4" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="76" />
+    <Item3 Ref="5" ControlType="DetailBand" Name="Detail" HeightF="25">
+      <Controls>
+        <Item1 Ref="6" ControlType="XRTable" Name="xrTable3" TextAlignment="MiddleCenter" SizeF="955.999939,25" LocationFloat="0,0" Padding="2,2,0,0,96" Borders="Left, Top, Right">
+          <Rows>
+            <Item1 Ref="7" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="8" ControlType="XRTableCell" Name="xrTableCell11" Weight="1.1960285445234751" Multiline="true" Text="xrTableCell11" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="9" EventName="BeforePrint" PropertyName="Text" Expression="[VendorID]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="10" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="11" ControlType="XRTableCell" Name="xrTableCell12" Weight="1.2028351336107079" Multiline="true" Text="xrTableCell12" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[ItemID]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="13" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="14" ControlType="XRTableCell" Name="xrTableCell14" Weight="0.88197155356999135" Multiline="true" Text="xrTableCell14" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="15" EventName="BeforePrint" PropertyName="Text" Expression="[Position]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="16" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="17" ControlType="XRTableCell" Name="xrTableCell15" Weight="1.5829349207564762" Multiline="true" Text="xrTableCell15" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[ItemName]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="19" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="20" ControlType="XRTableCell" Name="xrTableCell16" Weight="0.61985765402027426" Multiline="true" Text="xrTableCell16" TextAlignment="MiddleRight">
+                  <ExpressionBindings>
+                    <Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="Round([QuantityPerUnit] * (1 + [WastagePercent] / 100), 3)" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="22" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="23" ControlType="XRTableCell" Name="xrTableCell18" Weight="0.80648831419744671" Multiline="true" Text="xrTableCell18" TextAlignment="MiddleRight">
+                  <ExpressionBindings>
+                    <Item1 Ref="24" EventName="BeforePrint" PropertyName="Text" Expression="Round([UnitPrice], 3)" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="25" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="26" ControlType="XRTableCell" Name="xrTableCell19" Weight="0.70988387932162833" Multiline="true" Text="xrTableCell19" TextAlignment="MiddleRight">
+                  <ExpressionBindings>
+                    <Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="Round([Amount],3)" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="28" UseTextAlignment="false" />
+                </Item7>
+                <Item8 Ref="29" ControlType="XRTableCell" Name="xrTableCell17" Weight="0.82460297261875" Multiline="true" Text="xrTableCell17" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="[Country]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="31" UseTextAlignment="false" />
+                </Item8>
+                <Item9 Ref="32" ControlType="XRTableCell" Name="xrTableCell13" Weight="1.2801583508559526" Multiline="true" Text="xrTableCell13" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="33" EventName="BeforePrint" PropertyName="Text" Expression="[Note]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="34" UseTextAlignment="false" />
+                </Item9>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="35" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="36" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="257.291656">
+      <Controls>
+        <Item1 Ref="37" ControlType="XRPictureBox" Name="pictureBox1" Sizing="ZoomImage" SizeF="445.304138,193.1319" LocationFloat="510.695862,48.3749237">
+          <ExpressionBindings>
+            <Item1 Ref="38" EventName="BeforePrint" PropertyName="ImageUrl" Expression="[ReportMaster].[Image]" />
+          </ExpressionBindings>
+        </Item1>
+        <Item2 Ref="39" ControlType="XRTable" Name="xrTable5" SizeF="496.458344,193.1319" LocationFloat="0,48.37491" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="40" ControlType="XRTableRow" Name="xrTableRow11" Weight="1">
+              <Cells>
+                <Item1 Ref="41" ControlType="XRTableCell" Name="xrTableCell35" Weight="1.2281533813476564" Multiline="true" Text="DATE" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="42" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="43" ControlType="XRTableCell" Name="xrTableCell36" Weight="3.4863193142729774" TextFormatString="{0:dd-MMM-yyyy}" Multiline="true" Text="xrTableCell36" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[CostingDate]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="45" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item1>
+            <Item2 Ref="46" ControlType="XRTableRow" Name="xrTableRow5" Weight="1">
+              <Cells>
+                <Item1 Ref="47" ControlType="XRTableCell" Name="xrTableCell23" Weight="1.2281533813476564" Multiline="true" Text="SEASON" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="48" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="49" ControlType="XRTableCell" Name="xrTableCell24" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell24" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[Season]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="51" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item2>
+            <Item3 Ref="52" ControlType="XRTableRow" Name="xrTableRow6" Weight="1">
+              <Cells>
+                <Item1 Ref="53" ControlType="XRTableCell" Name="xrTableCell25" Weight="1.2281533813476564" Multiline="true" Text="STYLE" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="54" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="55" ControlType="XRTableCell" Name="xrTableCell26" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell26" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="56" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[CustomerStyle]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="57" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item3>
+            <Item4 Ref="58" ControlType="XRTableRow" Name="xrTableRow7" Weight="1">
+              <Cells>
+                <Item1 Ref="59" ControlType="XRTableCell" Name="xrTableCell27" Weight="1.2281533813476564" Multiline="true" Text="GENDER" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="60" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="61" ControlType="XRTableCell" Name="xrTableCell28" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell28" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="62" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[Gender]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="63" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item4>
+            <Item5 Ref="64" ControlType="XRTableRow" Name="xrTableRow8" Weight="1">
+              <Cells>
+                <Item1 Ref="65" ControlType="XRTableCell" Name="xrTableCell29" Weight="1.2281533813476564" Multiline="true" Text="SIZE RUN" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="66" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="67" ControlType="XRTableCell" Name="xrTableCell30" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell30" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="68" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[SizeRun]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="69" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item5>
+            <Item6 Ref="70" ControlType="XRTableRow" Name="xrTableRow9" Weight="1">
+              <Cells>
+                <Item1 Ref="71" ControlType="XRTableCell" Name="xrTableCell31" Weight="1.2281533813476564" Multiline="true" Text="ITEM" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="72" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="73" ControlType="XRTableCell" Name="xrTableCell32" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell32" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="74" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[Description]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="75" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item6>
+            <Item7 Ref="76" ControlType="XRTableRow" Name="xrTableRow10" Weight="1">
+              <Cells>
+                <Item1 Ref="77" ControlType="XRTableCell" Name="xrTableCell33" Weight="1.2281533813476564" Multiline="true" Text="FACTORY CODE" TextAlignment="MiddleLeft">
+                  <StylePriority Ref="78" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="79" ControlType="XRTableCell" Name="xrTableCell34" Weight="3.4863193142729774" Multiline="true" Text="xrTableCell34" TextAlignment="MiddleLeft">
+                  <ExpressionBindings>
+                    <Item1 Ref="80" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[FactoryCode]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="81" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item7>
+          </Rows>
+          <StylePriority Ref="82" UseBorders="false" />
+        </Item2>
+        <Item3 Ref="83" ControlType="XRLabel" Name="xrLabel1" Multiline="true" Text="COSTING SHEET" SizeF="176.0417,29.25" LocationFloat="411.197449,0" Font="Arial, 14.25pt, style=Bold, charSet=0" Padding="2,2,0,0,100">
+          <StylePriority Ref="84" UseFont="false" />
+        </Item3>
+      </Controls>
+    </Item4>
+    <Item5 Ref="85" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="242.7084">
+      <Controls>
+        <Item1 Ref="86" ControlType="XRLabel" Name="xrLabel5" Multiline="true" Text="APPROVED BY:" TextAlignment="MiddleLeft" SizeF="116.6665,23" LocationFloat="724.750244,212.416718" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="87" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="88" ControlType="XRLabel" Name="xrLabel2" Multiline="true" Text="PREPARED BY:" TextAlignment="MiddleLeft" SizeF="115.2062,23" LocationFloat="0,212.416672" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="89" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="90" ControlType="XRLabel" Name="xrLabel4" Multiline="true" Text="TARGET FOB:" TextAlignment="MiddleLeft" SizeF="100,23" LocationFloat="344.487671,212.416718" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="91" UseFont="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="92" ControlType="XRLabel" Name="xrLabel6" Multiline="true" TextAlignment="MiddleLeft" SizeF="110.4167,23" LocationFloat="115.2062,212.416672" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="93" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[PrepareBy]" />
+          </ExpressionBindings>
+          <StylePriority Ref="94" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="95" ControlType="XRLabel" Name="xrLabel7" Multiline="true" TextAlignment="MiddleLeft" SizeF="100,23" LocationFloat="444.487671,212.416718" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="96" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[TargetFOBPrice]" />
+          </ExpressionBindings>
+          <StylePriority Ref="97" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="98" ControlType="XRLabel" Name="xrLabel8" Multiline="true" TextAlignment="MiddleLeft" SizeF="114.5834,23" LocationFloat="841.416565,212.416718" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="99" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[ApprovedBy]" />
+          </ExpressionBindings>
+          <StylePriority Ref="100" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="101" ControlType="XRTable" Name="xrTable6" SizeF="494.2622,193.132" LocationFloat="461.737732,10.0000067" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="102" ControlType="XRTableRow" Name="xrTableRow12" Weight="1">
+              <Cells>
+                <Item1 Ref="103" ControlType="XRTableCell" Name="xrTableCell37" Weight="2.2778138431050254" Multiline="true" Text="TOTAL COST OF MATERIAL:" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="104" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="105" ControlType="XRTableCell" Name="lbTotalCost" Weight="2.159686156894975" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="106" EventName="BeforePrint" PropertyName="Text" Expression="sum([Amount])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="107" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item1>
+            <Item2 Ref="108" ControlType="XRTableRow" Name="xrTableRow13" Weight="1">
+              <Cells>
+                <Item1 Ref="109" ControlType="XRTableCell" Name="xrTableCell39" Weight="2.2778129213671292" Multiline="true" Text="LABOUR" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="110" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="111" ControlType="XRTableCell" Name="lbLabour" Weight="2.1596870786328708" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="112" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[Labour]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="113" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item2>
+            <Item3 Ref="114" ControlType="XRTableRow" Name="xrTableRow14" Weight="1">
+              <Cells>
+                <Item1 Ref="115" ControlType="XRTableCell" Name="xrTableCell41" Weight="2.2778129213671292" Multiline="true" Text="CMT" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="116" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="117" ControlType="XRTableCell" Name="lbCMT" Weight="2.1596870786328708" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="118" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[CMTPrice]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="119" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item3>
+            <Item4 Ref="120" ControlType="XRTableRow" Name="xrTableRow15" Weight="1">
+              <Cells>
+                <Item1 Ref="121" ControlType="XRTableCell" Name="xrTableCell43" Weight="2.2778129213671292" Multiline="true" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="122" EventName="BeforePrint" PropertyName="Text" Expression="'PROFIT ' + [Profit] +'% PROFIT +' + [TestingFee] + ' testing fee'" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="123" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="124" ControlType="XRTableCell" Name="lbProfit" Weight="2.1596870786328708" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="125" EventName="BeforePrint" PropertyName="Text" Expression="Round(((ToDouble([ReportItems].[lbTotalCost].[Text]) + ToDouble([ReportItems].[lbLabour].[Text]) + ToDouble([ReportItems].[lbCMT].[Text])&#xA;) * [Profit] / 100) + [TestingFee]&#xA;, [Rounding])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="126" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item4>
+            <Item5 Ref="127" ControlType="XRTableRow" Name="xrTableRow16" Weight="1">
+              <Cells>
+                <Item1 Ref="128" ControlType="XRTableCell" Name="xrTableCell45" Weight="2.2778129213671292" Multiline="true" Text="FOB Price" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="129" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="130" ControlType="XRTableCell" Name="lbFOBPrice" Weight="2.1596870786328708" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="131" EventName="BeforePrint" PropertyName="Text" Expression="ToDouble([ReportItems].[lbTotalCost].[Text]) + ToDouble([ReportItems].[lbCMT].[Text])&#xA;+ ToDouble([ReportItems].[lbLabour].[Text])&#xA;+ ToDouble([ReportItems].[lbProfit].[Text])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="132" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item5>
+            <Item6 Ref="133" ControlType="XRTableRow" Name="xrTableRow17" Weight="1">
+              <Cells>
+                <Item1 Ref="134" ControlType="XRTableCell" Name="xrTableCell47" Weight="2.2778129213671292" Multiline="true" Text="Discount" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="135" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="136" ControlType="XRTableCell" Name="lbDiscount" Weight="2.1596870786328708" TextFormatString="{0:G29}" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="137" EventName="BeforePrint" PropertyName="Text" Expression="[ReportMaster].[Discount]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="138" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item6>
+            <Item7 Ref="139" ControlType="XRTableRow" Name="xrTableRow18" Weight="1">
+              <Cells>
+                <Item1 Ref="140" ControlType="XRTableCell" Name="xrTableCell49" Weight="2.2778129213671292" Multiline="true" Text="Final FOB" TextAlignment="MiddleLeft" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="141" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="142" ControlType="XRTableCell" Name="lbFinalFOB" Weight="2.1596870786328708" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 9.75pt, style=Bold">
+                  <StylePriority Ref="143" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item7>
+          </Rows>
+          <StylePriority Ref="144" UseBorders="false" />
+        </Item7>
+      </Controls>
+    </Item5>
+    <Item6 Ref="145" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="85.4166641">
+      <GroupFields>
+        <Item1 Ref="146" FieldName="MaterialTypeCode" />
+        <Item2 Ref="147" FieldName="MaterialSortIndex" />
+      </GroupFields>
+      <Controls>
+        <Item1 Ref="148" ControlType="XRTable" Name="xrTable1" TextAlignment="MiddleCenter" SizeF="955.999939,40.29169" LocationFloat="0,45.00001" Font="Arial, 9.75pt, style=Bold" Padding="2,2,0,0,96" Borders="Left, Right">
+          <Rows>
+            <Item1 Ref="149" ControlType="XRTableRow" Name="xrTableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="150" ControlType="XRTableCell" Name="xrTableCell1" Weight="1.1603129233643363" Multiline="true" Text="SUPPLIER" />
+                <Item2 Ref="151" ControlType="XRTableCell" Name="xrTableCell4" Weight="1.1669162484512463" Multiline="true" Text="CODE" />
+                <Item3 Ref="152" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.855634209637569" Multiline="true" Text="POSITION" />
+                <Item4 Ref="153" ControlType="XRTableCell" Name="xrTableCell5" Weight="1.5356653167980274" Multiline="true" Text="DESCRIPTION" />
+                <Item5 Ref="154" ControlType="XRTableCell" Name="xrTableCell7" Weight="0.60134749262703646" Multiline="true" Text="QTY (PC)" />
+                <Item6 Ref="155" ControlType="XRTableCell" Name="xrTableCell9" Weight="0.78240565531437722" Multiline="true" Text="UNIT COST&#xD;&#xA;(usd/yard)" />
+                <Item7 Ref="156" ControlType="XRTableCell" Name="xrTableCell8" Weight="0.68868461622802246" Multiline="true" Text="AMT(USD)" />
+                <Item8 Ref="157" ControlType="XRTableCell" Name="xrTableCell6" Weight="0.79997879967498853" Multiline="true" Text="COUNTRY" />
+                <Item9 Ref="158" ControlType="XRTableCell" Name="xrTableCell3" Weight="1.2419306915105" Multiline="true" Text="NOTE" />
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="159" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="160" ControlType="XRTable" Name="xrTable2" SizeF="956,45" LocationFloat="0,0" Padding="2,2,0,0,96">
+          <Rows>
+            <Item1 Ref="161" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="162" ControlType="XRTableCell" Name="xrTableCell10" Weight="1.2225063938618928" Multiline="true" Text="xrTableCell10" TextAlignment="MiddleCenter" Font="Arial, 11.25pt, style=Bold, charSet=0" Borders="All">
+                  <ExpressionBindings>
+                    <Item1 Ref="163" EventName="BeforePrint" PropertyName="Text" Expression="[MaterialTypeCode]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="164" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+              </Cells>
+            </Item1>
+          </Rows>
+        </Item2>
+      </Controls>
+    </Item6>
+    <Item7 Ref="165" ControlType="GroupFooterBand" Name="GroupFooter1" HeightF="36.4583321">
+      <Controls>
+        <Item1 Ref="166" ControlType="XRTable" Name="xrTable4" SizeF="955.9999,36.4583321" LocationFloat="0,0" BackColor="LightGray" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="167" ControlType="XRTableRow" Name="xrTableRow4" Weight="1">
+              <Cells>
+                <Item1 Ref="168" ControlType="XRTableCell" Name="xrTableCell20" Weight="6.9625808390283535" Multiline="true" Text="TOTAL" TextAlignment="MiddleRight" Font="Arial, 11.25pt, style=Bold, charSet=0">
+                  <StylePriority Ref="169" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="170" ControlType="XRTableCell" Name="xrTableCell22" Weight="3.0580547910422458" Multiline="true" TextAlignment="MiddleRight" Font="Arial, 11.25pt, style=Bold, charSet=0">
+                  <Summary Ref="171" Running="Group" />
+                  <ExpressionBindings>
+                    <Item1 Ref="172" EventName="BeforePrint" PropertyName="Text" Expression="Round(sumSum([Amount]), 3)" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="173" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="174" ControlType="XRTableCell" Name="xrTableCell21" Weight="3.0130064252999897" Multiline="true" />
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="175" UseBackColor="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item7>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v21.1" Name="objectDataSource1" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0ib2JqZWN0RGF0YVNvdXJjZTEiIC8+" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

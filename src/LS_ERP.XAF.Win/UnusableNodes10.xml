@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="DailyTargetSearchParam_DetailView_Chart">
+      <Items Id="Items">
+        <PropertyEditor Id="DailyTargets" View="DailyTargetSearchParam_DailyTargets_ListView_Chart" />
+      </Items>
+    </DetailView>
+  </Views>
+</Application>

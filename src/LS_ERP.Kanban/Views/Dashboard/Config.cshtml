@@ -1,0 +1,282 @@
+﻿@using DevExtreme.AspNet.Mvc
+
+@{
+    ViewData["Title"] = "System Config - Cấu hình hệ thống";
+}
+
+<section class="content">
+    <div class="container-fluid px-0">
+        <div class="row w-100 m-0">
+            <div class="card w-100 p-0" style="margin-top:1rem">
+                <div class="card-body p-2">                 
+                    <div class="row"> 
+                         <div class="col-4 col-md-2 mt-1 mt-md-0">
+                             <label class="mt-1"><b>Thời gian refresh:</b></label>                            
+                         </div> 
+                         <div class="col-4 col-md-3 mt-1 mt-md-0">
+                             <input class="form-control" id="refresh"/>                           
+                         </div>
+                         <div class="col-4 col-md-2 mt-1 mt-md-0">
+                             <label class="mt-1"><b>Thời gian slide:</b></label>                            
+                         </div> 
+                         <div class="col-4 col-md-3 mt-1 mt-md-0">
+                             <input class="form-control" id="slide"/>                           
+                         </div>
+                         <div class="col-4 col-md-2 mt-1 mt-md-0">
+                            <button class="btn btn-outline-primary mt-1 mt-md-0 w-100" type="button" onclick="setTimer()">
+                                <i class="fas fa-save"></i>
+                                Lưu
+                            </button>
+                        </div>                           
+                    </div>                                             
+                </div>
+            </div>
+            <div class="card w-100 p-0">
+                <div class="card-body p-2">
+                    <div class="row">   
+                         <div class="col-4 col-md-10 mt-1 mt-md-0">
+                             Chọn chuyền để hiển thị lên board
+                         </div>  
+                         <div class="col-4 col-md-2 mt-1 mt-md-0">
+                            <button class="btn btn-outline-primary mt-1 mt-md-0 w-100" type="button" onclick="onSearch()">
+                                <i class="fas fa-sync"></i>
+                                Khởi tạo
+                            </button>
+                        </div>                           
+                    </div>  
+                    <div class="row w-100 m-0 mt-2">  
+                          @(Html.DevExtreme().DataGrid<WorkCenterModel>()
+                            .ID("work-center-grid-container")
+                            .DataSource(new List<WorkCenterModel>())
+                            .Selection(s => s.Mode(SelectionMode.Multiple))
+                            .RemoteOperations(false)
+                            .AllowColumnReordering(true)
+                            .KeyExpr("Id")
+                            .NoDataText("Không có dữ liệu")
+                            .ShowBorders(true)
+                            .HeaderFilter(h => h.Visible(true))
+                            .Paging(p => p.PageSize(10))
+                            .Pager(p => p
+                                .ShowPageSizeSelector(true)
+                                .AllowedPageSizes(new[] { 10, 25, 50,100, 200 })
+                            )
+                            .Columns(columns => {
+                                columns.Add()
+                                    .DataField("id") 
+                                    .Caption("Mã")
+                                    .CssClass("grid-custom-header")
+                                    .DataType(GridColumnDataType.String);
+                                columns.Add()
+                                    .DataField("name")
+                                    .Caption("Tên")
+                                    .CssClass("grid-custom-header")
+                                    .DataType(GridColumnDataType.String);
+                                columns.Add()
+                                    .DataField("departmentID")
+                                    .Caption("Mã bộ phận")
+                                    .CssClass("grid-custom-header")
+                                    .DataType(GridColumnDataType.String);                                
+                            })
+                        )                        
+                    </div>
+                    <div class="row w-100 m-0 mt-2">  
+                        <div class="col-4 col-md-10 mt-1 mt-md-0">                            
+                         </div>  
+                        <div class="col-4 col-md-2 mt-1 mt-md-0">
+                            <button type="button" class="btn btn-primary w-100" onclick="onSave()">
+                                <i class="fas fa-save"></i>
+                                Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+<script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
+<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+<script>
+   $(document).ready(function() {
+        var refresh = localStorage.getItem('refresh');
+        $("#refresh").val(refresh);
+        var slide = localStorage.getItem('slide');
+        $("#slide").val(slide);
+
+        $('#overview-menu').removeClass('nav-link-active');
+        $('#compare-menu').removeClass('nav-link-active');
+        $('#board-menu').removeClass('nav-link-active');
+        $('#chart-menu').removeClass('nav-link-active');
+        $('#config-menu').addClass('nav-link-active');
+
+    });
+
+   setTimer = () =>{
+        var refresh = $("#refresh").val();
+       localStorage.setItem('refresh', refresh);
+       var refresh = $("#slide").val();
+       localStorage.setItem('slide', refresh);
+       alert("Lưu thời gian thành công!");
+   }
+
+   onSave = () => {
+      
+       //
+        var dataGrid = $("#work-center-grid-container").dxDataGrid({}).dxDataGrid("instance");
+        var dataSource = dataGrid.getDataSource().store()._array;
+        var listSelectedWorkCenters = dataGrid.getSelectedRowsData();
+        var listWorkCenterID = "";
+        for (var i = 0; i < listSelectedWorkCenters.length;i++)
+        {
+            var workCenterID = listSelectedWorkCenters[i];
+            listWorkCenterID += ","+workCenterID.id;
+        }
+        localStorage.setItem('listWorkCenterID', JSON.stringify(listWorkCenterID));    
+        var retrievedObject = localStorage.getItem('listWorkCenterID');
+        var url = "/Dashboard/Detail?ids=" + retrievedObject
+        $('#detail').attr('href', url);  
+        alert("Lưu thành công!");
+    }
+    onSearch = () => {
+        //$.blockUI({ message: 'Hệ thống đang xử lý vui lòng chờ...'})         
+        var listWorCenterID = localStorage.getItem('listWorCenterID');
+       
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetAllWorkCenter","WorkCenter")',
+            data: {
+                listWorCenterID: listWorCenterID,
+            },
+            success: (res) => {
+                if(res.success == true) {
+                   var dataGrid = $("#work-center-grid-container").dxDataGrid({}).dxDataGrid("instance");                                
+                    var dataSource = dataGrid.getDataSource();
+                    var details = dataSource.store();
+                    details._array = [];
+                    
+                    res.data.forEach((item, index) => {
+                        details.insert(item).then(() => {
+                            dataSource.reload();
+                        });
+                    });
+                    dataSource.reload();
+                }
+                else {
+                    swal({
+                        title: "Lỗi",
+                        text: res.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: (xhr, err) => {
+                $.unblockUI();
+                swal({
+                    title: "Lỗi",
+                    text: "Có lỗi trong quá trình xử lý, vui lòng thử lại sau",
+                    icon: "error"
+                });
+                console.log(xhr.responseText);
+            }
+        }).done(() => {
+          //  $.unblockUI();
+        })
+    }
+</script>
+
+
+
+
+@*<div class="content-header">
+    <div class="content-header py-0">
+        <div class="container-fluid">
+            <div class="row mb-2 w-100 m-0">
+                <div class="col-sm-6 px-0">
+                    <h1 class="m-0">Config</h1>
+                </div>
+                <div class="col-sm-6 px-0">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Kanban</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Config</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row w-100 m-0">
+            <div class="card w-100 p-1">
+                <div class="card-header p-2">
+                    <h3 class="card-title">General</h3>
+                </div>
+                <div class="card-body p-2">
+                    <div class="row w-100 m-0">
+                        <div class="col-md-1 mt-2"><b>Server:</b></div>
+                        <div class="col-md-7">
+                            <input class="form-control" placeholder="VD: https://dev-erp-api.sharedataroom.com" id="id" name="id"/>
+                        </div>
+                        <div class="col-md-1 mt-2"><b>Refesh (minute):</b></div>
+                        <div class="col-md-3">
+                            <input class="form-control" placeholder="" type="number"/>
+                        </div>
+                    </div>
+                    <hr class="my-2"/>
+                    <div class="row w-100 m-0">
+                        <div class="col-md-1 mt-2"><b>Factory:</b></div>
+                        <div class="col-md-11">
+                            <input class="form-control" placeholder="VD: Leading star" id="id" name="id"/>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="card w-100 p-1">
+                <div class="card-header p-2">
+                    <div class="col-4 col-md-10 mt-1 mt-md-0">
+                         <h3 class="card-title">Display</h3>
+                    </div>                    
+                    <div class="col-4 col-md-2 mt-1 mt-md-0">
+                        <button class="btn btn-outline-primary mt-1 mt-md-0 w-100" type="button" onclick="onSave()">
+                            <i class="fas fa-search"></i>
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-2">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Factory</th>
+                          <th scope="col">Work Center</th>
+                          <th scope="col">Timer (s)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>1</th>
+                          <td>LUCKY</td>
+                          <td>LINE 01</td>
+                          <td>60</td>
+                        </tr>
+                        <tr>
+                          <th>2</th>
+                          <td>LUCKY</td>
+                          <td>LINE 02</td>
+                          <td>60</td>
+                        </tr>
+                        <tr>
+                          <th>3</th>
+                          <td>LUCKY</td>
+                          <td>LINE 03</td>
+                          <td>60</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

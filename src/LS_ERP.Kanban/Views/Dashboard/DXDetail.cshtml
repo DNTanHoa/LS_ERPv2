@@ -1,0 +1,25 @@
+﻿@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "DXDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DXDetail</h2>
+
+@(Html.DevExtreme().DataGrid<LS_ERP.Kanban.Models.WorkCenterModel>()
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    .Columns(columns => {
+
+        columns.AddFor(m => m.ID);
+
+        columns.AddFor(m => m.WorkCenterTypeID);
+
+        columns.AddFor(m => m.Name);
+
+        columns.AddFor(m => m.DepartmentID);
+
+        columns.AddFor(m => m.AllowView);
+
+        columns.AddFor(m => m.Timer);
+    })
+)

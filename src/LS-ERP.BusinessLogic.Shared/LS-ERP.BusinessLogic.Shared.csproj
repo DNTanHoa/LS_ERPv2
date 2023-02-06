@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LS_ERP.BusinessLogic.Shared</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logic\**" />
+    <Compile Remove="Process\Receipt\**" />
+    <EmbeddedResource Remove="Logic\**" />
+    <EmbeddedResource Remove="Process\Receipt\**" />
+    <None Remove="Logic\**" />
+    <None Remove="Process\Receipt\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="EPPlus" Version="5.7.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.10" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+	<PackageReference Include="Hangfire.AspNetCore" Version="1.7.28" />
+	<PackageReference Include="Hangfire.Core" Version="1.7.28" />
+	<PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LS-ERP.EntityFrameworkCore\LS-ERP.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\LS-ERP.Ultilities\LS-ERP.Ultilities.csproj" />
+    <ProjectReference Include="..\LS_ERP.XAF.Module\LS_ERP.XAF.Module.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Process\Jobs\InventoryFG\" />
+  </ItemGroup>
+
+</Project>

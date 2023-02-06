@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Bảng thông tin sản xuất";
+}
+@model List<DailyTargetCompareOverviewModel>
+
+<div class="row mb-2 w-100 m-0 ">
+            <div class="col-3 col-md-1 mt-2">
+                 <label class="mt-1"><b>Công ty</b></label>
+            </div>
+            <div class="col-9 col-md-3 mt-2">
+                <div class="dx-field-value w-100">
+                    @(Html.DevExtreme().SelectBox()
+                    .ID("CompanyID")
+                    .DataSource(d => d.Mvc()
+                        .Controller("Company")
+                        .LoadAction("GetCompany")
+                        .LoadMode(DataSourceLoadMode.Raw)
+                        .Key("id"))
+                    .DisplayExpr("shortName")
+                    .ValueExpr("id")  
+                    .OnValueChanged("onSearch")
+                    )
+                </div>
+            </div>
+ </div>
+ <div id="dvPartial">
+
+ </div>
+
+@*<div class="content-header py-2">
+    <div class="container-fluid">
+        <div class="row mb-2 w-100 m-0">
+            <div class="col-sm-6 px-0">
+                <h1 class="m-0">Compare</h1>   
+                <div class="row mb-2 w-100 m-0"> 
+                    <div> <h4><i class="fas fa-user-hard-hat"></i>Mans: @ViewBag.TotalNumberOfWorkers -- Lines: @ViewBag.TotalLines -- </h4></div>
+                    <div style="width:15px;height:25px; background-color:red;margin-left:1rem;"></div> <div><h4 style="margin-left:0.2rem;">@ViewBag.TotalRed</h4></div>   
+                    <div style="width:15px;height:25px; background-color:yellow; margin-left:1rem;"> </div><div><h4 style="margin-left:0.2rem;">@ViewBag.TotalYellow</h4></div>   
+                    <div style="width:15px;height:25px; background-color:green;margin-left:1rem;"> </div><div><h4 style="margin-left:0.2rem;">@ViewBag.TotalGreen</h4></div>   
+                </div>
+                              
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="container-fluid">
+        @foreach(var a in Model.OrderBy(m=>m.StyleNO).ToList())
+        {
+            <hr class="my-2"/> 
+            <h4><b>Style: @a.StyleNO</b></h4>
+            <div class="row">
+                @foreach(var m in a.DailyTargetOverviewModels)
+                {
+                <div class="col-md-3">               
+                   <div class="card card-@m.Status p-0">
+                       <div class="card-header p-2">
+                           <div><h2 class="m-0 float-left"><b><a href="/Dashboard/Detail?ids=@m.WorkCenterID">@m.WorkCenterName</a></b></h2></div>
+                           <div><h4 class="m-0 float-right">@m.LastUpdateAt?.ToString("HH:mm")</h4></div>
+                       </div>
+                       <div class="card-body p-2 d-flex justify-content-between align-items-center">
+                           <div class="infor-area" style="flex-basis:80%">
+                               <p class="h5 font-weight-bold">Style: <span class="text-success">@m.StyleNO</span> - Target: <span class="text-warning">@((int)m.TotalTargetQuantity)</span></p>
+                               <p class="h5 font-weight-bold">Inline date: <span class="text-info">@m.InlineDate.ToString("dd/MM/yyyy")</span></p>
+                               <p class="h5 font-weight-bold">Manpower: <span class="text-info">@m.NumberOfWorker</span></p>
+                               <p class="h5 font-weight-bold">Total output: <span class="text-@m.Status">@((int)m.TotalOutputQuantity)</span></p>                           
+                               <p class="h5 font-weight-bold">Problem: <span class="text-@m.Status">@m.Problem</span></p>
+                           </div>
+                           <h1 class="text-right text-@m.Status m-0">@m.EfficiencyStr</h1>
+                       </div>
+                   </div>               
+                </div>
+                }
+           
+            </div>
+        }
+    </div>
+</div>*@
+<script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
+<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+    onSearch = () => {
+        $.blockUI({ message: 'Hệ thống đang xử lý vui lòng chờ...'})
+        var companyID = $("#CompanyID").dxSelectBox({}).dxSelectBox("option", "value");
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetCompare","Dashboard")',
+            data: { companyID: companyID } ,
+            success: (res) => { 
+
+                $('#dvPartial').html(res);
+            },
+            error: (xhr, err) => {
+                $.unblockUI();
+                swal({
+                    title: "Lỗi",
+                    text: "Có lỗi trong quá trình xử lý, vui lòng thử lại sau",
+                    icon: "error"
+                });
+                console.log(xhr.responseText);
+            }
+        }).done(() => {
+            $.unblockUI();
+        })
+       
+    }
+    //var refresh = localStorage.getItem('refresh');
+    //if (refresh == null) { refresh = 100000; }
+    //    function autoRefresh() {
+    //            window.location = window.location.href;
+    //        }
+    //setInterval('autoRefresh()', refresh);
+    $(document).ready(function() {
+        $('#overview-menu').removeClass('nav-link-active');
+        $('#compare-menu').addClass('nav-link-active');
+        $('#board-menu').removeClass('nav-link-active');
+        $('#chart-menu').removeClass('nav-link-active');
+        $('#config-menu').removeClass('nav-link-active');
+    });
+</script>
+

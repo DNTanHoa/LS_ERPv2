@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="DailyTargetDetailSummaryByDate_DetailView">
+      <Items Id="Items">
+        <PropertyEditor Id="DailyTargetDetailSummaryByDateDtos" PropertyEditorType="DevExpress.ExpressApp.Editors.DetailPropertyEditor" />
+      </Items>
+    </DetailView>
+  </Views>
+</Application>

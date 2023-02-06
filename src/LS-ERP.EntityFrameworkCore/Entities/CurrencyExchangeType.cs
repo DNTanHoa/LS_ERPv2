@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LS_ERP.EntityFrameworkCore.Entities
+{
+    public class CurrencyExchangeType : Audit
+    {
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string CurrencyID { get; set; }
+        public string DestinationCurrencyID { get; set; }
+
+        public virtual Currency Currency { get; set; }
+        public virtual Currency DestinationCurrency { get; set; }
+    }
+}

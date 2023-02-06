@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:custom="clr-namespace:LS_ERP.Mobile.Custom"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="LS_ERP.Mobile.Views.CuttingCardComplingScanPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <zxing:ZXingScannerView x:Name="scanner" 
+                                Grid.Row="0"
+                                VerticalOptions="FillAndExpand"/>
+        <zxing:ZXingDefaultOverlay TopText="Hướng điện thoại của bạn lên mã QR"/>
+        <StackLayout  Grid.Row="1">
+            <Frame BackgroundColor="Transparent"
+                   Margin="10,0"
+                   BorderColor="Black"
+                   CornerRadius="10"              
+                   Padding="8">
+                <StackLayout>
+                    <!--<Image HeightRequest="40"
+                                   Source="key.png"
+                                   WidthRequest="40"/>-->
+                    <custom:CustomEntry Placeholder="Mã QR"
+                                x:Name="qrCodeEntry"
+                                Text="{Binding QRCode}"
+                                PlaceholderColor="Black" 
+                                TextColor="Black"/>
+               
+                </StackLayout>
+                
+            </Frame>          
+            <Button Text="Xem"
+                    Margin="10,0"
+                    CornerRadius="10"
+                    x:Name="btnView"
+                    BackgroundColor="#09C"
+                    TextColor="#FFF"
+                    Command="{Binding ViewCuttingCardCommand}"
+                    WidthRequest="150"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

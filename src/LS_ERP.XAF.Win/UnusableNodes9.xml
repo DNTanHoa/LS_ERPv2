@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="DailyTargetSearchParam_LookupListView_Chart" MasterDetailView="DailyTargetSearchParam_DetailView_Chart" DetailViewID="DailyTargetSearchParam_DetailView_Chart" />
+    <ListView Id="DailyTargetSearchParam_ListView_Chart" MasterDetailView="DailyTargetSearchParam_DetailView_Chart" DetailViewID="DailyTargetSearchParam_DetailView_Chart" />
+    <ListView Id="DailyTargetSearchParam_DailyTargets_ListView_Chart" DetailViewID="DailyTargetReportParam_DetailView_Chart" />
+    <ListView Id="DailyTargetReportParam_LookupListView_Chart" DetailViewID="DailyTargetReportParam_DetailView_Chart" />
+  </Views>
+</Application>

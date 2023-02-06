@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="ItemStyle_DetailView_Details">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs" RelativeSize="100">
+            <LayoutGroup Id="OrderDetails" TextAlignMode="AlignWithChildren" Direction="Vertical" Caption="Order Details">
+              <LayoutItem Id="OrderDetails" TextAlignMode="AutoSize" RelativeSize="100" />
+            </LayoutGroup>
+            <LayoutGroup Id="Barcodes" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="Barcodes" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

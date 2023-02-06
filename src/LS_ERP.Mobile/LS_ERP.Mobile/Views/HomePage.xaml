@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:layout="clr-namespace:LS_ERP.Mobile.Custom" 
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}"
+             x:Name="HomePageView"
+             x:Class="LS_ERP.Mobile.Views.HomePage">
+    <ScrollView >
+        <StackLayout VerticalOptions="Start" >
+            <StackLayout BackgroundColor="ForestGreen">
+                <Label Text="{Binding Title}" 
+                       Margin="8,14"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontFamily="Mullish"
+                       FontSize="20"/>
+            </StackLayout>
+            <layout:CustomLayout VerticalOptions="Start" 
+                     BindableLayout.ItemsSource="{Binding  Functions, Mode=TwoWay, UpdateSourceEventName=PropertyChagned}"
+                     Margin="8">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame CornerRadius="10"
+                                   Padding="4"                                   
+                                   WidthRequest="80"
+                                   HeightRequest="80"
+                                   BorderColor="ForestGreen">   
+                                <StackLayout BackgroundColor="White" 
+                                             Spacing="0"
+                                             Padding="5">
+                                    <Image Source="{Binding Image}" 
+                                           WidthRequest="40"
+                                           HeightRequest="40"
+                                           Aspect="AspectFit"></Image>
+                                    <Label Text="{Binding Description}"
+                                           FontSize="14"
+                                           Margin="0"
+                                           Padding="0"
+                                           HorizontalTextAlignment="Center"
+                                           HorizontalOptions="Center"
+                                           FontAttributes="Bold"
+                                           FontFamily="Mullish"></Label>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.NavigateCommand, Source={x:Reference Name=HomePageView}}"
+                                              CommandParameter="{Binding Path}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </layout:CustomLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Problem_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Audit">
+              <LayoutItem Id="CreatedBy" RelativeSize="6.451612903225806" />
+              <LayoutItem Id="LastUpdatedBy" RelativeSize="5.591397849462366" />
+              <LayoutItem Id="CreatedAt" RelativeSize="5.591397849462366" />
+              <LayoutItem Id="LastUpdatedAt" RelativeSize="82.36559139784946" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

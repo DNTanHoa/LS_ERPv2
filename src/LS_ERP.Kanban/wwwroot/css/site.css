@@ -1,0 +1,114 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+#login-body {
+    background-image: url('/images/garment-background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+    #login-body::before {
+        position: absolute;
+        background-color: black;
+        content: '';
+        opacity: 0.5;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+.brand-text-custom {
+    color: forestgreen;
+}
+
+.logo {
+    border: 1px solid forestgreen;
+    padding: 5px;
+}
+
+.nav-link-active {
+    color: #28A745 !important;
+}
+
+/*
+    Custom for devextrem
+*/
+
+#chart {
+    height: 440px;
+}
+
+.tooltip-header {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.tooltip-body {
+    width: 170px;
+}
+
+    .tooltip-body .series-name {
+        font-weight: normal;
+        opacity: 0.6;
+        display: inline-block;
+        line-height: 1.5;
+        padding-right: 10px;
+        width: 126px;
+    }
+
+    .tooltip-body .value-text {
+        display: inline-block;
+        line-height: 1.5;
+        width: 30px;
+    }
+
+.grid-custom-header[role="columnheader"] {
+    font-size: 17px;
+    color: black;
+    font-weight: bold;
+}
+
+/**/
+.menu-box {
+    background-color: forestgreen;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+}
+
+.menu-box-container {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border: solid 1px forestgreen;
+    border-radius: 10px;
+}
+.menu-icon {
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    margin: auto;
+    padding-top: 15px;
+}
+
+.menu-text {
+    font-size: 18px;
+}

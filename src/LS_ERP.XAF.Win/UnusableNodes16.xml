@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="PurchaseOrderReportSearchParam_PurchaseOrderChartDetails_ListView">
+      <ChartSettings Id="ChartSettings" Settings="﻿&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xD;&#xA;&lt;ChartXmlSerializer version=&quot;21.2.6.0&quot;&gt;&#xD;&#xA;  &lt;Chart AppearanceNameSerializable=&quot;Default&quot; SelectionMode=&quot;None&quot; SeriesSelectionMode=&quot;Series&quot;&gt;&#xD;&#xA;    &lt;DataContainer BoundSeriesSorting=&quot;None&quot; SeriesDataMember=&quot;OrderDate&quot; ValidateDataMembers=&quot;true&quot;&gt;&#xD;&#xA;      &lt;SeriesSerializable&gt;&#xD;&#xA;        &lt;Item1 Name=&quot;Series 1&quot; ArgumentDataMember=&quot;OrderDate&quot; ColorDataMember=&quot;ID&quot; LabelsVisibility=&quot;True&quot;&gt;&#xD;&#xA;          &lt;DateTimeSummaryOptions SummaryFunction=&quot;COUNT()&quot; /&gt;&#xD;&#xA;        &lt;/Item1&gt;&#xD;&#xA;      &lt;/SeriesSerializable&gt;&#xD;&#xA;      &lt;SeriesTemplate SeriesDataMember=&quot;OrderDate&quot; /&gt;&#xD;&#xA;    &lt;/DataContainer&gt;&#xD;&#xA;    &lt;Diagram RuntimePaneCollapse=&quot;true&quot; RuntimePaneResize=&quot;false&quot; PaneLayoutDirection=&quot;Vertical&quot; TypeNameSerializable=&quot;XYDiagram&quot;&gt;&#xD;&#xA;      &lt;AxisX StickToEnd=&quot;false&quot; VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.6&quot; EndSideMargin=&quot;0.6&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisX&gt;&#xD;&#xA;      &lt;AxisY VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.89&quot; EndSideMargin=&quot;0.89&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisY&gt;&#xD;&#xA;      &lt;SelectionOptions /&gt;&#xD;&#xA;    &lt;/Diagram&gt;&#xD;&#xA;    &lt;Legend CrosshairContentOffset=&quot;4&quot; MaxCrosshairContentWidth=&quot;50&quot; MaxCrosshairContentHeight=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;/Chart&gt;&#xD;&#xA;&lt;/ChartXmlSerializer&gt;" />
+    </ListView>
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="report-management">
+        <Items Id="Items">
+          <Item Id="purchase-report">
+            <Items Id="Items">
+              <Item Id="Purchase Order Detail" Removed="True" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

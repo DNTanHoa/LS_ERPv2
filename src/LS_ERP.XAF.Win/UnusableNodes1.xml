@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="SalesQuote_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <TabbedGroup Id="Tabs" RelativeSize="40.373831775700936">
+            <LayoutGroup Id="SalesQuoteDetails" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="SalesQuoteDetails" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+            <LayoutGroup Id="SalesQuoteLogs" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="SalesQuoteLogs" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="SalesQuote" RelativeSize="70.83333333333333">
+              <LayoutGroup Id="SalesQuote_col1" RelativeSize="49.509803921568626" />
+              <LayoutGroup Id="SalesQuote_col2" RelativeSize="50.490196078431374" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

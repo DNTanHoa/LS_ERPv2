@@ -1,0 +1,20 @@
+﻿using LS_ERP.XAF.Module.Service.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LS_ERP.XAF.Module.Service
+{
+    public class CommonRespone
+    {
+        public CommonResult Result { get; set; }
+
+        public virtual CommonRespone SetResult(bool IsSuccess, string Message)
+        {
+            this.Result = new CommonResult(IsSuccess, Message);
+            return this;
+        }
+    }
+}

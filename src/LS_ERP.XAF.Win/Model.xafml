@@ -1,0 +1,1112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Logo="ExpressAppLogo">
+  <BOModel>
+    <Class Name="LS_ERP.XAF.Module.DomainComponent.DailyTargetDetailSummaryByDate" DefaultLookupEditorMode="Auto">
+      <AppearanceRules>
+        <AppearanceRule Id="normal" TargetItems="*" FontColor="Black" BackColor="White" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.XAF.Module.DomainComponent.PurchasePopupModel">
+      <OwnMembers>
+        <Member Name="PurchaseOrder" LookupProperty="Number" />
+      </OwnMembers>
+    </Class>
+    <Class Name="LS_ERP.XAF.Module.DomainComponent.ReceiptReportDetail">
+      <AppearanceRules>
+        <AppearanceRule Id="Quantity" BackColor="White" FontColor="Red" />
+      </AppearanceRules>
+    </Class>
+  </BOModel>
+  <NavigationItems NavigationStyle="Accordion" ShowImages="True" DefaultChildItemsDisplayStyle="List" StartupNavigationItem="sale-order">
+    <Items>
+      <Item Id="report-management">
+        <Items>
+          <Item Id="Daily" IsNewNode="True" Removed="True">
+            <Items IsNewNode="True">
+              <Item Id="JobOutput" ObjectKey="0" Caption="Job Output" ViewId="DailyTargetDetailSummaryByDate_DetailView" IsNewNode="True" />
+              <Item Id="Output" ObjectKey="0" ViewId="DailyTargetDetailSummary_DetailView" Caption="Output" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="production-report" Caption="Production Report" IsNewNode="True" Removed="True" />
+          <Item Id="purchase-report" Caption="Purchase Report" />
+        </Items>
+      </Item>
+      <Item Id="inventory-management">
+        <Items>
+          <Item Id="organization">
+            <Items>
+              <Item Id="storage-bin-entry" Caption="Storage Bin Entry" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="storage" Removed="True" />
+          <Item Id="transaction" Removed="True" />
+        </Items>
+      </Item>
+      <Item Id="job-management">
+        <Items>
+          <Item Id="out-put">
+            <Items>
+              <Item Id="DailySearch" Caption="Daily" />
+              <Item Id="DailyTargetDetail" Caption="Daily Detail" ViewId="DailyTargetDetailReportParam_DetailView" />
+              <Item Id="report" ViewId="DailyTargetDetailSearchParam_DetailView" />
+            </Items>
+          </Item>
+          <Item Id="setup">
+            <Items>
+              <Item Id="problem" Caption="Problem" ViewId="Problem_ListView" IsNewNode="True" />
+              <Item Id="WorkingTime" ViewId="WorkingTime_ListView" IsNewNode="True" />
+              <Item Id="WorkingTime_Chart" ViewId="WorkingTime_ListView_Chart" Caption="Working Time Chart" IsNewNode="True" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+      <Item Id="setup-management">
+        <Items>
+          <Item Id="box-dimension" Caption="Box Dimension" IsNewNode="True" />
+          <Item Id="pad" ViewId="Pad_ListView" IsNewNode="True" />
+          <Item Id="styles" Caption="Styles" ViewId="Part_ListView" IsNewNode="True" />
+          <Item Id="tax" Caption="VAT" />
+        </Items>
+      </Item>
+      <Item Id="packing-management">
+        <Items>
+          <Item Id="Search_Ls_Style" ObjectKey="0" />
+        </Items>
+      </Item>
+      <Item Id="permission-management">
+        <Items>
+          <Item Id="account-detail" ObjectKey="@CurrentUserID" ImageName="Tasks" />
+          <Item Id="user" ImageName="Tasks" />
+          <Item Id="role" ImageName="Tasks" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options UIType="MultipleWindowSDI" FormStyle="Standard" ShowTabImage="False" UseAsyncLoading="True" DataAccessMode="InstantFeedbackView">
+    <LayoutManagerOptions EnableLayoutGroupImages="True" GroupStyle="Inherited" />
+  </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="21.2.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.Decimal" DefaultEditMask="N4" DefaultDisplayFormat="{0:G29}" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="40.101522842639596" Direction="Vertical" Caption="SimpleEditors" TextAlignMode="AlignWithChildren">
+            <LayoutGroup Id="Item1" ShowCaption="True" Caption="Account Information" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="30.80168776371308" IsNewNode="True">
+              <LayoutItem Id="UserName" ViewItem="UserName" Index="0" RelativeSize="34.51704545454545" IsNewNode="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="33.23863636363637" IsNewNode="True" />
+              <LayoutItem Id="ChangePasswordOnFirstLogon" ViewItem="ChangePasswordOnFirstLogon" Index="2" RelativeSize="32.24431818181818" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ApplicationUser" RelativeSize="77.60736196319019" Caption="Personal Information" Index="1" Removed="True">
+              <LayoutGroup Id="ApplicationUser_col1" RelativeSize="50">
+                <LayoutItem Id="Email" RelativeSize="63.96396396396396" />
+                <LayoutItem Id="FullName" RelativeSize="14.414414414414415" />
+                <LayoutItem Id="NormalizedPhone" RelativeSize="10.81081081081081" />
+                <LayoutItem Id="Phone" RelativeSize="10.81081081081081" />
+              </LayoutGroup>
+              <LayoutGroup Id="ApplicationUser_col2" RelativeSize="50">
+                <LayoutItem Id="ImageData" Index="2" RelativeSize="74.77477477477477" />
+                <LayoutItem Id="NormalizedEmail" RelativeSize="14.414414414414415" />
+                <LayoutItem Id="Signature" Removed="True" />
+                <LayoutItem Id="Supervisor" RelativeSize="10.81081081081081" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Auto38d4617f-e289-450a-91ab-d9110cff1b5a" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="69.19831223628692" IsNewNode="True">
+              <LayoutGroup Id="ApplicationUser" ShowCaption="True" Caption="Personal Information" Direction="Horizontal" Index="0" RelativeSize="67.07988980716253" IsNewNode="True">
+                <LayoutGroup Id="ApplicationUser_col1" ShowCaption="False" Index="0" RelativeSize="51.702127659574465" IsNewNode="True">
+                  <LayoutItem Id="FullName" ViewItem="FullName" Index="0" RelativeSize="24.06015037593985" IsNewNode="True" />
+                  <LayoutItem Id="Phone" ViewItem="Phone" Index="1" RelativeSize="18.045112781954888" IsNewNode="True" />
+                  <LayoutItem Id="NormalizedPhone" ViewItem="NormalizedPhone" Index="2" RelativeSize="57.89473684210526" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="ApplicationUser_col2" ShowCaption="False" Index="1" RelativeSize="48.297872340425535" IsNewNode="True">
+                  <LayoutItem Id="Email" ViewItem="Email" Index="0" RelativeSize="24.06015037593985" IsNewNode="True" />
+                  <LayoutItem Id="NormalizedEmail" ViewItem="NormalizedEmail" Index="1" RelativeSize="18.045112781954888" IsNewNode="True" />
+                  <LayoutItem Id="Supervisor" ViewItem="Supervisor" Index="2" RelativeSize="57.89473684210526" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="ImageData" ShowCaption="False" ViewItem="ImageData" Index="1" RelativeSize="32.92011019283746" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="PermissionPolicyUser" Caption="PermissionPolicyUser" RelativeSize="6.0606060606060606" Direction="Vertical" Index="2" Removed="True">
+              <LayoutItem Id="UserName" ViewItem="UserName" Index="0" RelativeSize="50" Removed="True" />
+              <LayoutItem Id="IsActive" ViewItem="IsActive" Index="1" RelativeSize="23.034934497816593" Removed="True" />
+              <LayoutItem Id="ChangePasswordOnFirstLogon" Index="2" RelativeSize="26.965065502183407" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Roles_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="59.898477157360404">
+            <LayoutItem Id="Roles" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="BoxDimension_ListView">
+      <Columns>
+        <ColumnInfo Id="Length" Index="1" />
+        <ColumnInfo Id="Width" Index="2" />
+        <ColumnInfo Id="Height" Index="3" />
+        <ColumnInfo Id="Weight" Index="4" />
+      </Columns>
+    </ListView>
+    <ListView Id="DailyTargetDetailSearchParam_DailyTargetDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="DailyTargetID" Width="87" />
+        <ColumnInfo Id="Name" SortOrder="Ascending" />
+        <ColumnInfo Id="CustomerID" Width="81" />
+        <ColumnInfo Id="CustomerName" Width="102" />
+        <ColumnInfo Id="StyleNO" Width="132" />
+        <ColumnInfo Id="WorkCenterID" Width="104" />
+        <ColumnInfo Id="WorkCenterName" Width="115" />
+        <ColumnInfo Id="TotalTargetQuantity" Width="113" />
+        <ColumnInfo Id="TotalOrderQuantity" Width="113" />
+        <ColumnInfo Id="NumberOfWorker" DisplayFormat="{0}%" EditMask="" DataSourcePropertyIsNullMode="SelectNothing" Width="121" />
+        <ColumnInfo Id="ProduceDate" Width="114" />
+        <ColumnInfo Id="InlineDate" Width="77" />
+        <ColumnInfo Id="Operation" Width="79" />
+        <ColumnInfo Id="IsAllocated" Width="71" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DailyTargetDetailSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="12.93233082706767">
+            <LayoutGroup Id="DailyTargetDetailSearchParam" Direction="Vertical">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Search" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="29.040097205346296" IsNewNode="True" />
+                <LayoutItem Id="Operation" ViewItem="Operation" Index="1" RelativeSize="26.48845686512758" IsNewNode="True" />
+                <LayoutItem Id="FromDate" ViewItem="FromDate" Index="2" RelativeSize="21.992709599027947" IsNewNode="True" />
+                <LayoutItem Id="ToDate" ViewItem="ToDate" Index="3" RelativeSize="22.478736330498176" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Customer" Removed="True" />
+              <LayoutItem Id="FromDate" Removed="True" />
+              <LayoutItem Id="Operation" Removed="True" />
+              <LayoutItem Id="ToDate" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="DailyTargetDetails_Group" TextAlignMode="AlignWithChildren" RelativeSize="87.06766917293233" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DailyTargetDetailSummary_DailyTargetDetailReports_ListView" AutoExpandAllGroups="True" IsGroupPanelVisible="False" GroupSummary="OrderQuantity:Sum,(Order Quantity: SUM={0:0.##});OutputQuantity:Sum,(Output Quantity: SUM={0:0.##})">
+      <Columns>
+        <ColumnInfo Id="CustomerStyle" Width="154" Index="0" />
+        <ColumnInfo Id="CustomerID" Index="1" Width="94" />
+        <ColumnInfo Id="GarmentColorName" Width="141" Index="2" />
+        <ColumnInfo Id="GarmentColorCode" Width="133" Index="3" />
+        <ColumnInfo Id="LSStyle" Index="4" Width="146" SortOrder="Ascending" GroupIndex="0" />
+        <ColumnInfo Id="Season" Width="84" />
+        <ColumnInfo Id="Description" Width="208" />
+        <ColumnInfo Id="GarmentSize" Width="117" />
+        <ColumnInfo Id="OrderQuantity" Width="90" />
+        <ColumnInfo Id="OutputQuantity" Width="105" Index="9" />
+        <ColumnInfo Id="Operation" Width="92" SortOrder="Ascending" GroupIndex="1" Index="10" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DailyTargetDetailSummary_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="12.93233082706767">
+            <LayoutGroup Id="DailyTargetDetailSummary" RelativeSize="100" Caption="DailyTargetDetailSummary" Direction="Vertical">
+              <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="25" Removed="True" />
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Search" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="24.908869987849332" IsNewNode="True" />
+                <LayoutItem Id="Style" ViewItem="Style" Index="1" RelativeSize="24.908869987849332" IsNewNode="True" />
+                <LayoutItem Id="FromDate" ViewItem="FromDate" Index="2" RelativeSize="24.908869987849332" IsNewNode="True" />
+                <LayoutItem Id="ToDate" ViewItem="ToDate" Index="3" RelativeSize="25.273390036452003" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Style" ViewItem="Style" Index="1" RelativeSize="25" Removed="True" />
+              <LayoutItem Id="FromDate" ViewItem="FromDate" Index="2" RelativeSize="24.882075471698112" Removed="True" />
+              <LayoutItem Id="ToDate" Index="3" RelativeSize="25.117924528301888" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="DailyTargetDetailReports_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="87.06766917293233">
+            <LayoutItem Id="DailyTargetDetailReports" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="DailyTargetDetailSummaryByDate_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="13.76">
+            <LayoutGroup Id="DailyTargetDetailSummaryByDate" RelativeSize="100" Caption="DailyTargetDetailSummaryByDate" Direction="Vertical">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Search" IsNewNode="True">
+                <LayoutItem Id="Customer" Index="0" RelativeSize="33.333333333333336" ViewItem="Customer" IsNewNode="True" />
+                <LayoutItem Id="Operation" Index="1" RelativeSize="33.333333333333336" ViewItem="Operation" IsNewNode="True" />
+                <LayoutItem Id="ProduceDate" Index="2" RelativeSize="33.333333333333336" ViewItem="ProduceDate" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" Index="1" RelativeSize="37.76" />
+          <LayoutGroup Id="ListDetail" RelativeSize="48.48" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DailyTargetDetailSummaryByDate_ListDetail_ListView" IsGroupPanelVisible="False" GroupSummary="Efficiency:Sum,(Efficiency: SUM={0:0.##});Quantity:Sum,(Quantity: SUM={0:0.##})" AutoExpandAllGroups="True">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Index="-1" Width="106" />
+        <ColumnInfo Id="DailyTargetID" Index="-1" Width="85" />
+        <ColumnInfo Id="ID" Index="-1" />
+        <ColumnInfo Id="Name" Index="-1" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="StyleNO" Index="-1" Width="80" />
+        <ColumnInfo Id="UserName" Index="-1" />
+        <ColumnInfo Id="CustomerName" Index="0" Width="106" />
+        <ColumnInfo Id="LSStyle" Index="1" Width="144" />
+        <ColumnInfo Id="WorkCenterID" Index="2" Width="114" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="Size" Index="3" Width="133" />
+        <ColumnInfo Id="Operation" Index="4" Width="88" />
+        <ColumnInfo Id="Remark" Index="5" Width="139" />
+        <ColumnInfo Id="Quantity" Index="6" />
+        <ColumnInfo Id="SMV" Index="7" />
+        <ColumnInfo Id="InlineDate" Index="8" Width="90" />
+        <ColumnInfo Id="ProduceDate" Index="9" Width="109" />
+        <ColumnInfo Id="NumberOfWorker" Index="10" Width="124" />
+        <ColumnInfo Id="WorkCenterName" Index="11" Width="118" SortOrder="Ascending" GroupIndex="0" />
+        <ColumnInfo Id="Efficiency" Index="12" />
+        <ColumnInfo Id="TotalOrderQuantity" Index="13" Width="124" />
+        <ColumnInfo Id="TotalTargetQuantity" Index="14" Width="124" />
+      </Columns>
+    </ListView>
+    <ListView Id="DailyTargetDetailSummaryByDate_ListView" EditorTypeName="DevExpress.ExpressApp.Win.Editors.GridListEditor" />
+    <ListView Id="DailyTargetSearchParam_DailyTargets_ListView">
+      <Columns>
+        <ColumnInfo Id="StyleNO" Width="147" />
+      </Columns>
+    </ListView>
+    <DetailView Id="DailyTargetSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="13.715277777777779">
+            <LayoutGroup Id="DailyTargetSearchParam" Direction="Vertical">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Search" IsNewNode="True">
+                <LayoutItem Id="CompanyID" ViewItem="CompanyID" Index="0" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="ProduceDate" ViewItem="ProduceDate" Index="1" RelativeSize="50" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="CompanyID" Removed="True" />
+              <LayoutItem Id="ProduceDate" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="DailyTargets_Group" TextAlignMode="AlignWithChildren" RelativeSize="86.28472222222223" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Issued_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="32.28782287822878">
+            <LayoutGroup Id="Issued" RelativeSize="71.02526002971769">
+              <LayoutGroup Id="Issued_col1" RelativeSize="48.15618221258134" />
+              <LayoutGroup Id="Issued_col2" RelativeSize="51.84381778741866" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" RelativeSize="28.974739970282318" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="67.71217712177122">
+            <LayoutGroup Id="IssuedGroupLines" TextAlignMode="AlignWithChildren" RelativeSize="100" Caption="IssuedGroupLines">
+              <LayoutItem Id="IssuedGroupLines" Index="0" RelativeSize="100" ViewItem="IssuedGroupLines" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="IssuedLines" TextAlignMode="AlignWithChildren" RelativeSize="100">
+              <LayoutItem Id="IssuedLines" TextAlignMode="AutoSize" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemPriceSearchParam_ItemPrices_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="82" />
+        <ColumnInfo Id="CreatedBy" Width="82" />
+        <ColumnInfo Id="ID" Width="82" />
+        <ColumnInfo Id="LastUpdatedAt" Width="82" />
+        <ColumnInfo Id="LastUpdatedBy" Width="82" />
+        <ColumnInfo Id="ItemID" Width="82" />
+        <ColumnInfo Id="ItemCode" Width="82" />
+        <ColumnInfo Id="ItemName" Width="220" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="ItemColorCode" Width="110" />
+        <ColumnInfo Id="ItemColorName" Width="112" />
+        <ColumnInfo Id="Specify" Width="82" />
+        <ColumnInfo Id="Position" Width="82" />
+        <ColumnInfo Id="Season" Width="82" />
+        <ColumnInfo Id="LabelCode" Width="82" />
+        <ColumnInfo Id="PriceUnitID" Width="82" />
+        <ColumnInfo Id="CurrencyID" Width="82" />
+        <ColumnInfo Id="CustomerID" Width="82" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="ShippingTermCode" Width="82" />
+        <ColumnInfo Id="Price" Width="82" />
+        <ColumnInfo Id="VendorID" Width="82" />
+        <ColumnInfo Id="EffectDate" Width="82" />
+        <ColumnInfo Id="MaterialTypeCode" Width="82" />
+        <ColumnInfo Id="PriceUnit" Width="82" />
+        <ColumnInfo Id="Currency" Width="82" />
+        <ColumnInfo Id="ShippingTerm" Width="82" />
+        <ColumnInfo Id="Customer" Width="82" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyle_Barcodes_ListView_Packing">
+      <Columns>
+        <ColumnInfo Id="BarCode" Width="102" AllowEdit="False" />
+        <ColumnInfo Id="Size" Width="177" AllowEdit="False" />
+        <ColumnInfo Id="Color" Width="91" AllowEdit="True" />
+        <ColumnInfo Id="UE" Width="52" AllowEdit="True" />
+        <ColumnInfo Id="PCB" Width="56" />
+        <ColumnInfo Id="Packing" Width="140" />
+        <ColumnInfo Id="Quantity" AllowEdit="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemStyle_DetailView_Details">
+      <Layout>
+        <LayoutGroup Id="Main" TextAlignMode="AlignWithChildren" Direction="Vertical" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemStyle_DetailView_DetailsPivot">
+      <Items>
+        <PropertyEditor Id="OrderDetails" ImmediatePostData="True" />
+        <PropertyEditor Id="PackingOverQuantities" ImmediatePostData="True" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ItemStyle_DetailView_Packing" FreezeLayout="False" AllowEdit="True">
+      <Items>
+        <PropertyEditor Id="MSRP" AllowEdit="True" />
+      </Items>
+    </DetailView>
+    <ListView Id="ItemStyle_OrderDetails_ListView_Pivot" ClassName="LS_ERP.EntityFrameworkCore.Entities.OrderDetail" DataAccessMode="Client" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor" IsNewNode="True" Removed="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="ID" PropertyName="ID" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyle" PropertyName="ItemStyle" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyleNumber" PropertyName="ItemStyleNumber" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Size" PropertyName="Size" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="ReservedQuantity" PropertyName="ReservedQuantity" Index="2" Width="107" IsNewNode="True" />
+        <ColumnInfo Id="SizeSortIndex" PropertyName="SizeSortIndex" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ConsumedQuantity" PropertyName="ConsumedQuantity" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="OldQuantity" PropertyName="OldQuantity" Index="4" Width="72" IsNewNode="True" />
+        <ColumnInfo Id="Price" PropertyName="Price" Index="7" IsNewNode="True" />
+      </Columns>
+      <PivotSettings Settings="﻿&lt;XtraSerializer version=&quot;1.0&quot; application=&quot;PivotGrid&quot;&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutVersion&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutScaleFactor&quot;&gt;@1,Width=1@1,Height=1&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedColumnFieldValues&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;Fields&quot; iskey=&quot;true&quot; value=&quot;3&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Item1&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;ColumnArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortMode&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ActualSortMode&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item2&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;DataArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item3&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_1_ItemStyle&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ItemStyle.ColorCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Prefilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Criteria&quot; isnull=&quot;true&quot; /&gt;&#xD;&#xA;    &lt;property name=&quot;ShowOperandTypeIcon&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Enabled&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsCustomization&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;CustomizationFormStyle&quot;&gt;Excel2007&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsChartDataSource&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DataProvideMode&quot;&gt;UseCustomSettings&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsView&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowDataHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowFilterHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DefaultFilterEditorView&quot;&gt;VisualAndText&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedLineWidth&quot;&gt;2&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Groups&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatRules&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatConditions&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;&lt;/XtraSerializer&gt;" AddNewColumns="False" CustomizationEnabled="False" IsNewNode="True" />
+    </ListView>
+    <ListView Id="ItemStyle_PackingOverQuantities_ListView_Pivot" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor">
+      <PivotSettings Settings="﻿&lt;XtraSerializer version=&quot;1.0&quot; application=&quot;PivotGrid&quot;&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutVersion&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutScaleFactor&quot;&gt;@1,Width=1@1,Height=1&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedColumnFieldValues&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;Fields&quot; iskey=&quot;true&quot; value=&quot;3&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Item1&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;ColumnArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortMode&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ActualSortMode&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item2&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;DataArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Quantity&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:G29}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item3&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_1_ColorCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ColorCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Color&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Prefilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Criteria&quot; isnull=&quot;true&quot; /&gt;&#xD;&#xA;    &lt;property name=&quot;ShowOperandTypeIcon&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Enabled&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilterPopup&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowToolbar&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsCustomization&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;CustomizationFormStyle&quot;&gt;Excel2007&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsChartDataSource&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DataProvideMode&quot;&gt;UseCustomSettings&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsView&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnGrandTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowGrandTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnGrandTotalHeader&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowGrandTotalHeader&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowDataHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowFilterHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DefaultFilterEditorView&quot;&gt;VisualAndText&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedLineWidth&quot;&gt;2&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Groups&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatRules&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatConditions&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;&lt;/XtraSerializer&gt;" CustomizationEnabled="False" AddNewColumns="False" />
+    </ListView>
+    <ListView Id="ItemStyle_ProductionBOMs_ListView">
+      <Columns>
+        <ColumnInfo Id="ExternalCode" Index="0" Width="95" />
+        <ColumnInfo Id="ItemID" Index="1" />
+        <ColumnInfo Id="ItemName" Width="120" Index="2" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="ItemStyleNumber" Index="3" />
+        <ColumnInfo Id="PartMaterialID" Index="3" Removed="True" />
+        <ColumnInfo Id="ItemColorCode" Index="4" />
+        <ColumnInfo Id="ItemColorName" Index="5" />
+        <ColumnInfo Id="Specify" Index="6" />
+        <ColumnInfo Id="Position" Index="7" />
+        <ColumnInfo Id="VendorID" Index="8" Caption="Vendor" />
+        <ColumnInfo Id="PerUnitID" SortIndex="0" SortOrder="Ascending" DataSourcePropertyIsNullMode="SelectNothing" Caption="Per Unit" />
+        <ColumnInfo Id="PriceUnitID" Caption="Price Unit" />
+        <ColumnInfo Id="CurrencyID" Caption="Currency" />
+        <ColumnInfo Id="Currency" Removed="True" />
+        <ColumnInfo Id="PerUnit" Removed="True" />
+        <ColumnInfo Id="PriceUnit" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyleSearchParam_Styles_ListView_Packing">
+      <HiddenActions>
+        <ActionLink ActionId="ChangeItemStyleAction" IsNewNode="True" />
+        <ActionLink ActionId="ExportItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="PullBomTypeItemStyle" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <DetailView Id="MaterialRequest_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="24.85981308411215">
+            <LayoutGroup Id="Auto9438a933-67ce-46ad-8dca-114c27a0f7dc">
+              <LayoutGroup Id="Auto88933e87-9f38-4dc5-bb7f-32f49be20983" RelativeSize="49.853372434017594">
+                <LayoutGroup Id="MaterialRequest">
+                  <LayoutGroup Id="Auto0f0778cf-f1ac-4909-9ae8-d0bc5f0b6e7a" RelativeSize="65.95744680851064">
+                    <LayoutGroup Id="MaterialRequest_col1" RelativeSize="49.845201238390096">
+                      <LayoutItem Id="Storage" RelativeSize="51.61290322580645" />
+                      <LayoutItem Id="RequestFor" RelativeSize="48.38709677419355" />
+                    </LayoutGroup>
+                    <LayoutGroup Id="MaterialRequest_col2" RelativeSize="50.154798761609904">
+                      <LayoutItem Id="RequestDate" RelativeSize="51.61290322580645" />
+                      <LayoutItem Id="DueDate" RelativeSize="48.38709677419355" />
+                    </LayoutGroup>
+                  </LayoutGroup>
+                  <LayoutItem Id="Customer" RelativeSize="34.04255319148936" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item1" RelativeSize="50.146627565982406">
+                <LayoutGroup Id="Auto44a4d42b-8b51-43d1-a519-cd3653e32df6" RelativeSize="49.53846153846154">
+                  <LayoutItem Id="CreatedBy" RelativeSize="34.04255319148936" />
+                  <LayoutItem Id="LastUpdatedBy" RelativeSize="65.95744680851064" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto0a5102f0-b13b-4df4-af98-a2a026e680b6" RelativeSize="50.46153846153846">
+                  <LayoutItem Id="CreatedAt" RelativeSize="34.04255319148936" />
+                  <LayoutItem Id="LastUpdatedAt" RelativeSize="65.95744680851064" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Item2" RelativeSize="16.635514018691588" />
+          <TabbedGroup Id="Tabs" Index="2" RelativeSize="58.504672897196265">
+            <LayoutGroup Id="Details" TextAlignMode="AlignWithChildren" RelativeSize="100">
+              <LayoutItem Id="Details" Index="0" RelativeSize="100" ViewItem="Details" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="OrderDetails" TextAlignMode="AlignWithChildren" RelativeSize="100">
+              <LayoutItem Id="OrderDetails" TextAlignMode="AutoSize" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="MaterialRequest_OrderDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemStyleNumber" Index="-1" />
+        <ColumnInfo Id="MaterialRequestId" Index="-1" />
+        <ColumnInfo Id="OrderDetailID" Index="-1" />
+        <ColumnInfo Id="TotalQuantity" Index="-1" />
+        <ColumnInfo Id="CustomerStyle" Index="0" Width="98" />
+        <ColumnInfo Id="LSStyle" Index="1" />
+        <ColumnInfo Id="ColorCode" Index="2" />
+        <ColumnInfo Id="ColorName" Width="108" Index="3" />
+        <ColumnInfo Id="GarmentSize" Index="4" />
+        <ColumnInfo Id="Quantity" Index="5" Width="57" />
+        <ColumnInfo Id="SampleQuantity" Index="6" Width="56" />
+        <ColumnInfo Id="PercentQuantity" Index="7" Width="61" />
+      </Columns>
+    </ListView>
+    <ListView Id="MaterialSyncMasterSearchParam_ItemStyleSyncMasters_ListView" MasterDetailMode="ListViewAndDetailView" MasterDetailView="ItemStyleSyncMaster_DetailView_Material" />
+    <DetailView Id="PackingLineCreateParam_DetailView">
+      <Items>
+        <PropertyEditor Id="PackingRatios" View="PackingRatio_ListView_Pivot" />
+      </Items>
+    </DetailView>
+    <ListView Id="PackingLineCreateParam_OrderDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="DeliveryPlace" Index="-1" />
+        <ColumnInfo Id="ItemStyleNumber" Index="-1" />
+        <ColumnInfo Id="SizeSortIndex" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="CustomerStyle" Index="1" />
+        <ColumnInfo Id="ColorName" Index="2" Width="89" />
+        <ColumnInfo Id="ColorCode" Index="3" Width="91" />
+        <ColumnInfo Id="LSStyle" Index="4" />
+        <ColumnInfo Id="Size" Index="5" />
+        <ColumnInfo Id="Quantity" Index="6" />
+        <ColumnInfo Id="BalanceQuantity" Index="7" />
+        <ColumnInfo Id="ShipQuantity" SortIndex="-1" SortOrder="None" Index="8" />
+        <ColumnInfo Id="NoCartonShortShip" Index="9" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PackingList_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="47.64397905759162">
+            <LayoutGroup Id="PackingList" RelativeSize="71.48876404494382">
+              <LayoutGroup Id="PackingList_col1" RelativeSize="63.21138211382114">
+                <LayoutItem Id="PackingListCode" RelativeSize="13.50210970464135" />
+                <LayoutItem Id="PackingListDate" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="DeliveryGroup" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="RatioRight" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="RatioLeft" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="RatioBottom" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="Company" ViewItem="Company" Index="6" RelativeSize="10.126582278481013" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="OrdinalShip" RelativeSize="10.126582278481013" Index="7" />
+                <LayoutGroup Id="Auto5114bc91-81c6-48da-ba73-2c76e41bfc39" RelativeSize="15.611814345991561" Index="8">
+                  <LayoutGroup Id="Auto64c308db-5fca-4672-968a-f864baa4f361">
+                    <LayoutItem Id="Confirm" RelativeSize="23.794212218649516" />
+                    <LayoutItem Id="DontShortShip" RelativeSize="34.40514469453376" />
+                    <LayoutItem Id="BarCodeCompleted" RelativeSize="41.80064308681672" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="PackingList_col2" RelativeSize="36.78861788617886">
+                <LayoutItem Id="Customer" RelativeSize="13.50210970464135" />
+                <LayoutItem Id="SalesOrder" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="ShippingMark1" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="ShippingMark2" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="ShippingMethod" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="LSStyles" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="Factory" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="PackingUnit" RelativeSize="10.126582278481013" />
+                <LayoutItem Id="SheetName" RelativeSize="15.611814345991561" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Auto05df1b5a-eeff-4a0e-b597-bd9452e61732" RelativeSize="28.51123595505618">
+              <LayoutGroup Id="Item1" RelativeSize="53.11355311355312">
+                <LayoutItem Id="CreatedAt" RelativeSize="28.571428571428573" />
+                <LayoutItem Id="CreatedBy" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="LastUpdatedBy" RelativeSize="21.428571428571427" />
+                <LayoutItem Id="LastUpdatedAt" RelativeSize="28.571428571428573" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" RelativeSize="46.88644688644688">
+                <LayoutItem Id="TotalQuantity" RelativeSize="32.98969072164948" />
+                <LayoutItem Id="TotalBarCodeCarton" RelativeSize="24.742268041237114" />
+                <LayoutItem Id="PPCBookDate" ViewItem="PPCBookDate" Index="2" RelativeSize="42.2680412371134" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Autoc5a709d5-cb31-4924-9329-d2355e2b0e14" RelativeSize="52.35602094240838" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PackingListCreateParam_DetailView">
+      <Items>
+        <PropertyEditor Id="PackingStyles" ImmediatePostData="True" />
+      </Items>
+    </DetailView>
+    <ListView Id="PackingListSearchParam_PackingLists_ListView" AllowNew="True" AllowEdit="False" />
+    <ListView Id="PackingRatio_ListView_Pivot" ClassName="LS_ERP.XAF.Module.DomainComponent.PackingRatio" EditorTypeName="DevExpress.ExpressApp.Win.Editors.GridListEditor" AllowEdit="True" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="SizeSortIndex" PropertyName="SizeSortIndex" Index="0" SortIndex="0" SortOrder="Ascending" Width="106" IsNewNode="True" />
+        <ColumnInfo Id="Color" PropertyName="Color" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="Size" PropertyName="Size" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Ratio" PropertyName="Ratio" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="TotalQuantity" PropertyName="TotalQuantity" Index="4" IsNewNode="True" />
+      </Columns>
+      <PivotSettings Settings="﻿&lt;XtraSerializer version=&quot;1.0&quot; application=&quot;PivotGrid&quot;&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutVersion&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutScaleFactor&quot;&gt;@1,Width=1@1,Height=1&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedColumnFieldValues&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;Fields&quot; iskey=&quot;true&quot; value=&quot;3&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Item1&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowFilter&quot;&gt;False&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Color.ColorName&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Color.ColorName&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Color&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item2&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;ColumnArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Size&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item3&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_Ratio&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;DataArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Ratio&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Ratio&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:N0}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:N0}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;{0:N0}&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Prefilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Criteria&quot; isnull=&quot;true&quot; /&gt;&#xD;&#xA;    &lt;property name=&quot;ShowOperandTypeIcon&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Enabled&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsCustomization&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;CustomizationFormStyle&quot;&gt;Excel2007&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsChartDataSource&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DataProvideMode&quot;&gt;UseCustomSettings&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsView&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnGrandTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowGrandTotals&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnGrandTotalHeader&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowDataHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowFilterHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DefaultFilterEditorView&quot;&gt;VisualAndText&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedLineWidth&quot;&gt;2&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Groups&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatRules&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatConditions&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;&lt;/XtraSerializer&gt;" IsNewNode="True" />
+    </ListView>
+    <DetailView Id="Part_DetailView">
+      <Items>
+        <PropertyEditor Id="Character" AllowEdit="True" />
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="Customer" Removed="True" />
+        <PropertyEditor Id="CustomerID" AllowEdit="True" Caption="Customer" />
+        <PropertyEditor Id="Description" RowCount="10" MaxLength="4000" />
+        <PropertyEditor Id="GarmentColorCode" AllowEdit="True" />
+        <PropertyEditor Id="ID" AllowEdit="False" />
+        <PropertyEditor Id="LastSequenceNumber" AllowEdit="True" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="Number" AllowEdit="True" Caption="Customer Style" />
+        <PropertyEditor Id="Season" AllowEdit="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100" Direction="Vertical" Caption="SimpleEditors" TextAlignMode="UseParentOptions">
+            <LayoutGroup Id="Auto50be5fd4-c486-47f8-9db9-01e32ba222f0" ShowCaption="False" Caption="Auto50be5fd4-c486-47f8-9db9-01e32ba222f0(3)" Direction="Horizontal" Index="0" RelativeSize="35.318275154004105" IsNewNode="True">
+              <LayoutGroup Id="Part" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="65.17482517482517" IsNewNode="True">
+                <LayoutGroup Id="Part_col1" ShowCaption="False" Index="0" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="29.032258064516128" IsNewNode="True" />
+                  <LayoutItem Id="Image" ViewItem="Image" Index="1" RelativeSize="20.967741935483872" IsNewNode="True" />
+                  <LayoutItem Id="GarmentColorCode" ViewItem="GarmentColorCode" Index="2" RelativeSize="20.967741935483872" IsNewNode="True" />
+                  <LayoutItem Id="GarmentColorName" ViewItem="GarmentColorName" Index="3" RelativeSize="29.032258064516128" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Part_col2" ShowCaption="False" Index="1" RelativeSize="50" IsNewNode="True">
+                  <LayoutItem Id="Season" ViewItem="Season" Index="0" RelativeSize="29.032258064516128" IsNewNode="True" />
+                  <LayoutItem Id="LastSequenceNumber" ViewItem="LastSequenceNumber" Index="1" RelativeSize="20.967741935483872" IsNewNode="True" />
+                  <LayoutItem Id="CustomerID" ViewItem="CustomerID" Index="2" RelativeSize="20.967741935483872" IsNewNode="True" />
+                  <LayoutItem Id="Character" ViewItem="Character" Index="3" RelativeSize="29.032258064516128" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Item1" ShowCaption="True" Caption="Audit" CaptionLocation="Top" Index="1" RelativeSize="34.82517482517483" IsNewNode="True">
+                <LayoutItem Id="CreatedBy" ViewItem="CreatedBy" Index="0" RelativeSize="29.032258064516128" IsNewNode="True" />
+                <LayoutItem Id="LastUpdatedBy" ViewItem="LastUpdatedBy" Index="1" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="CreatedAt" ViewItem="CreatedAt" Index="2" RelativeSize="20.967741935483872" IsNewNode="True" />
+                <LayoutItem Id="LastUpdatedAt" ViewItem="LastUpdatedAt" Index="3" RelativeSize="29.032258064516128" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Part" ShowCaption="True" Direction="Horizontal" Index="0" RelativeSize="65.17482517482517" Removed="True">
+              <LayoutGroup Id="Part_col1" ShowCaption="False" Index="0" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="ID" ViewItem="ID" Index="0" RelativeSize="8.237986270022883" IsNewNode="True" />
+                <LayoutItem Id="Number" ViewItem="Number" Index="1" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="Description" ViewItem="Description" Index="2" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="Image" ViewItem="Image" Index="3" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="GarmentColorCode" ViewItem="GarmentColorCode" Index="4" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="GarmentColorName" ViewItem="GarmentColorName" Index="5" RelativeSize="67.96338672768879" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Part_col2" ShowCaption="False" Index="1" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="Season" ViewItem="Season" Index="0" RelativeSize="8.237986270022883" IsNewNode="True" />
+                <LayoutItem Id="LastSequenceNumber" ViewItem="LastSequenceNumber" Index="1" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="CustomerID" ViewItem="CustomerID" Index="2" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="Character" ViewItem="Character" Index="3" RelativeSize="5.949656750572083" IsNewNode="True" />
+                <LayoutItem Id="Customer" Index="4" RelativeSize="73.91304347826087" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Item2" ShowCaption="True" CaptionLocation="Top" TextAlignMode="AlignWithChildren" Index="1" RelativeSize="64.68172484599589" Caption="Description" IsNewNode="True">
+              <LayoutItem Id="Description" ShowCaption="False" ViewItem="Description" Index="0" RelativeSize="100" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Audit" RelativeSize="57.48031496062992" Removed="True">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Audit" IsNewNode="True">
+                <LayoutItem Id="CreatedBy" ViewItem="CreatedBy" Index="0" RelativeSize="14.754098360655737" IsNewNode="True" />
+                <LayoutItem Id="LastUpdatedBy" ViewItem="LastUpdatedBy" Index="1" RelativeSize="10.655737704918034" IsNewNode="True" />
+                <LayoutItem Id="CreatedAt" ViewItem="CreatedAt" Index="2" RelativeSize="10.655737704918034" IsNewNode="True" />
+                <LayoutItem Id="LastUpdatedAt" ViewItem="LastUpdatedAt" Index="3" RelativeSize="63.9344262295082" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="CreatedAt" Removed="True" />
+              <LayoutItem Id="CreatedBy" Removed="True" />
+              <LayoutItem Id="LastUpdatedAt" Removed="True" />
+              <LayoutItem Id="LastUpdatedBy" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Part_ListView" AllowEdit="True" ShowAutoFilterRow="False" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" AllowEdit="False" />
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="ID" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedAt" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedBy" AllowEdit="False" />
+        <ColumnInfo Id="CustomerID" PropertyName="CustomerID" Caption="Customer" AllowEdit="True" Index="0" Width="118" SortOrder="Ascending" GroupIndex="0" />
+        <ColumnInfo Id="Number" Caption="Customer Style" AllowEdit="True" Width="88" Index="1" />
+        <ColumnInfo Id="GarmentColorCode" AllowEdit="True" Index="2" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="GarmentColorName" AllowEdit="True" Index="3" Width="157" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Season" AllowEdit="True" Index="4" />
+        <ColumnInfo Id="Description" Index="5" />
+        <ColumnInfo Id="Image" Index="6" />
+        <ColumnInfo Id="Character" AllowEdit="True" Index="7" />
+        <ColumnInfo Id="LastSequenceNumber" AllowEdit="True" Index="8" />
+        <ColumnInfo Id="Customer" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PartRevision_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="22.06477732793522">
+            <LayoutGroup Id="PartRevision" Direction="Vertical">
+              <LayoutGroup Id="PartRevision_col1" RelativeSize="100">
+                <LayoutGroup Id="Autoeb4b06d7-140a-4b8c-a7eb-6cac0c30e649" RelativeSize="23.916292974588938">
+                  <LayoutItem Id="PartNumber" RelativeSize="45.714285714285715" />
+                  <LayoutGroup Id="Auto3cc0a45d-9e3b-4385-a2d4-f6b87a831d13" RelativeSize="54.285714285714285" Direction="Vertical">
+                    <LayoutItem Id="RevisionNumber" RelativeSize="100" Index="0" />
+                    <LayoutItem Id="EffectDate" RelativeSize="49.20634920634921" Index="1" Removed="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+                <LayoutGroup Id="Auto3a0735ca-b329-4219-9a50-f8a14a66ca01" RelativeSize="76.08370702541106">
+                  <LayoutGroup Id="Autob651fd24-4d57-4b6e-8181-3428e66164a3" Direction="Horizontal">
+                    <LayoutGroup Id="Auto23bf8f2d-e062-4ae0-9ab9-0b992dc5486f" ShowCaption="False" Caption="" Index="0" RelativeSize="68.56581532416503" IsNewNode="True">
+                      <LayoutItem Id="Season" ViewItem="Season" Index="0" RelativeSize="45.714285714285715" IsNewNode="True" />
+                      <LayoutGroup Id="Auto1c76fa51-6706-4d9b-b9e7-45b6479d9c98" ShowCaption="False" Caption="Auto1c76fa51-6706-4d9b-b9e7-45b6479d9c98(12)" Direction="Horizontal" Index="1" RelativeSize="54.285714285714285" IsNewNode="True">
+                        <LayoutItem Id="IsConfirmed" ViewItem="IsConfirmed" Index="0" RelativeSize="55.587392550143264" IsNewNode="True" />
+                        <LayoutItem Id="EffectDate" ViewItem="EffectDate" Index="1" RelativeSize="44.412607449856736" IsNewNode="True" />
+                      </LayoutGroup>
+                    </LayoutGroup>
+                    <LayoutGroup Id="Auto3695dbef-5303-4a90-8251-ac240829e0c6" ShowCaption="False" Caption="" Index="1" RelativeSize="31.43418467583497" IsNewNode="True">
+                      <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="45.714285714285715" IsNewNode="True" />
+                      <LayoutItem Id="PullBomType" ViewItem="PullBomType" Index="1" RelativeSize="54.285714285714285" IsNewNode="True" />
+                    </LayoutGroup>
+                    <LayoutItem Id="Customer" Index="1" RelativeSize="31.43418467583497" Removed="True" />
+                    <LayoutItem Id="Season" RelativeSize="24.242424242424242" Index="1" Removed="True" />
+                    <LayoutItem Id="IsConfirmed" RelativeSize="54.285714285714285" Removed="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="PartRevision_col2" RelativeSize="26.231884057971016" Removed="True">
+                <LayoutItem Id="FileName" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="FileNameServer" Index="1" RelativeSize="65.95744680851064" Removed="True" />
+                <LayoutItem Id="FilePath" Index="2" RelativeSize="40.42553191489362" Removed="True" />
+                <LayoutGroup Id="Auto965b6d1f-8867-499f-8e67-77f5ed36f12a" RelativeSize="18.571428571428573" Direction="Horizontal" Removed="True">
+                  <LayoutItem Id="LastUpdatedBy" RelativeSize="100" Index="0" Removed="True" />
+                  <LayoutItem Id="LastUpdatedAt" RelativeSize="49.20634920634921" Removed="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autod915d932-1c2d-4c66-89ce-e90284471286" RelativeSize="20" Direction="Horizontal" Removed="True">
+                  <LayoutItem Id="CreatedBy" RelativeSize="100" Index="0" Removed="True" />
+                  <LayoutItem Id="CreatedAt" RelativeSize="49.20634920634921" Removed="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="PartMaterials" TextAlignMode="AlignWithChildren" RelativeSize="38.8663967611336" />
+          <LayoutGroup Id="PartRevisionLogs" TextAlignMode="AlignWithChildren" RelativeSize="39.068825910931174" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PartRevision_ListView">
+      <Columns>
+        <ColumnInfo Id="PullBomTypeCode" Index="-6" />
+        <ColumnInfo Id="CreatedAt" Index="10" AllowEdit="False" />
+        <ColumnInfo Id="FileName" Index="11" />
+        <ColumnInfo Id="CreatedBy" Index="12" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedBy" Index="12" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedAt" Index="13" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="PermissionPolicyUser_Roles_ListView">
+      <Columns>
+        <ColumnInfo Id="Name" Width="256" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Problem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Problem" RelativeSize="12.429378531073446">
+              <LayoutItem Id="Name" Index="0" RelativeSize="54.54545454545455" />
+              <LayoutItem Id="SortIndex" Index="1" RelativeSize="45.45454545454545" />
+              <LayoutItem Id="ID" Removed="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="Audit" RelativeSize="87.57062146892656" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Problem_ListView" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="ID" Index="0" Width="52" />
+        <ColumnInfo Id="Name" SortOrder="Ascending" Index="1" />
+        <ColumnInfo Id="SortIndex" Width="134" Index="2" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseOrder_DetailView">
+      <Items>
+        <PropertyEditor Id="Tax" Caption="VAT" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="74.27536231884058">
+            <LayoutGroup Id="PurchaseOrder" RelativeSize="65.1872399445215">
+              <LayoutGroup Id="PurchaseOrder_col1" RelativeSize="50">
+                <LayoutItem Id="Number" RelativeSize="9.94475138121547" />
+                <LayoutItem Id="OrderDate" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="EstimateShipDate" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="VendorConfirmedDate" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="ShipDate" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Customer" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Remark" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Vendor" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Description" RelativeSize="39.77900552486188" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseOrder_col2" RelativeSize="50" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="25.72463768115942">
+            <LayoutGroup Id="PurchaseOrderLines" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="PurchaseOrderLines" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+            <LayoutGroup Id="PurchaseOrderGroupLines" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="PurchaseOrderGroupLines" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseOrder_ListView">
+      <Columns>
+        <ColumnInfo Id="Tax" Caption="VAT" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseOrderGroupLineSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="15.008726003490402">
+            <LayoutGroup Id="PurchaseOrderGroupLineSearchParam">
+              <LayoutGroup Id="PurchaseOrderGroupLineSearchParam_col1" RelativeSize="20.454545454545453" Caption="PurchaseOrderGroupLineSearchParam_col1">
+                <LayoutItem Id="PurchaseNumber" RelativeSize="100" Index="0" />
+                <LayoutItem Id="Company" RelativeSize="27.272727272727273" Removed="True" />
+                <LayoutItem Id="Customer" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseOrderGroupLineSearchParam_col2" Index="1" RelativeSize="59.09090909090909" Direction="Horizontal">
+                <LayoutItem Id="Company" ViewItem="Company" Index="0" RelativeSize="33.333333333333336" IsNewNode="True" />
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="33.333333333333336" IsNewNode="True" />
+                <LayoutItem Id="FromDate" Index="2" RelativeSize="33.333333333333336" />
+              </LayoutGroup>
+              <LayoutItem Id="ToDate" ViewItem="ToDate" Index="2" RelativeSize="20.454545454545453" IsNewNode="True" />
+              <LayoutItem Id="Customer1" Removed="True" />
+              <LayoutItem Id="ToDate1" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="PurchaseOrderGroupLines_Group" TextAlignMode="AlignWithChildren" RelativeSize="84.9912739965096" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseOrderGroupLineSearchParam_PurchaseOrderGroupLines_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemMasterID" Index="-1" />
+        <ColumnInfo Id="PurchaseOrderID" Index="-1" />
+        <ColumnInfo Id="PurchaseOrder.CompanyCode" PropertyName="PurchaseOrder.CompanyCode" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrder.Number" PropertyName="PurchaseOrder.Number" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="ItemCode" Index="2" />
+        <ColumnInfo Id="CustomerStyle" Index="3" />
+        <ColumnInfo Id="GarmentColorCode" Index="4" />
+        <ColumnInfo Id="GarmentColorName" Index="5" />
+        <ColumnInfo Id="DsmItemID" Index="6" />
+        <ColumnInfo Id="ItemID" Index="7" />
+        <ColumnInfo Id="ItemName" Index="8" />
+        <ColumnInfo Id="ItemColorCode" Index="9" />
+        <ColumnInfo Id="ItemColorName" Index="10" />
+        <ColumnInfo Id="GarmentSize" Index="11" />
+        <ColumnInfo Id="Quantity" Index="12" />
+        <ColumnInfo Id="ReceiptQuantity" Index="13" />
+        <ColumnInfo Id="Season" Index="14" />
+        <ColumnInfo Id="Position" Index="15" />
+        <ColumnInfo Id="Specify" Index="16" />
+        <ColumnInfo Id="Mfg" Index="17" />
+        <ColumnInfo Id="ContractNo" Index="18" />
+        <ColumnInfo Id="UPC" Index="19" />
+        <ColumnInfo Id="Division" Index="20" />
+        <ColumnInfo Id="ShipDate" Index="21" />
+        <ColumnInfo Id="Label" Index="22" />
+        <ColumnInfo Id="OtherName" Index="23" />
+        <ColumnInfo Id="DefaultThreadName" Index="24" />
+        <ColumnInfo Id="Remarks" Index="25" />
+        <ColumnInfo Id="OrderNo" Index="26" />
+        <ColumnInfo Id="Price" Index="27" />
+        <ColumnInfo Id="UnitID" Index="28" />
+        <ColumnInfo Id="WareHouseUnitID" Index="29" />
+        <ColumnInfo Id="WareHouseQuantity" Index="30" />
+        <ColumnInfo Id="WastageQuantity" Index="31" />
+        <ColumnInfo Id="CustomerPurchaseOrderNumber" Index="32" />
+        <ColumnInfo Id="PurchaseOrder" Index="33" />
+        <ColumnInfo Id="Unit" Index="34" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseOrderImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="BrowsePurchaseOrderImport" ActionContainer="Unspecified" Caption="BrowsePurchaseOrderImport(7)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="PurchaseOrderImportParam" RelativeSize="100">
+              <LayoutItem Id="Customer" RelativeSize="6.324110671936759" />
+              <LayoutItem Id="Brand" RelativeSize="4.743083003952569" />
+              <LayoutGroup Id="Autobaf06464-963d-4895-a41d-90fa82a4bf67" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="88.93280632411067" IsNewNode="True">
+                <LayoutItem Id="ImportFilePath" ViewItem="ImportFilePath" Index="0" RelativeSize="67.95252225519287" IsNewNode="True" />
+                <LayoutItem Id="BrowsePurchaseOrderImport" ViewItem="BrowsePurchaseOrderImport" Index="1" RelativeSize="32.047477744807125" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="ImportFilePath" Index="3" RelativeSize="83.79446640316206" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PurchaseOrderLineSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="15.008726003490402">
+            <LayoutGroup Id="PurchaseOrderLineSearchParam">
+              <LayoutGroup Id="Autobe18b0e6-3cee-4cb4-b0b5-22d4ea74da60" RelativeSize="99.74619289340102">
+                <LayoutItem Id="PurchaseNumber" RelativeSize="20.610687022900763" Index="0" />
+                <LayoutItem Id="Company" RelativeSize="19.84732824427481" Index="1" />
+                <LayoutItem Id="Customer" RelativeSize="19.84732824427481" />
+                <LayoutItem Id="FromDate" RelativeSize="19.84732824427481" />
+                <LayoutItem Id="ToDate" RelativeSize="19.84732824427481" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseOrderLineSearchParam_col1" Index="1" RelativeSize="0.12690355329949238" Caption="PurchaseOrderLineSearchParam_col1">
+                <LayoutItem Id="Company" Index="0" RelativeSize="100" Removed="True" />
+                <LayoutItem Id="Customer" Removed="True" />
+                <LayoutItem Id="PurchaseNumber" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="PurchaseOrderLineSearchParam_col2" Index="2" RelativeSize="0.12690355329949238" Caption="PurchaseOrderLineSearchParam_col2">
+                <LayoutItem Id="ToDate" RelativeSize="100" Index="0" Removed="True" />
+                <LayoutItem Id="FromDate" RelativeSize="50" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="PurchaseOrderLines_Group" TextAlignMode="AlignWithChildren" RelativeSize="84.9912739965096" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseOrderLineSearchParam_PurchaseOrderLines_ListView">
+      <Columns>
+        <ColumnInfo Id="CanReusedQuantity" Index="-1" />
+        <ColumnInfo Id="ContractualHandoverDateWeekID" Index="-1" Width="91" />
+        <ColumnInfo Id="ForecastWeekID" Index="-1" />
+        <ColumnInfo Id="FreePercent" Index="-1" />
+        <ColumnInfo Id="FreePercentQuantity" Index="-1" />
+        <ColumnInfo Id="ItemMasterID" Index="-1" />
+        <ColumnInfo Id="ItemNo" Index="-1" />
+        <ColumnInfo Id="MaterialType" Index="-1" />
+        <ColumnInfo Id="PurchaseOrderGroupLine" Index="-1" />
+        <ColumnInfo Id="PurchaseOrderGroupLineID" Index="-1" />
+        <ColumnInfo Id="PurchaseOrderID" Index="-1" />
+        <ColumnInfo Id="PurchaseRequestID" Index="-1" />
+        <ColumnInfo Id="ReservedForecastQuantity" Index="-1" />
+        <ColumnInfo Id="PurchaseOrder.CompanyCode" Width="98" />
+        <ColumnInfo Id="CustomerStyle" Index="3" />
+        <ColumnInfo Id="GarmentColorCode" Index="4" />
+        <ColumnInfo Id="GarmentColorName" Index="5" />
+        <ColumnInfo Id="LSStyle" Index="6" />
+        <ColumnInfo Id="ItemCode" Index="7" />
+        <ColumnInfo Id="DsmItemID" Index="8" />
+        <ColumnInfo Id="ItemID" Index="9" />
+        <ColumnInfo Id="ItemName" Index="10" />
+        <ColumnInfo Id="ItemColorCode" Index="11" />
+        <ColumnInfo Id="ItemColorName" Index="12" />
+        <ColumnInfo Id="GarmentSize" Index="13" />
+        <ColumnInfo Id="QuantityPerUnit" Index="14" />
+        <ColumnInfo Id="Quantity" Index="15" />
+        <ColumnInfo Id="PurchaseOrder.VendorID" Index="16" />
+        <ColumnInfo Id="Position" Index="17" />
+        <ColumnInfo Id="Mfg" Index="18" />
+        <ColumnInfo Id="UPC" Index="19" />
+        <ColumnInfo Id="Division" Index="20" />
+        <ColumnInfo Id="MaterialTypeClass" Index="21" />
+        <ColumnInfo Id="CustomerSupplier" Index="22" />
+        <ColumnInfo Id="Label" Index="23" />
+        <ColumnInfo Id="Specify" Index="24" />
+        <ColumnInfo Id="Remarks" Index="25" />
+        <ColumnInfo Id="Season" Index="26" />
+        <ColumnInfo Id="OtherName" Index="27" />
+        <ColumnInfo Id="Price" Index="28" />
+        <ColumnInfo Id="DefaultThreadName" Index="29" />
+        <ColumnInfo Id="UnitID" Index="30" />
+        <ColumnInfo Id="CustomerPurchaseOrderNumber" Index="31" />
+        <ColumnInfo Id="SecondUnitID" Index="32" />
+        <ColumnInfo Id="ReservedQuantity" Index="33" />
+        <ColumnInfo Id="WareHouseQuantity" Index="34" />
+        <ColumnInfo Id="ShipDate" Index="35" />
+        <ColumnInfo Id="EstimateShipDate" Index="36" />
+        <ColumnInfo Id="MSRP" Index="37" />
+        <ColumnInfo Id="VendorConfirmDate" Index="38" />
+        <ColumnInfo Id="OrderDate" Index="39" />
+        <ColumnInfo Id="ContractNo" Index="40" />
+        <ColumnInfo Id="OrderNo" Index="41" />
+        <ColumnInfo Id="InvoiceNo" Index="42" />
+        <ColumnInfo Id="DeliveryNote" Index="43" />
+        <ColumnInfo Id="OrderQuantityTracking" Index="44" />
+        <ColumnInfo Id="ConsumedForecastQuantity" Index="45" />
+        <ColumnInfo Id="WastageQuantity" Index="46" />
+        <ColumnInfo Id="SuppPlt" Index="47" />
+        <ColumnInfo Id="ReplCode" Index="48" />
+        <ColumnInfo Id="DeptSubFineline" Index="49" />
+        <ColumnInfo Id="FixtureCode" Index="50" />
+        <ColumnInfo Id="TagSticker" Index="51" />
+        <ColumnInfo Id="ModelName" Index="52" />
+        <ColumnInfo Id="MatchingShipment" Index="53" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseOrderReportSearchParam_DetailView">
+      <Items>
+        <PropertyEditor Id="ListCharts" PropertyEditorType="DevExpress.ExpressApp.Editors.ListPropertyEditor" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="14.575645756457565">
+            <LayoutGroup Id="PurchaseOrderReportSearchParam">
+              <LayoutGroup Id="Item1">
+                <LayoutItem Id="Customer" RelativeSize="24.752475247524753" />
+                <LayoutItem Id="Vendor" RelativeSize="24.893917963224894" />
+                <LayoutItem Id="FromDate" RelativeSize="24.893917963224894" />
+                <LayoutItem Id="ToDate" RelativeSize="25.45968882602546" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="44.28044280442804">
+            <LayoutGroup Id="ListCharts" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="ListCharts" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="PurchaseOrderReportDetails" TextAlignMode="AlignWithChildren" RelativeSize="41.14391143911439">
+            <LayoutItem Id="ReportDetails" ViewItem="ReportDetails" Index="0" RelativeSize="100" IsNewNode="True" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseOrderReportSearchParam_ListCharts_ListView" EditorTypeName="DevExpress.ExpressApp.Chart.Win.ChartListEditor">
+      <ChartSettings Settings="﻿&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xD;&#xA;&lt;ChartXmlSerializer version=&quot;21.2.6.0&quot;&gt;&#xD;&#xA;  &lt;Chart AppearanceNameSerializable=&quot;Default&quot; SelectionMode=&quot;None&quot; SeriesSelectionMode=&quot;Series&quot;&gt;&#xD;&#xA;    &lt;DataContainer BoundSeriesSorting=&quot;None&quot; SeriesDataMember=&quot;CustomerID&quot; ValidateDataMembers=&quot;true&quot;&gt;&#xD;&#xA;      &lt;SeriesSerializable&gt;&#xD;&#xA;        &lt;Item1 Name=&quot;TotalAmount&quot; ArgumentDataMember=&quot;VendorID&quot; LabelsVisibility=&quot;True&quot;&gt;&#xD;&#xA;          &lt;View AxisYName=&quot;Secondary AxisY 1&quot; TypeNameSerializable=&quot;LineSeriesView&quot;&gt;&#xD;&#xA;            &lt;SeriesPointAnimation TypeNameSerializable=&quot;XYMarkerWidenAnimation&quot; /&gt;&#xD;&#xA;            &lt;FirstPoint MarkerDisplayMode=&quot;Default&quot; LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePointMarker&quot;&gt;&#xD;&#xA;              &lt;Label Angle=&quot;180&quot; TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/FirstPoint&gt;&#xD;&#xA;            &lt;LastPoint MarkerDisplayMode=&quot;Default&quot; LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePointMarker&quot;&gt;&#xD;&#xA;              &lt;Label Angle=&quot;0&quot; TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/LastPoint&gt;&#xD;&#xA;          &lt;/View&gt;&#xD;&#xA;          &lt;QualitativeSummaryOptions SummaryFunction=&quot;SUM([TotalAmount])&quot; /&gt;&#xD;&#xA;          &lt;Label TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; TextPattern=&quot;{V:N2} đ&quot; /&gt;&#xD;&#xA;        &lt;/Item1&gt;&#xD;&#xA;      &lt;/SeriesSerializable&gt;&#xD;&#xA;      &lt;SeriesTemplate SeriesDataMember=&quot;CustomerID&quot; ArgumentDataMember=&quot;VendorID&quot; LabelsVisibility=&quot;True&quot;&gt;&#xD;&#xA;        &lt;View TypeNameSerializable=&quot;StackedBarSeriesView&quot;&gt;&#xD;&#xA;          &lt;FirstPoint LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePoint&quot;&gt;&#xD;&#xA;            &lt;Label TypeNameSerializable=&quot;StackedBarSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;          &lt;/FirstPoint&gt;&#xD;&#xA;          &lt;LastPoint LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePoint&quot;&gt;&#xD;&#xA;            &lt;Label TypeNameSerializable=&quot;StackedBarSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;          &lt;/LastPoint&gt;&#xD;&#xA;        &lt;/View&gt;&#xD;&#xA;        &lt;QualitativeSummaryOptions SummaryFunction=&quot;COUNT()&quot; /&gt;&#xD;&#xA;      &lt;/SeriesTemplate&gt;&#xD;&#xA;    &lt;/DataContainer&gt;&#xD;&#xA;    &lt;Diagram RuntimePaneCollapse=&quot;true&quot; RuntimePaneResize=&quot;false&quot; PaneLayoutDirection=&quot;Vertical&quot; TypeNameSerializable=&quot;XYDiagram&quot;&gt;&#xD;&#xA;      &lt;AxisX StickToEnd=&quot;false&quot; VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.6&quot; EndSideMargin=&quot;0.6&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisX&gt;&#xD;&#xA;      &lt;AxisY VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.72&quot; EndSideMargin=&quot;0.72&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisY&gt;&#xD;&#xA;      &lt;SecondaryAxesY&gt;&#xD;&#xA;        &lt;Item1 AxisID=&quot;0&quot; VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot; Name=&quot;Secondary AxisY 1&quot;&gt;&#xD;&#xA;          &lt;Label TextPattern=&quot;{V:N0} đ&quot; /&gt;&#xD;&#xA;          &lt;WholeRange StartSideMargin=&quot;0.89&quot; EndSideMargin=&quot;0.89&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;        &lt;/Item1&gt;&#xD;&#xA;      &lt;/SecondaryAxesY&gt;&#xD;&#xA;      &lt;SelectionOptions /&gt;&#xD;&#xA;    &lt;/Diagram&gt;&#xD;&#xA;    &lt;Legend CrosshairContentOffset=&quot;4&quot; MaxCrosshairContentWidth=&quot;50&quot; MaxCrosshairContentHeight=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;/Chart&gt;&#xD;&#xA;&lt;/ChartXmlSerializer&gt;" />
+    </ListView>
+    <ListView Id="PurchaseOrderReportSearchParam_ListPivot_ListView" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor">
+      <PivotSettings Settings="﻿&lt;XtraSerializer version=&quot;1.0&quot; application=&quot;PivotGrid&quot;&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutVersion&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutScaleFactor&quot;&gt;@1,Width=1@1,Height=1&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedColumnFieldValues&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;Fields&quot; iskey=&quot;true&quot; value=&quot;20&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Item1&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item2&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldNumber&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;DataArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Number&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Number&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item3&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldOrderDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;OrderDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Order Date&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item4&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldEstimateShipDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;EstimateShipDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Estimate Ship Date&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;3&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item5&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldVendorConfirmedDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;VendorConfirmedDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Vendor Confirmed Date&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;4&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;3&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item6&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldShipDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ShipDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Ship Date&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;5&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;4&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item7&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldCustomerID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;CustomerID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Customer ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;6&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item8&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldInvoiceNo&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;InvoiceNo&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Invoice No&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;7&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;5&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item9&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldReason&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Reason&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Reason&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;8&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;6&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item10&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldPaymentTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;PaymentTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Payment Term Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;9&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;7&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item11&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldPurchaseOrderStatusCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;PurchaseOrderStatusCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Purchase Order Status Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;10&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;8&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item12&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldDescription&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Description&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Description&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;11&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;9&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item13&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldRemark&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Remark&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Remark&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;12&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;10&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item14&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldCompanyCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;CompanyCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Company Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;13&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;11&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item15&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldIncoTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;IncoTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Inco Term Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;14&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;12&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item16&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldVendorID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;ColumnArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;VendorID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Vendor ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;15&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;79&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item17&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldSupplierCNUFCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;SupplierCNUFCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Supplier CNUFCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;16&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;13&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item18&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldShipTo&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ShipTo&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Ship To&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;17&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;14&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item19&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldShippingMethodCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ShippingMethodCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Shipping Method Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;18&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;15&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item20&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;fieldShippingTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;ShippingTermCode&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Shipping Term Code&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;19&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;16&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Prefilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Criteria&quot; isnull=&quot;true&quot; /&gt;&#xD;&#xA;    &lt;property name=&quot;ShowOperandTypeIcon&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Enabled&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsCustomization&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;CustomizationFormStyle&quot;&gt;Excel2007&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsChartDataSource&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DataProvideMode&quot;&gt;UseCustomSettings&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsView&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowDataHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowFilterHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DefaultFilterEditorView&quot;&gt;VisualAndText&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedLineWidth&quot;&gt;2&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Groups&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatRules&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatConditions&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;&lt;/XtraSerializer&gt;" AddNewColumns="False" />
+    </ListView>
+    <DetailView Id="PurchaseOrderSearchParam_DetailView">
+      <Items>
+        <PropertyEditor Id="PurchaseOrders" View="PurchaseOrderSearchParam_PurchaseOrders_ListView" />
+      </Items>
+    </DetailView>
+    <DetailView Id="PurchaseOrderSearchParam_DetailView_Report">
+      <Items>
+        <PropertyEditor Id="PurchaseOrders" View="PurchaseOrderSearchParam_PurchaseOrders_ListView_Pivot" />
+      </Items>
+    </DetailView>
+    <ListView Id="PurchaseOrderSearchParam_PurchaseOrders_ListView_Pivot" ClassName="LS_ERP.EntityFrameworkCore.Entities.PurchaseOrder" DataAccessMode="Client" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Number" PropertyName="Number" Index="0" Width="143" IsNewNode="True" />
+        <ColumnInfo Id="CustomerID" PropertyName="CustomerID" Index="1" Caption="Customer" Width="115" IsNewNode="True" />
+        <ColumnInfo Id="VendorID" PropertyName="VendorID" Index="2" Caption="Vendor" IsNewNode="True" />
+        <ColumnInfo Id="OrderDate" PropertyName="OrderDate" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="EstimateShipDate" PropertyName="EstimateShipDate" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="VendorConfirmedDate" PropertyName="VendorConfirmedDate" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="ShipDate" PropertyName="ShipDate" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="PaymentTermCode" PropertyName="PaymentTerm.Description" Index="7" Caption="Payment Term" Width="113" IsNewNode="True" />
+        <ColumnInfo Id="SupplierCNUFCode" PropertyName="SupplierCNUFCode" Index="8" Caption="Supplier CNUF" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderStatusCode" PropertyName="PurchaseOrderStatusCode" Index="9" Caption=" Status" IsNewNode="True" />
+        <ColumnInfo Id="CurrencyID" PropertyName="CurrencyID" Index="10" Caption="Currency" IsNewNode="True" />
+        <ColumnInfo Id="CurrencyExchangeTypeID" PropertyName="CurrencyExchangeTypeID" Index="11" Caption="Exchange Type" IsNewNode="True" />
+        <ColumnInfo Id="CurrencyExchangeValue" PropertyName="CurrencyExchangeValue" Index="12" Caption="Exchange Value" IsNewNode="True" />
+        <ColumnInfo Id="ShippingMethodCode" PropertyName="ShippingMethodCode" Index="13" Caption="Shipping Method" IsNewNode="True" />
+        <ColumnInfo Id="ShippingTermCode" PropertyName="ShippingTermCode" Index="14" Caption="Shipping Term" IsNewNode="True" />
+        <ColumnInfo Id="ShipTo" PropertyName="ShipTo" Index="15" Width="122" IsNewNode="True" />
+        <ColumnInfo Id="IncoTermCode" PropertyName="IncoTermCode" Index="16" Caption="Inco Term" IsNewNode="True" />
+      </Columns>
+      <PivotSettings ShowChart="True" Settings="﻿&lt;XtraSerializer version=&quot;1.0&quot; application=&quot;PivotGrid&quot;&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutVersion&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;#LayoutScaleFactor&quot;&gt;@1,Width=1@1,Height=1&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedColumnFieldValues&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;Fields&quot; iskey=&quot;true&quot; value=&quot;4&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Item1&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_CustomerID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;CustomerID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Customer ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item2&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_VendorID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;RowArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;VendorID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Vendor ID&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;Custom&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item3&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;Options&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;AllowRunTimeSummaryChange&quot;&gt;true&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_OrderDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;ColumnArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GroupInterval&quot;&gt;DateMonth&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;OrderDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;UnboundFieldName&quot;&gt;Field_OrderDate&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Caption&quot;&gt;Order Date&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;CellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;MM/yyyy&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;DateTime&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;GrandTotalCellFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;MM/yyyy&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;DateTime&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ValueFormat&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;FormatString&quot;&gt;MM/yyyy&lt;/property&gt;&#xD;&#xA;        &lt;property name=&quot;FormatType&quot;&gt;DateTime&lt;/property&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;2&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SortOrder&quot;&gt;Descending&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryDisplayType&quot;&gt;PercentOfRow&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Item4&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;      &lt;property name=&quot;ImageIndex&quot;&gt;-1&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;ToolTips&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;        &lt;property name=&quot;HeaderText&quot; /&gt;&#xD;&#xA;        &lt;property name=&quot;ValueText&quot; /&gt;&#xD;&#xA;      &lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldEditName&quot; /&gt;&#xD;&#xA;      &lt;property name=&quot;Name&quot;&gt;Field_1_Number&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Area&quot;&gt;DataArea&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;FieldName&quot;&gt;Number&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;SummaryType&quot;&gt;Count&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Index&quot;&gt;3&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;AreaIndex&quot;&gt;0&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;MinWidth&quot;&gt;20&lt;/property&gt;&#xD;&#xA;      &lt;property name=&quot;Width&quot;&gt;100&lt;/property&gt;&#xD;&#xA;    &lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Prefilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;Criteria&quot; isnull=&quot;true&quot; /&gt;&#xD;&#xA;    &lt;property name=&quot;ShowOperandTypeIcon&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;Enabled&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsCustomization&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;CustomizationFormStyle&quot;&gt;Excel2007&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsChartDataSource&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DataProvideMode&quot;&gt;UseCustomSettings&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsView&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnGrandTotalHeader&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowDataHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowFilterHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowColumnHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;    &lt;property name=&quot;ShowRowHeaders&quot;&gt;false&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;OptionsFilter&quot; isnull=&quot;true&quot; iskey=&quot;true&quot;&gt;&#xD;&#xA;    &lt;property name=&quot;DefaultFilterEditorView&quot;&gt;VisualAndText&lt;/property&gt;&#xD;&#xA;  &lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;FixedLineWidth&quot;&gt;2&lt;/property&gt;&#xD;&#xA;  &lt;property name=&quot;Groups&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatRules&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;property name=&quot;FormatConditions&quot; iskey=&quot;true&quot; value=&quot;0&quot; /&gt;&#xD;&#xA;&lt;/XtraSerializer&gt;" IsNewNode="True" />
+      <SplitLayout Direction="Vertical" IsNewNode="True" />
+    </ListView>
+    <DetailView Id="SalesQuote_DetailView">
+      <Items>
+        <PropertyEditor Id="Description" RowCount="0" MaxLength="0" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="Autoe43e1fe9-6e9d-40f0-b25e-378650566393" Caption="Autoe43e1fe9-6e9d-40f0-b25e-378650566393(3)" RelativeSize="68">
+              <LayoutGroup Id="SalesQuote" RelativeSize="62.85140562248996">
+                <LayoutGroup Id="SalesQuote_col1" RelativeSize="49.87212276214834">
+                  <LayoutItem Id="Customer" RelativeSize="11.428571428571429" />
+                  <LayoutItem Id="CustomerStyle" RelativeSize="8.571428571428571" />
+                  <LayoutItem Id="SalesOrder" RelativeSize="8.571428571428571" />
+                  <LayoutItem Id="SizeRun" ViewItem="SizeRun" Index="3" RelativeSize="8.571428571428571" IsNewNode="True" />
+                  <LayoutItem Id="PriceTerm" RelativeSize="8.571428571428571" Index="4" />
+                  <LayoutItem Id="PrepareBy" RelativeSize="8.571428571428571" Index="5" />
+                  <LayoutItem Id="TargetFOBPrice" RelativeSize="8.571428571428571" Index="6" />
+                  <LayoutItem Id="FactoryCode" RelativeSize="8.571428571428571" Index="7" />
+                  <LayoutItem Id="Division" ViewItem="Division" Index="8" RelativeSize="8.571428571428571" IsNewNode="True" />
+                  <LayoutItem Id="CostingDate" Index="9" RelativeSize="8.571428571428571" />
+                  <LayoutItem Id="Description" RelativeSize="11.428571428571429" Index="10" />
+                  <LayoutItem Id="ExchangeValue" Removed="True" />
+                  <LayoutItem Id="SalesQuoteStatusCode" RelativeSize="8.571428571428571" Removed="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="SalesQuote_col2" RelativeSize="50.12787723785166">
+                  <LayoutGroup Id="Auto67425079-db6a-4145-9d3a-3aa7f4948b76">
+                    <LayoutItem Id="Labour" Index="0" RelativeSize="11.428571428571429" />
+                    <LayoutItem Id="Profit" RelativeSize="8.571428571428571" Index="1" />
+                    <LayoutItem Id="TestingFee" RelativeSize="8.571428571428571" Index="2" />
+                    <LayoutItem Id="CMTPrice" RelativeSize="8.571428571428571" Index="3" />
+                    <LayoutItem Id="Discount" RelativeSize="8.571428571428571" Index="4" />
+                    <LayoutItem Id="Season" RelativeSize="8.571428571428571" Index="5" />
+                    <LayoutItem Id="SalesQuoteStatus" RelativeSize="8.571428571428571" Index="6" />
+                    <LayoutItem Id="Gender" RelativeSize="8.571428571428571" Index="7" />
+                    <LayoutItem Id="Currency" RelativeSize="8.571428571428571" Index="8" />
+                    <LayoutItem Id="CurrencyExchangeType" Index="9" RelativeSize="8.571428571428571" />
+                    <LayoutItem Id="ExchangeValue" ViewItem="ExchangeValue" Index="10" RelativeSize="11.428571428571429" IsNewNode="True" />
+                    <LayoutItem Id="Division" RelativeSize="10.526315789473685" Removed="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="SalesQuoteDetails" TextAlignMode="AlignWithChildren" RelativeSize="37.14859437751004" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto59796922-8e31-4b83-b453-261110ef41bc" TextAlignMode="AlignWithChildren" Index="1" RelativeSize="32">
+              <LayoutGroup Id="Item1" RelativeSize="29.116465863453815" />
+              <LayoutItem Id="ImageData" RelativeSize="33.734939759036145" />
+              <LayoutGroup Id="SalesQuoteLogs" TextAlignMode="AlignWithChildren" RelativeSize="37.14859437751004" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ShippingMark_ListView" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Code" Index="" Width="120" />
+        <ColumnInfo Id="Description" Width="348" />
+      </Columns>
+    </ListView>
+    <ListView Id="WorkingTime_ListView_Chart" ClassName="LS_ERP.EntityFrameworkCore.Entities.WorkingTime" Caption="Working Time Chart" EditorTypeName="DevExpress.ExpressApp.Chart.Win.ChartListEditor" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedAt" PropertyName="CreatedAt" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="ID" PropertyName="ID" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedAt" PropertyName="LastUpdatedAt" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedBy" PropertyName="LastUpdatedBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="SortIndex" PropertyName="SortIndex" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="FromTime" PropertyName="FromTime" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ToTime" PropertyName="ToTime" Index="3" IsNewNode="True" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

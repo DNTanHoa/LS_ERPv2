@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="DailyTargetSearchParam_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="14.10459587955626">
+            <LayoutGroup Id="DailyTargetSearchParam" RelativeSize="100">
+              <LayoutItem Id="Operation" RelativeSize="38.20224719101124" />
+              <LayoutItem Id="FromDate" RelativeSize="26.96629213483146" />
+              <LayoutItem Id="ToDate" RelativeSize="34.831460674157306" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="DailyTargets_Group" Direction="Vertical" RelativeSize="85.89540412044374" Caption="Daily Targets">
+            <LayoutItem Id="DailyTargets" RelativeSize="6.70611439842209" />
+            <LayoutItem Id="Item1" Index="1" RelativeSize="93.29388560157791" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="job-management">
+        <Items Id="Items">
+          <Item Id="out-put">
+            <Items Id="Items">
+              <Item Id="report" ViewId="DailyTargetSearchParam_DetailView" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+</Application>

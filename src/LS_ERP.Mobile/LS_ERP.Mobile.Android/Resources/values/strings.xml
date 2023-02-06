@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">LS Tools</string>
+	<string name="host_api_erp">https://dev-erp-api.sharedataroom.com/api/</string>
+	<string name="host_api_helpdesk">https://api-helpdesk.sharedataroom.com/api/v1</string>
+</resources>

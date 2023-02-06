@@ -1,0 +1,2259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="PopupStyleNetWeight" ImageName="ShowWeightedLegend" />
+    </Actions>
+    <ActionToContainerMapping>
+      <ActionContainer Id="PackingAction" IsNewNode="True">
+        <ActionLink ActionId="BrowserPackingListImportFile" IsNewNode="True" />
+      </ActionContainer>
+      <ActionContainer Id="Unspecified">
+        <ActionLink ActionId="BrowserPackingListImportFile" Removed="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.Item">
+      <AppearanceRules>
+        <AppearanceRule Id="Code" TargetItems="Code" Context="ListView" BackColor="Yellow" FontColor="Red" Criteria="[MaterialType.Code] = 'AC'" IsNewNode="True" />
+        <AppearanceRule Id="CodeFB" TargetItems="Code" Context="ListView" BackColor="Lime" FontColor="Black" Criteria="[MaterialType.Code] = 'FB'" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.ItemPrice">
+      <AppearanceRules>
+        <AppearanceRule Id="Item Code" Context="ListView" TargetItems="ItemCode" BackColor="Yellow" FontColor="Red" Criteria="[MaterialTypeCode] = 'AC'" IsNewNode="True" />
+        <AppearanceRule Id="Item Code FB" Context="ListView" TargetItems="ItemCode" BackColor="Lime" FontColor="Black" Criteria="[MaterialTypeCode] = 'FB'" IsNewNode="True" />
+        <AppearanceRule Id="Price" TargetItems="Price" Context="ListView" BackColor="Yellow" FontColor="Red" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.ItemStyle">
+      <AppearanceRules>
+        <AppearanceRule Id="Cancel" BackColor="255, 128, 128" TargetItems="*" Context="ListView" Criteria="[TotalQuantity] = 0" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.PurchaseOrder">
+      <OwnMembers>
+        <Member Name="SupplierCNUF" LookupProperty="Code" />
+      </OwnMembers>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.SalesOrderOffset">
+      <AppearanceRules>
+        <AppearanceRule Id="ErrorMessage" TargetItems="ErrorMessage" Context="ListView" BackColor="Red" Criteria="[IsProcess] = True And [IsSuccess] = False" IsNewNode="True" />
+        <AppearanceRule Id="ErrorMessage_Pass" BackColor="Lime" Context="ListView" TargetItems="ErrorMessage" IsNewNode="True" />
+        <AppearanceRule Id="TargetLSStyle" Criteria="[IsProcess] = True And [IsSuccess] = False" BackColor="Red" TargetItems="TargetLSStyle" Context="ListView" IsNewNode="True" />
+        <AppearanceRule Id="TargetLSStyle_Pass" TargetItems="TargetLSStyle" Context="ListView" BackColor="Lime" Criteria="[IsProcess] = True And [IsSuccess] = True" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.SalesQuoteDetail">
+      <OwnMembers>
+        <Member Name="Vendor" LookupProperty="ID" />
+      </OwnMembers>
+    </Class>
+    <Class Name="LS_ERP.EntityFrameworkCore.Entities.ShippingPlanDetail">
+      <AppearanceRules>
+        <AppearanceRule Id="shipping-plan-detail-error" BackColor="Red" Criteria="[IsError] = True" TargetItems="*" FontColor="White" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.XAF.Module.DomainComponent.MaterialTransactionReportDetail">
+      <AppearanceRules>
+        <AppearanceRule Id="InQuantity" TargetItems="InQuantity" BackColor="Yellow" FontColor="Red" Context="ListView" IsNewNode="True" />
+        <AppearanceRule Id="OutQuantity" TargetItems="OutQuantity" BackColor="Yellow" FontColor="Red" Context="ListView" IsNewNode="True" />
+      </AppearanceRules>
+    </Class>
+    <Class Name="LS_ERP.XAF.Module.DomainComponent.PurchaseOrderReportDetailParam">
+      <OwnMembers>
+        <Member Name="TotalAmount" DisplayFormat="{0:N2} đ" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="report-management" Caption="Report Management" Index="0" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="purchase-report" Caption="Purchase" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="forecast-management" Caption="Forecast Management" Index="3" IsNewNode="True" />
+      <Item Id="purchase-management" Index="4">
+        <Items>
+          <Item Id="fabric-request" Removed="True" />
+        </Items>
+      </Item>
+      <Item Id="inventory-management" Caption="Inventory Management" Index="5" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="receipt" Index="1" IsNewNode="True" />
+          <Item Id="storage" Caption="Issued" Index="2" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="issued-entry" Caption="Issued Entry" ViewId="Issued_ListView" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="Request" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="fabric-request" Caption="Fabric Request" ObjectKey="0" ViewId="FabricRequestSearchParam_DetailView" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="transaction" Caption="Transaction" Index="3" IsNewNode="True">
+            <Items IsNewNode="True">
+              <Item Id="summary-transaction" Caption="Summary Transaction" IsNewNode="True" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+      <Item Id="job-management">
+        <Items>
+          <Item Id="out-put">
+            <Items>
+              <Item Id="DailyTargetDetail" ObjectKey="0" ViewId="DailyTargetDetailSearchParam_DetailView" IsNewNode="True" />
+            </Items>
+          </Item>
+          <Item Id="setup">
+            <Items>
+              <Item Id="WorkingTime" ViewId="WorkingTime_ListView" IsNewNode="True" />
+            </Items>
+          </Item>
+        </Items>
+      </Item>
+      <Item Id="setup-management">
+        <Items>
+          <Item Id="brand" Caption="Brand" ViewId="Brand_ListView" Index="1" IsNewNode="True" />
+          <Item Id="upc-management" Index="98" />
+          <Item Id="currency" Caption="Currency" Index="99" ViewId="Currency_ListView" IsNewNode="True" />
+          <Item Id="Company" Caption="Company" ViewId="Company_ListView" IsNewNode="True" />
+          <Item Id="material-type" Caption="Material Type" ViewId="MaterialType_ListView" IsNewNode="True" />
+          <Item Id="net-weight" Caption="Net Weight" ObjectKey="" ViewId="StyleNetWeight_ListView" IsNewNode="True" />
+          <Item Id="payment-term" Caption="Payment Term" ViewId="PaymentTerm_ListView" IsNewNode="True" />
+          <Item Id="price-term" Caption="Price Term" ViewId="PriceTerm_ListView" IsNewNode="True" />
+          <Item Id="shipping-mark" Caption="Shipping Mark" ViewId="ShippingMark_ListView" IsNewNode="True" />
+          <Item Id="tax" Caption="Tax" ViewId="Tax_ListView" IsNewNode="True" />
+          <Item Id="unit" Caption="Unit" ViewId="Unit_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="packing-management">
+        <Items>
+          <Item Id="packing-list" Index="0" />
+          <Item Id="packing-output" Index="1" />
+          <Item Id="Search_Ls_Style" Caption="Search LS Style" ChildItemsDisplayStyle="LargeIcons" ObjectKey="1" ViewId="ItemStyleSearchParam_DetailView_Packing" Index="2" IsNewNode="True" />
+          <Item Id="box-info" Index="3" Caption="Box Info" ViewId="BoxInfoSearchParam_DetailView" ObjectKey="0" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="shipping-management">
+        <Items>
+          <Item Id="Shipment" Caption="Shipment" ViewId="Shipment_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="system-management" Caption="System Management" IsNewNode="True" />
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="21.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="21.2.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <ViewItems>
+    <PropertyEditor Name="PropertyEditors">
+      <RegisteredPropertyEditor PropertyType="System.DateTime" DefaultDisplayFormat="{0:dd/MM/yyyy HH:mm:ss}" />
+    </PropertyEditor>
+  </ViewItems>
+  <Views>
+    <ListView Id="BarCodeForPacking_ListView" AllowEdit="True" />
+    <ListView Id="BoxDimension_ListView" NewItemRowPosition="Top" />
+    <ListView Id="BoxDimension_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Code" PropertyName="Code" Width="86" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Width" PropertyName="Width" DisplayFormat="{0:N4}" Index="1" Width="74" IsNewNode="True" />
+        <ColumnInfo Id="Height" PropertyName="Height" DisplayFormat="{0:N4}" Index="2" Width="79" IsNewNode="True" />
+        <ColumnInfo Id="Weight" PropertyName="Weight" Index="3" Width="85" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="BoxInfo_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="BoxInfo" RelativeSize="16.313725490196077">
+              <LayoutGroup Id="BoxInfo_col1" RelativeSize="49.961028838659395">
+                <LayoutItem Id="ID" RelativeSize="24.390243902439025" />
+                <LayoutItem Id="TagID" RelativeSize="17.073170731707318" />
+                <LayoutItem Id="GarmentColorCode" RelativeSize="17.073170731707318" />
+                <LayoutItem Id="ItemCode" RelativeSize="17.073170731707318" />
+                <LayoutItem Id="Description" RelativeSize="24.390243902439025" />
+              </LayoutGroup>
+              <LayoutGroup Id="BoxInfo_col2" RelativeSize="50.038971161340605">
+                <LayoutItem Id="GarmentSize" RelativeSize="24.390243902439025" />
+                <LayoutItem Id="CustomerStyle" RelativeSize="17.073170731707318" />
+                <LayoutItem Id="QuantityPerBox" RelativeSize="17.073170731707318" />
+                <LayoutItem Id="Customer" Index="3" RelativeSize="41.46341463414634" />
+                <LayoutItem Id="CustomerID" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Audit" RelativeSize="83.68627450980392">
+              <LayoutGroup Id="Audit_col1" RelativeSize="49.961028838659395">
+                <LayoutItem Id="CreatedBy" RelativeSize="3.9100684261974585" />
+                <LayoutItem Id="LastUpdatedBy" RelativeSize="2.7370478983382207" />
+                <LayoutItem Id="CreatedAt" RelativeSize="93.35288367546433" />
+              </LayoutGroup>
+              <LayoutGroup Id="Audit_col2" RelativeSize="50.038971161340605">
+                <LayoutItem Id="LastUpdatedAt" RelativeSize="3.9100684261974585" />
+                <LayoutItem Id="IsDeleted" RelativeSize="96.08993157380255" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="BoxInfoImportParam_Data_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="96" />
+        <ColumnInfo Id="CreatedBy" Width="96" />
+        <ColumnInfo Id="Customer" Width="96" Index="-1" />
+        <ColumnInfo Id="CustomerID" Width="96" Index="-1" />
+        <ColumnInfo Id="ID" Width="96" />
+        <ColumnInfo Id="IsDeleted" Width="68" />
+        <ColumnInfo Id="LastUpdatedAt" Width="96" />
+        <ColumnInfo Id="LastUpdatedBy" Width="96" />
+        <ColumnInfo Id="TagID" Width="169" Index="0" />
+        <ColumnInfo Id="GarmentColorCode" Width="96" Index="1" />
+        <ColumnInfo Id="ItemCode" Width="96" Index="2" />
+        <ColumnInfo Id="Description" Width="471" Index="3" />
+        <ColumnInfo Id="GarmentSize" Width="96" />
+        <ColumnInfo Id="CustomerStyle" Width="96" />
+        <ColumnInfo Id="QuantityPerBox" Width="96" />
+      </Columns>
+    </ListView>
+    <DetailView Id="BoxInfoImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" ActionContainer="Unspecified" Caption="Control" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.627450980392156">
+            <LayoutGroup Id="BoxInfoImportParam" Direction="Vertical" RelativeSize="100">
+              <LayoutItem Id="Customer" Index="0" RelativeSize="38.67595818815331" Removed="True" />
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Box Info Import Param" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="38.62928348909657" IsNewNode="True" />
+                <LayoutItem Id="ImportFilePath" ViewItem="ImportFilePath" Index="1" RelativeSize="44.781931464174455" IsNewNode="True" />
+                <LayoutItem Id="Control" ViewItem="Control" Index="2" RelativeSize="16.588785046728972" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="ImportFilePath" Index="1" RelativeSize="44.51219512195122" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Data_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="91.37254901960785">
+            <LayoutItem Id="Data" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="BoxInfoSearchParam_BoxInfos_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="112" />
+        <ColumnInfo Id="CreatedBy" Width="112" />
+        <ColumnInfo Id="Customer" Width="82" Index="-1" />
+        <ColumnInfo Id="ID" Width="112" />
+        <ColumnInfo Id="IsDeleted" Width="79" />
+        <ColumnInfo Id="LastUpdatedAt" Width="112" />
+        <ColumnInfo Id="LastUpdatedBy" Width="112" />
+        <ColumnInfo Id="TagID" Width="236" Index="0" />
+        <ColumnInfo Id="GarmentColorCode" Width="173" Index="1" />
+        <ColumnInfo Id="ItemCode" Width="150" Index="2" />
+        <ColumnInfo Id="Description" Width="289" Index="3" />
+        <ColumnInfo Id="GarmentSize" Width="149" />
+        <ColumnInfo Id="CustomerStyle" Width="142" />
+        <ColumnInfo Id="QuantityPerBox" Width="107" />
+        <ColumnInfo Id="CustomerID" Width="112" />
+      </Columns>
+    </ListView>
+    <DetailView Id="BoxInfoSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.235294117647058">
+            <LayoutGroup Id="BoxInfoSearchParam" Direction="Vertical" RelativeSize="100">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Horizontal" Index="0" RelativeSize="100" Caption="Box Info Search Param" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="49.96096799375488" IsNewNode="True" />
+                <LayoutItem Id="Search" ViewItem="Search" Index="1" RelativeSize="50.03903200624512" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Customer" RelativeSize="49.956331877729255" Removed="True" />
+              <LayoutItem Id="Search" RelativeSize="50.043668122270745" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="BoxInfos_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="91.76470588235294">
+            <LayoutItem Id="BoxInfos" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Brand_ListView" AllowEdit="True" NewItemRowPosition="Bottom">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Caption="Customer" Index="0" />
+        <ColumnInfo Id="CustomerName" PropertyName="Customer.Name" Caption="Customer Name" Index="1" Width="162" IsNewNode="True" />
+        <ColumnInfo Id="Name" Index="2" />
+        <ColumnInfo Id="Customer" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Company_ListView" NewItemRowPosition="Top" AllowEdit="True" />
+    <ListView Id="Currency_ListView">
+      <Columns>
+        <ColumnInfo Id="ID" SortIndex="0" SortOrder="Ascending" Index="0" Width="128" />
+        <ColumnInfo Id="Description" SortIndex="1" Index="1" Width="330" />
+        <ColumnInfo Id="Rounding" Width="164" />
+      </Columns>
+    </ListView>
+    <ListView Id="Currency_LookupListView">
+      <Columns>
+        <ColumnInfo Id="id" PropertyName="ID" View="" SortIndex="0" SortOrder="Ascending" Index="0" Caption="ID" IsNewNode="True" />
+        <ColumnInfo Id="Description" Caption="Code" PropertyName="ID" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Customer_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="29.530201342281877">
+            <LayoutGroup Id="Customer">
+              <LayoutGroup Id="Customer_col1" RelativeSize="45.129469790382245">
+                <LayoutItem Id="ID" RelativeSize="17.391304347826086" />
+                <LayoutItem Id="Name" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Division" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="FullName" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Address" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="PhoneNumber" RelativeSize="13.043478260869565" />
+                <LayoutItem Id="Fax" RelativeSize="17.391304347826086" />
+              </LayoutGroup>
+              <LayoutGroup Id="Customer_col2" RelativeSize="54.870530209617755">
+                <LayoutGroup Id="Auto1aa91261-290c-4b3c-a953-d8a9422decc5" RelativeSize="61.57303370786517">
+                  <LayoutItem Id="Currency" RelativeSize="17.391304347826086" />
+                  <LayoutItem Id="PaymentTerm" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="PriceTerm" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="BankAccount" Index="3" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="ContactName" Index="4" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="Country" Index="5" RelativeSize="30.434782608695652" />
+                  <LayoutItem Id="Fax" Removed="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto689b5884-3f92-423e-8d0b-9cacd5293835" RelativeSize="38.42696629213483">
+                  <LayoutItem Id="CreatedBy" RelativeSize="17.391304347826086" />
+                  <LayoutItem Id="CreatedAt" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="LastUpdatedBy" RelativeSize="13.043478260869565" />
+                  <LayoutItem Id="LastUpdatedAt" RelativeSize="56.52173913043478" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="SizeableEditors" RelativeSize="26.97986577181208">
+            <LayoutGroup Id="Item1" TextAlignMode="AlignWithChildren" />
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="43.48993288590604">
+            <LayoutGroup Id="Brands" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="Brands" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+            <LayoutGroup Id="Sizes" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="Sizes" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Customer_ListView" AllowEdit="True" NewItemRowPosition="Bottom" />
+    <ListView Id="Customer_Sizes_ListView" AllowDelete="True" AllowEdit="True" NewItemRowPosition="Top" />
+    <DetailView Id="DailyTargetDetailMailParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="DailyTargetDetailMailParam" RelativeSize="100" Direction="Vertical">
+              <LayoutGroup Id="DailyTargetDetailMailParam_col1" RelativeSize="100">
+                <LayoutItem Id="ToAddress" RelativeSize="5.044510385756676" />
+                <LayoutItem Id="CCs" RelativeSize="3.5608308605341246" />
+                <LayoutItem Id="BCCs" ViewItem="BCCs" Index="2" RelativeSize="3.5608308605341246" IsNewNode="True" Removed="True" />
+                <LayoutItem Id="Subject" Index="3" RelativeSize="3.5608308605341246" ViewItem="Subject" IsNewNode="True" />
+                <LayoutGroup Id="Auto1c122c34-c459-4808-ba13-7ca3e61ef0dc" ShowCaption="False" Caption="Auto1c122c34-c459-4808-ba13-7ca3e61ef0dc(9)" Direction="Horizontal" Index="4" RelativeSize="84.27299703264094" IsNewNode="True">
+                  <LayoutItem Id="ImportFilePath" ViewItem="ImportFilePath" Index="0" RelativeSize="75.38461538461539" IsNewNode="True" />
+                  <LayoutItem Id="Browser" ViewItem="Browser" Index="1" RelativeSize="24.615384615384617" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autod827ad85-2cdd-4362-a696-513ca390333c" TextAlignMode="UseParentOptions" Direction="Horizontal" Index="5" RelativeSize="75.60137457044674" Removed="True">
+                  <LayoutItem Id="BrowserAttachFile" Removed="True" />
+                  <LayoutItem Id="ImportFilePath" Removed="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="DailyTargetDetailSummaryByDate_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="11.96105702364395">
+            <LayoutGroup Id="DailyTargetDetailSummaryByDate">
+              <LayoutGroup Id="Item1">
+                <LayoutItem Id="Customer" RelativeSize="33.37612323491656" />
+                <LayoutItem Id="Operation" RelativeSize="33.1193838254172" />
+                <LayoutItem Id="ProduceDate" RelativeSize="33.504492939666235" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="36.99582753824757">
+            <LayoutGroup Id="ListDailyTargetDetailSummaryByDate" TextAlignMode="AlignWithChildren">
+              <LayoutItem Id="ListDailyTargetDetailSummaryByDate" TextAlignMode="AutoSize" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="ListDetail" TextAlignMode="AlignWithChildren" RelativeSize="51.04311543810849" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="DailyTargetDetailSummaryByDate_ListDailyTargetDetailSummaryByDate_ListView" EditorTypeName="DevExpress.ExpressApp.Chart.Win.ChartListEditor">
+      <ChartSettings Settings="﻿&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#xD;&#xA;&lt;ChartXmlSerializer version=&quot;21.2.6.0&quot;&gt;&#xD;&#xA;  &lt;Chart AppearanceNameSerializable=&quot;Default&quot; SelectionMode=&quot;None&quot; SeriesSelectionMode=&quot;Series&quot;&gt;&#xD;&#xA;    &lt;DataContainer BoundSeriesSorting=&quot;None&quot; ValidateDataMembers=&quot;true&quot;&gt;&#xD;&#xA;      &lt;SeriesSerializable&gt;&#xD;&#xA;        &lt;Item1 Name=&quot;Quantity&quot; ArgumentDataMember=&quot;WorkCenterName&quot; LabelsVisibility=&quot;True&quot;&gt;&#xD;&#xA;          &lt;View Color=&quot;227, 108, 9&quot; TypeNameSerializable=&quot;SideBySideBarSeriesView&quot;&gt;&#xD;&#xA;            &lt;FirstPoint LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePoint&quot;&gt;&#xD;&#xA;              &lt;Label TypeNameSerializable=&quot;SideBySideBarSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/FirstPoint&gt;&#xD;&#xA;            &lt;LastPoint LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePoint&quot;&gt;&#xD;&#xA;              &lt;Label TypeNameSerializable=&quot;SideBySideBarSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/LastPoint&gt;&#xD;&#xA;          &lt;/View&gt;&#xD;&#xA;          &lt;QualitativeSummaryOptions SummaryFunction=&quot;SUM([Quantity])&quot; /&gt;&#xD;&#xA;        &lt;/Item1&gt;&#xD;&#xA;        &lt;Item2 Name=&quot;Efficency&quot; ArgumentDataMember=&quot;WorkCenterName&quot; LabelsVisibility=&quot;True&quot;&gt;&#xD;&#xA;          &lt;View AxisYName=&quot;Secondary AxisY 1&quot; Color=&quot;0, 112, 192&quot; TypeNameSerializable=&quot;SplineSeriesView&quot;&gt;&#xD;&#xA;            &lt;SeriesPointAnimation TypeNameSerializable=&quot;XYMarkerWidenAnimation&quot; /&gt;&#xD;&#xA;            &lt;FirstPoint MarkerDisplayMode=&quot;Default&quot; LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePointMarker&quot;&gt;&#xD;&#xA;              &lt;Label Angle=&quot;180&quot; TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/FirstPoint&gt;&#xD;&#xA;            &lt;LastPoint MarkerDisplayMode=&quot;Default&quot; LabelDisplayMode=&quot;Default&quot; TypeNameSerializable=&quot;SidePointMarker&quot;&gt;&#xD;&#xA;              &lt;Label Angle=&quot;0&quot; TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; /&gt;&#xD;&#xA;            &lt;/LastPoint&gt;&#xD;&#xA;          &lt;/View&gt;&#xD;&#xA;          &lt;QualitativeSummaryOptions SummaryFunction=&quot;SUM([Efficiency])&quot; /&gt;&#xD;&#xA;          &lt;Label TypeNameSerializable=&quot;PointSeriesLabel&quot; TextOrientation=&quot;Horizontal&quot; TextPattern=&quot;{V:0.00}%&quot; /&gt;&#xD;&#xA;        &lt;/Item2&gt;&#xD;&#xA;      &lt;/SeriesSerializable&gt;&#xD;&#xA;      &lt;SeriesTemplate /&gt;&#xD;&#xA;    &lt;/DataContainer&gt;&#xD;&#xA;    &lt;Diagram RuntimePaneCollapse=&quot;true&quot; RuntimePaneResize=&quot;false&quot; PaneLayoutDirection=&quot;Vertical&quot; TypeNameSerializable=&quot;XYDiagram&quot;&gt;&#xD;&#xA;      &lt;AxisX StickToEnd=&quot;false&quot; VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.5&quot; EndSideMargin=&quot;0.5&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisX&gt;&#xD;&#xA;      &lt;AxisY VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot;&gt;&#xD;&#xA;        &lt;WholeRange StartSideMargin=&quot;0.9800000000000001&quot; EndSideMargin=&quot;0.9800000000000001&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;      &lt;/AxisY&gt;&#xD;&#xA;      &lt;SecondaryAxesY&gt;&#xD;&#xA;        &lt;Item1 AxisID=&quot;0&quot; VisibleInPanesSerializable=&quot;-1&quot; ShowBehind=&quot;false&quot; Name=&quot;Secondary AxisY 1&quot;&gt;&#xD;&#xA;          &lt;WholeRange StartSideMargin=&quot;0.85&quot; EndSideMargin=&quot;0.85&quot; SideMarginSizeUnit=&quot;AxisUnit&quot; /&gt;&#xD;&#xA;        &lt;/Item1&gt;&#xD;&#xA;      &lt;/SecondaryAxesY&gt;&#xD;&#xA;      &lt;SelectionOptions /&gt;&#xD;&#xA;    &lt;/Diagram&gt;&#xD;&#xA;    &lt;Legend CrosshairContentOffset=&quot;4&quot; MaxCrosshairContentWidth=&quot;50&quot; MaxCrosshairContentHeight=&quot;0&quot; /&gt;&#xD;&#xA;  &lt;/Chart&gt;&#xD;&#xA;&lt;/ChartXmlSerializer&gt;" />
+    </ListView>
+    <ListView Id="Division_ListView" AllowEdit="True" NewItemRowPosition="Bottom" />
+    <DetailView Id="FabricPopupModel_DetailView">
+      <Items>
+        <PropertyEditor Id="FabricPurchaseOrder" LookupProperty="Number" />
+      </Items>
+    </DetailView>
+    <ListView Id="FabricPopupModel_FabricPurchaseInfor_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="ItemName" AllowEdit="False" />
+        <ColumnInfo Id="ItemID" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorCode" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorName" AllowEdit="False" />
+        <ColumnInfo Id="PurchaseUnitID" AllowEdit="True" />
+        <ColumnInfo Id="PurchaseQuantity" AllowEdit="False" />
+        <ColumnInfo Id="ReceiptQuantity" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="FabricPurchaseOrder_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Index="-1" />
+        <ColumnInfo Id="FilePath" Index="-1" />
+        <ColumnInfo Id="ServerFileName" Index="-1" />
+        <ColumnInfo Id="Number" Width="89" />
+        <ColumnInfo Id="ItemName" Width="332" />
+      </Columns>
+    </ListView>
+    <ListView Id="FabricPurchaseOrder_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Number" Width="97" Index="0" />
+        <ColumnInfo Id="CustomerStyles" Width="134" Index="1" />
+        <ColumnInfo Id="GarmentColorCodes" Width="173" Index="2" />
+        <ColumnInfo Id="ItemID" Width="95" Index="3" />
+        <ColumnInfo Id="ItemName" Width="108" Index="4" />
+        <ColumnInfo Id="ItemColorCode" Width="134" Index="5" />
+        <ColumnInfo Id="Seasons" Width="96" />
+      </Columns>
+    </ListView>
+    <ListView Id="FabricPurchaseOrderSearchParam_FabricPurchaseOrders_ListView">
+      <Columns>
+        <ColumnInfo Id="FilePath" Index="-1" />
+        <ColumnInfo Id="ServerFileName" Index="-1" />
+        <ColumnInfo Id="Number" SortIndex="0" SortOrder="Ascending" Index="0" Width="104" />
+        <ColumnInfo Id="ItemID" Index="1" Width="78" />
+        <ColumnInfo Id="ItemName" Width="181" SortIndex="-1" SortOrder="None" Index="2" />
+        <ColumnInfo Id="ItemColorCode" Width="76" />
+        <ColumnInfo Id="ItemColorName" Width="74" />
+        <ColumnInfo Id="OrderedQuantity" Index="6" />
+        <ColumnInfo Id="ShippedQuantity" Index="7" />
+        <ColumnInfo Id="ReceivedQuantity" Index="8" />
+        <ColumnInfo Id="UpdatedEstimatedTimeOfDeparture" Index="9" />
+        <ColumnInfo Id="Line" Index="10" />
+        <ColumnInfo Id="EstimatedTimeOfDeparture" Index="11" />
+        <ColumnInfo Id="ExpectedDeliveryDate" Index="12" />
+        <ColumnInfo Id="ContractualDeliveryDate" Index="13" />
+        <ColumnInfo Id="FabricSupplier" Index="14" />
+        <ColumnInfo Id="CustomerID" Index="15" />
+        <ColumnInfo Id="OrderCreationDate" Index="16" />
+        <ColumnInfo Id="ProductionStartDate" Index="17" />
+        <ColumnInfo Id="Note" Index="18" />
+      </Columns>
+    </ListView>
+    <ListView Id="ForecastEntry_ForecastOveralls_ListView" MasterDetailMode="ListViewAndDetailView" MasterDetailView="ForecastOverall_DetailView_Detail" DetailViewID="ForecastOverall_DetailView_Detail">
+      <SplitLayout Direction="Vertical" />
+    </ListView>
+    <DetailView Id="ForecastGroup_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <ListView Id="ForecastGroup_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" AllowEdit="False" />
+        <ColumnInfo Id="CreatedBy" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedAt" AllowEdit="False" />
+        <ColumnInfo Id="LastUpdatedBy" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ForecastGroupImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" ActionContainer="Unspecified" Caption="Control(12)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="20.29250457038391">
+            <LayoutGroup Id="ForecastGroupImportParam" RelativeSize="100">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Param" IsNewNode="True">
+                <LayoutGroup Id="Autob4c8eb48-0711-4476-be03-a0c1c6d92e4c" ShowCaption="False" Caption="Autob4c8eb48-0711-4476-be03-a0c1c6d92e4c(5)" Direction="Horizontal" Index="0" RelativeSize="52.77777777777778" IsNewNode="True">
+                  <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="50" IsNewNode="True" />
+                  <LayoutItem Id="ForecastGroup" ViewItem="ForecastGroup" Index="1" RelativeSize="50" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autoe3a4b217-c31e-4e2a-b0fa-19edfd1fc000" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="47.22222222222222" IsNewNode="True">
+                  <LayoutItem Id="FilePath" ViewItem="FilePath" Index="0" RelativeSize="75.21489971346705" IsNewNode="True" />
+                  <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="24.785100286532952" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="Description" Index="1" RelativeSize="27.906976744186046" Removed="True" />
+              <LayoutItem Id="FilePath" Index="2" RelativeSize="34.883720930232556" Removed="True" />
+              <LayoutItem Id="Customer" Removed="True" />
+              <LayoutItem Id="ForecastGroup" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Overalls_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="79.70749542961609">
+            <LayoutItem Id="Overalls" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ForecastGroupImportParam_Overalls_ListView">
+      <Columns>
+        <ColumnInfo Id="GarmentColorName" Width="153" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ForecastMaterial_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ImportPartRevisionParam_DetailView">
+      <Items>
+        <PropertyEditor Id="ID" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <ListView Id="ImportPartRevisionParam_PartMaterials_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="SubmitBom" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="ImportShippingPlanParam_Details_ListView">
+      <Columns>
+        <ColumnInfo Id="FilePath" Index="-1" />
+        <ColumnInfo Id="ShippingPlan" Index="-1" />
+        <ColumnInfo Id="IsDeActive" Index="12" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ImportShippingPlanParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="11.607843137254902">
+            <LayoutGroup Id="ImportShippingPlanParam">
+              <LayoutGroup Id="Item1">
+                <LayoutGroup Id="Auto0a7d4aeb-2d36-4186-937e-dbadefb15d6d" RelativeSize="47.36842105263158">
+                  <LayoutItem Id="Company" RelativeSize="46.46569646569647" />
+                  <LayoutItem Id="Customer" RelativeSize="53.53430353430353" />
+                </LayoutGroup>
+                <LayoutGroup Id="Autofdd4d394-5a37-49ee-9d24-beec3825b5de" Caption="Autofdd4d394-5a37-49ee-9d24-beec3825b5de(8)" RelativeSize="52.63157894736842">
+                  <LayoutItem Id="FilePath" RelativeSize="77.85862785862786" />
+                  <LayoutItem Id="Controls" RelativeSize="22.14137214137214" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Details_Group" TextAlignMode="AlignWithChildren" RelativeSize="88.3921568627451" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="IncoTerm_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Year" PropertyName="Year" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_InvoiceDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="InvoiceID" Index="-12" />
+      </Columns>
+    </ListView>
+    <ListView Id="Invoice_InvoiceDocument_ListView">
+      <Columns>
+        <ColumnInfo Id="InvoiceDocumentTypeID" Index="-3" />
+        <ColumnInfo Id="FilePath" Index="-2" />
+        <ColumnInfo Id="FileNameServer" Index="1" />
+        <ColumnInfo Id="CreatedAt" Index="10" />
+        <ColumnInfo Id="CreatedBy" Index="10" />
+        <ColumnInfo Id="LastUpdatedAt" Index="10" />
+        <ColumnInfo Id="LastUpdatedBy" Index="10" />
+      </Columns>
+    </ListView>
+    <DetailView Id="InvoiceDocument_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="InvoiceDocument" RelativeSize="13.020134228187919">
+              <LayoutGroup Id="InvoiceDocument_col1" RelativeSize="49.87684729064039">
+                <LayoutItem Id="FileName" RelativeSize="50" />
+                <LayoutItem Id="FilePath" RelativeSize="50" />
+                <LayoutItem Id="FileNameServer" RelativeSize="36.36363636363637" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="InvoiceDocument_col2" Caption="InvoiceDocument_col2" RelativeSize="50.12315270935961">
+                <LayoutItem Id="InvoiceDocumentType" RelativeSize="50" />
+                <LayoutItem Id="FileNameServer" ViewItem="FileNameServer" Index="1" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="Invoice" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Audit" RelativeSize="86.97986577181209" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="Issued_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="Number" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <ListView Id="Issued_IssuedGroupLines_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="ItemID" AllowEdit="False" />
+        <ColumnInfo Id="ItemName" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorCode" AllowEdit="False" />
+        <ColumnInfo Id="ItemCode" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorName" AllowEdit="False" />
+        <ColumnInfo Id="Season" AllowEdit="False" />
+        <ColumnInfo Id="UnitID" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorCode" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorName" AllowEdit="True" />
+        <ColumnInfo Id="CustomerStyle" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="IssuedCreateParam_ProductionBOMs_ListView">
+      <Columns>
+        <ColumnInfo Id="QuantityPerUnit" Index="15" />
+        <ColumnInfo Id="RequiredQuantity" Index="16" />
+        <ColumnInfo Id="ConsumptionQuantity" Index="17" />
+        <ColumnInfo Id="RemainQuantity" Index="18" />
+        <ColumnInfo Id="ReservedQuantity" Index="19" />
+        <ColumnInfo Id="WareHouseQuantity" Index="20" />
+        <ColumnInfo Id="WastagePercent" Index="21" />
+        <ColumnInfo Id="WastageQuantity" Index="22" />
+        <ColumnInfo Id="LessPercent" Index="23" />
+        <ColumnInfo Id="LessQuantity" Index="24" />
+        <ColumnInfo Id="FreePercent" Index="25" />
+        <ColumnInfo Id="FreeQuantity" Index="26" />
+      </Columns>
+    </ListView>
+    <ListView Id="IssuedFabricParam_Fabrics_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="ItemName" AllowEdit="False" />
+        <ColumnInfo Id="FabricPurchaseOrderNumber" AllowEdit="False" />
+        <ColumnInfo Id="CustomerStyle" AllowEdit="False" />
+        <ColumnInfo Id="ItemID" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorCode" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorName" AllowEdit="False" />
+        <ColumnInfo Id="Season" AllowEdit="False" />
+        <ColumnInfo Id="LotNumber" AllowEdit="False" />
+        <ColumnInfo Id="InStockQuantity" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="Item_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="ID" Width="74" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemPriceImportParam_ItemPrices_ListView">
+      <Columns>
+        <ColumnInfo Id="Customer" Index="-1" />
+        <ColumnInfo Id="ShippingTerm" Index="-1" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyle_Barcodes_ListView" NewItemRowPosition="Bottom" />
+    <ListView Id="ItemStyle_Barcodes_ListView_Packing" ClassName="LS_ERP.EntityFrameworkCore.Entities.ItemStyleBarCode" DataAccessMode="Client" AllowDelete="False" AllowLink="False" AllowNew="False" AllowEdit="True" DetailViewID="ItemStyleBarCode_DetailView_Packing" AutoExpandAllGroups="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedAt" PropertyName="CreatedAt" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="ID" PropertyName="ID" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyle" PropertyName="ItemStyle" Index="-1" AllowClear="False" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyleNumber" PropertyName="ItemStyleNumber" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedAt" PropertyName="LastUpdatedAt" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedBy" PropertyName="LastUpdatedBy" Index="-1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="BarCode" PropertyName="BarCode" Index="0" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="Size" PropertyName="Size" Index="1" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="Color" PropertyName="Color" Index="2" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="UE" PropertyName="UE" Index="3" AllowEdit="False" IsNewNode="True" />
+        <ColumnInfo Id="PCB" PropertyName="PCB" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Packing" PropertyName="Packing" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Quantity" PropertyName="Quantity" Index="6" AllowEdit="False" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemStyle_DetailView_DetailsPivot">
+      <Items>
+        <PropertyEditor Id="OrderDetails" View="ItemStyle_OrderDetails_ListView_Pivot" />
+      </Items>
+    </DetailView>
+    <DetailView Id="ItemStyle_DetailView_Packing" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" GroupStyle="Inherited" RequiredFieldMark="*" ClassName="LS_ERP.EntityFrameworkCore.Entities.ItemStyle" AllowDelete="True" AllowNew="True" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="Barcodes" PropertyName="Barcodes" View="ItemStyle_Barcodes_ListView_Packing" IsNewNode="True" />
+        <PropertyEditor Id="Brand" PropertyName="Brand" IsNewNode="True" />
+        <PropertyEditor Id="ColorCode" PropertyName="ColorCode" IsNewNode="True" />
+        <PropertyEditor Id="ColorName" PropertyName="ColorName" IsNewNode="True" />
+        <PropertyEditor Id="ContractDate" PropertyName="ContractDate" IsNewNode="True" />
+        <PropertyEditor Id="ContractNo" PropertyName="ContractNo" IsNewNode="True" />
+        <PropertyEditor Id="CreatedAt" PropertyName="CreatedAt" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CustomerCode" PropertyName="CustomerCode" IsNewNode="True" />
+        <PropertyEditor Id="CustomerCodeNo" PropertyName="CustomerCodeNo" IsNewNode="True" />
+        <PropertyEditor Id="CustomerStyle" PropertyName="CustomerStyle" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryDate" PropertyName="DeliveryDate" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPlace" PropertyName="DeliveryPlace" IsNewNode="True" />
+        <PropertyEditor Id="Description" PropertyName="Description" IsNewNode="True" />
+        <PropertyEditor Id="Division" PropertyName="Division" IsNewNode="True" />
+        <PropertyEditor Id="EstimatedSupplierHandOver" PropertyName="EstimatedSupplierHandOver" IsNewNode="True" />
+        <PropertyEditor Id="FabricContent" PropertyName="FabricContent" IsNewNode="True" />
+        <PropertyEditor Id="Gender" PropertyName="Gender" IsNewNode="True" />
+        <PropertyEditor Id="HangFlat" PropertyName="HangFlat" IsNewNode="True" />
+        <PropertyEditor Id="Image" PropertyName="Image" IsNewNode="True" />
+        <PropertyEditor Id="IsBomPulled" PropertyName="IsBomPulled" IsNewNode="True" />
+        <PropertyEditor Id="IsCalculateRequiredQuantity" PropertyName="IsCalculateRequiredQuantity" IsNewNode="True" />
+        <PropertyEditor Id="IsConfirmed" PropertyName="IsConfirmed" IsNewNode="True" />
+        <PropertyEditor Id="IsEnoughQuantity" PropertyName="IsEnoughQuantity" IsNewNode="True" />
+        <PropertyEditor Id="IsIssued" PropertyName="IsIssued" IsNewNode="True" />
+        <PropertyEditor Id="IsNew" PropertyName="IsNew" IsNewNode="True" />
+        <PropertyEditor Id="IsQuantityBalanced" PropertyName="IsQuantityBalanced" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyleStatus" PropertyName="ItemStyleStatus" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyleStatusCode" PropertyName="ItemStyleStatusCode" IsNewNode="True" />
+        <PropertyEditor Id="LabelCode" PropertyName="LabelCode" IsNewNode="True" />
+        <PropertyEditor Id="LabelName" PropertyName="LabelName" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedAt" PropertyName="LastUpdatedAt" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedBy" PropertyName="LastUpdatedBy" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="LSStyle" PropertyName="LSStyle" IsNewNode="True" />
+        <PropertyEditor Id="MSRP" PropertyName="MSRP" IsNewNode="True" />
+        <PropertyEditor Id="Number" PropertyName="Number" IsNewNode="True" />
+        <PropertyEditor Id="OldShipDate" PropertyName="OldShipDate" IsNewNode="True" />
+        <PropertyEditor Id="OldTotalQuantity" PropertyName="OldTotalQuantity" IsNewNode="True" />
+        <PropertyEditor Id="OrderDetails" PropertyName="OrderDetails" View="ItemStyle_OrderDetails_ListView" IsNewNode="True" />
+        <PropertyEditor Id="Packing" PropertyName="Packing" IsNewNode="True" />
+        <PropertyEditor Id="PackingLists" PropertyName="PackingLists" View="ItemStyle_PackingLists_ListView" IsNewNode="True" />
+        <PropertyEditor Id="PackingOverQuantities" PropertyName="PackingOverQuantities" View="ItemStyle_PackingOverQuantities_ListView" IsNewNode="True" />
+        <PropertyEditor Id="PCB" PropertyName="PCB" IsNewNode="True" />
+        <PropertyEditor Id="PIC" PropertyName="PIC" IsNewNode="True" />
+        <PropertyEditor Id="PriceTerm" PropertyName="PriceTerm" IsNewNode="True" />
+        <PropertyEditor Id="PriceTermCode" PropertyName="PriceTermCode" IsNewNode="True" />
+        <PropertyEditor Id="ProductionBOMs" PropertyName="ProductionBOMs" View="ItemStyle_ProductionBOMs_ListView" IsNewNode="True" />
+        <PropertyEditor Id="ProductionDescription" PropertyName="ProductionDescription" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderDate" PropertyName="PurchaseOrderDate" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderNumber" PropertyName="PurchaseOrderNumber" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderStatus" PropertyName="PurchaseOrderStatus" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderStatusCode" PropertyName="PurchaseOrderStatusCode" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderType" PropertyName="PurchaseOrderType" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderTypeCode" PropertyName="PurchaseOrderTypeCode" IsNewNode="True" />
+        <PropertyEditor Id="Remark" PropertyName="Remark" IsNewNode="True" />
+        <PropertyEditor Id="SalesOrder" PropertyName="SalesOrder" IsNewNode="True" />
+        <PropertyEditor Id="SalesOrderID" PropertyName="SalesOrderID" IsNewNode="True" />
+        <PropertyEditor Id="Season" PropertyName="Season" IsNewNode="True" />
+        <PropertyEditor Id="ShipDate" PropertyName="ShipDate" IsNewNode="True" />
+        <PropertyEditor Id="ShipMode" PropertyName="ShipMode" IsNewNode="True" />
+        <PropertyEditor Id="ShippingMark" PropertyName="ShippingMark" IsNewNode="True" />
+        <PropertyEditor Id="ShipTo" PropertyName="ShipTo" IsNewNode="True" />
+        <PropertyEditor Id="TotalQuantity" PropertyName="TotalQuantity" IsNewNode="True" />
+        <PropertyEditor Id="UCustomerCode" PropertyName="UCustomerCode" IsNewNode="True" />
+        <PropertyEditor Id="UCustomerCodeNo" PropertyName="UCustomerCodeNo" IsNewNode="True" />
+        <PropertyEditor Id="UE" PropertyName="UE" IsNewNode="True" />
+        <PropertyEditor Id="Unit" PropertyName="Unit" IsNewNode="True" />
+        <PropertyEditor Id="UnitID" PropertyName="UnitID" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="100" Caption="Packing" TextAlignMode="UseParentOptions" IsNewNode="True">
+            <TabbedGroup Id="Tabs" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutGroup Id="Barcodes" ShowCaption="True" TextAlignMode="AlignWithChildren" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="Barcodes" TextAlignMode="AutoSize" ViewItem="Barcodes" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="RemainQuantities" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="1" TextAlignMode="AlignWithChildren" RelativeSize="100" Caption="Remain Quantities" IsNewNode="True">
+                <LayoutItem Id="PackingOverQuantities" ViewItem="PackingOverQuantities" Index="0" RelativeSize="100" IsNewNode="True" />
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemStyle_ListView">
+      <Columns>
+        <ColumnInfo Id="SalesOrderID" Index="0" />
+        <ColumnInfo Id="LSStyle" Index="1" SortIndex="0" SortOrder="Descending" />
+        <ColumnInfo Id="ColorName" SortIndex="-1" SortOrder="None" Index="2" Width="128" />
+        <ColumnInfo Id="CustomerStyle" Index="3" />
+        <ColumnInfo Id="ShipTo" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyle_OrderDetails_ListView" NewItemRowPosition="Bottom" AllowEdit="True" />
+    <ListView Id="ItemStyle_PackingOverQuantities_ListView">
+      <Columns>
+        <ColumnInfo Id="PackingList" Index="-1" />
+        <ColumnInfo Id="ItemStyleNumber" Index="0" />
+        <ColumnInfo Id="ColorName" Index="1" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ItemStyleBarCode_DetailView" AllowEdit="True" AllowDelete="True" AllowNew="True" />
+    <DetailView Id="ItemStyleBarCode_DetailView_Packing" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" GroupStyle="Inherited" RequiredFieldMark="*" ClassName="LS_ERP.EntityFrameworkCore.Entities.ItemStyleBarCode" AllowDelete="False" AllowEdit="True" AllowNew="False" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="BarCode" PropertyName="BarCode" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Color" PropertyName="Color" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CreatedAt" PropertyName="CreatedAt" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="ID" PropertyName="ID" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyle" PropertyName="ItemStyle" AllowClear="True" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyleNumber" PropertyName="ItemStyleNumber" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedAt" PropertyName="LastUpdatedAt" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedBy" PropertyName="LastUpdatedBy" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="Packing" PropertyName="Packing" IsNewNode="True" />
+        <PropertyEditor Id="PCB" PropertyName="PCB" IsNewNode="True" />
+        <PropertyEditor Id="Quantity" PropertyName="Quantity" AllowEdit="True" IsNewNode="True" />
+        <PropertyEditor Id="Size" PropertyName="Size" AllowEdit="False" IsNewNode="True" />
+        <PropertyEditor Id="UE" PropertyName="UE" AllowEdit="False" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="SimpleEditors" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+            <LayoutGroup Id="ItemStyleBarCode" Index="0" Direction="Vertical" ShowCaption="True" Caption="Item Style Bar Code" RelativeSize="20.922570016474463" IsNewNode="True">
+              <LayoutGroup Id="ItemStyleBarCode_col2" Index="0" ShowCaption="False" RelativeSize="100" Direction="Vertical" Caption="ItemStyleBarCode_col2" IsNewNode="True">
+                <LayoutGroup Id="Autoa33fad8c-eed7-456f-9d71-5124ef7d8f23" ShowCaption="False" Caption="Autoa33fad8c-eed7-456f-9d71-5124ef7d8f23(5)" Direction="Horizontal" Index="0" RelativeSize="37.234042553191486" IsNewNode="True">
+                  <LayoutItem Id="Size" ViewItem="Size" Index="0" RelativeSize="50.13550135501355" IsNewNode="True" />
+                  <LayoutItem Id="UE" ViewItem="UE" Index="1" RelativeSize="49.86449864498645" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto3e835555-c37c-40f8-9169-03a2f523d57e" ShowCaption="False" Caption="Auto3e835555-c37c-40f8-9169-03a2f523d57e(8)" Direction="Vertical" Index="1" RelativeSize="62.765957446808514" IsNewNode="True">
+                  <LayoutGroup Id="Auto0124c1cf-8979-403e-94ad-75a66eaed9e1" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="45.76271186440678" IsNewNode="True">
+                    <LayoutItem Id="Packing" ViewItem="Packing" Index="0" RelativeSize="50.13550135501355" IsNewNode="True" />
+                    <LayoutItem Id="PCB" ViewItem="PCB" Index="1" RelativeSize="49.86449864498645" IsNewNode="True" />
+                  </LayoutGroup>
+                  <LayoutItem Id="Quantity" ViewItem="Quantity" Index="1" RelativeSize="54.23728813559322" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Audit" Index="1" ShowCaption="False" RelativeSize="79.07742998352553" Direction="Horizontal" IsNewNode="True">
+              <LayoutGroup Id="Auto2da279d2-ea54-4270-9c33-9f963faa2b55" ShowCaption="False" Caption="Auto2da279d2-ea54-4270-9c33-9f963faa2b55(8)" Index="0" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="CreatedBy" ViewItem="CreatedBy" Index="0" RelativeSize="6.25" IsNewNode="True" />
+                <LayoutItem Id="CreatedAt" ViewItem="CreatedAt" Index="1" RelativeSize="93.75" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Autob04e6e45-4f5a-4a08-83ae-c1aa1c3510ae" ShowCaption="False" Caption="Autob04e6e45-4f5a-4a08-83ae-c1aa1c3510ae(11)" Index="1" RelativeSize="50" IsNewNode="True">
+                <LayoutItem Id="LastUpdatedBy" ViewItem="LastUpdatedBy" Index="0" RelativeSize="6.25" IsNewNode="True" />
+                <LayoutItem Id="LastUpdatedAt" ViewItem="LastUpdatedAt" Index="1" RelativeSize="93.75" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemStyleSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Item1" RelativeSize="23.987034035656404">
+            <LayoutGroup Id="Autoa83ed7a6-f98a-42a1-a66d-98e5f82f08b1" RelativeSize="33.6283185840708">
+              <LayoutItem Id="Number" RelativeSize="48.81305637982196" />
+              <LayoutItem Id="PurchaseOrderNumber" RelativeSize="51.18694362017804" />
+            </LayoutGroup>
+            <LayoutGroup Id="Auto3503a28d-0673-4899-ae6e-586c44fb2a15" Direction="Vertical" RelativeSize="66.3716814159292">
+              <LayoutGroup Id="Autocf1c4e7e-cf94-4628-a052-577bc87be074" ShowCaption="False" Caption="Autocf1c4e7e-cf94-4628-a052-577bc87be074(7)" Direction="Horizontal" Index="0" RelativeSize="46.666666666666664" IsNewNode="True">
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="48.6646884272997" IsNewNode="True" />
+                <LayoutItem Id="FromDate" ViewItem="FromDate" Index="1" RelativeSize="51.3353115727003" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="Auto00038d44-59bd-4fe2-8f2c-a54e118ee504" ShowCaption="False" Caption="Auto00038d44-59bd-4fe2-8f2c-a54e118ee504(10)" Direction="Horizontal" Index="1" RelativeSize="53.333333333333336" TextAlignMode="AlignWithChildren" IsNewNode="True">
+                <LayoutItem Id="Item2" Index="0" RelativeSize="84.27299703264094" IsNewNode="True" />
+                <LayoutItem Id="Controls" ViewItem="Controls" Index="1" RelativeSize="15.72700296735905" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="Controls" Index="1" RelativeSize="55.73770491803279" Removed="True" />
+              <LayoutItem Id="Customer" Removed="True" />
+              <LayoutItem Id="FromDate" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Styles_Group" TextAlignMode="AlignWithChildren" RelativeSize="76.01296596434359" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ItemStyleSearchParam_DetailView_Packing" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" GroupStyle="Inherited" RequiredFieldMark="*" ClassName="LS_ERP.XAF.Module.DomainComponent.ItemStyleSearchParam" AllowDelete="False" AllowNew="False" IsNewNode="True">
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="Cancel" IsNewNode="True" />
+        <ActionLink ActionId="IssuedItemStyle" IsNewNode="True" />
+      </HiddenActions>
+      <Items IsNewNode="True">
+        <ActionContainerViewItem Id="Controls" ActionContainer="Unspecified" Caption="Controls(9)" IsNewNode="True" />
+        <PropertyEditor Id="Customer" PropertyName="Customer" IsNewNode="True" />
+        <PropertyEditor Id="FromDate" PropertyName="FromDate" IsNewNode="True" />
+        <PropertyEditor Id="Number" PropertyName="Number" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderNumber" PropertyName="PurchaseOrderNumber" IsNewNode="True" />
+        <PropertyEditor Id="Styles" PropertyName="Styles" View="ItemStyleSearchParam_Styles_ListView_Packing" IsNewNode="True" />
+        <PropertyEditor Id="ToDate" PropertyName="ToDate" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" IsNewNode="True">
+          <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Index="0" RelativeSize="14.349775784753364" Caption="ItemStyleSearchParam" IsNewNode="True">
+            <LayoutGroup Id="Autoa83ed7a6-f98a-42a1-a66d-98e5f82f08b1" ShowCaption="False" Caption="Autoa83ed7a6-f98a-42a1-a66d-98e5f82f08b1(3)" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+              <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="25.663716814159294" IsNewNode="True" />
+              <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="24.48377581120944" IsNewNode="True" />
+              <LayoutItem Id="PurchaseOrderNumber" ViewItem="PurchaseOrderNumber" Index="2" RelativeSize="23.893805309734514" IsNewNode="True" />
+              <LayoutItem Id="FromDate" ViewItem="FromDate" Index="3" RelativeSize="25.958702064896755" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Styles_Group" Index="1" ShowCaption="True" RelativeSize="85.65022421524664" TextAlignMode="AlignWithChildren" IsNewNode="True">
+            <LayoutItem Id="Styles" ViewItem="Styles" ShowCaption="" Index="0" RelativeSize="100" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemStyleSearchParam_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="Number" Width="143" />
+        <ColumnInfo Id="PurchaseOrderNumber" Width="228" />
+        <ColumnInfo Id="Customer" Width="111" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyleSearchParam_ListView_Packing" ClassName="LS_ERP.XAF.Module.DomainComponent.ItemStyleSearchParam" AllowEdit="True" DetailViewID="ItemStyleSearchParam_DetailView_Search" MasterDetailMode="ListViewAndDetailView" AllowDelete="False" AllowLink="False" AllowNew="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="Number" PropertyName="Number" Index="0" Width="143" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderNumber" PropertyName="PurchaseOrderNumber" Index="1" Width="228" IsNewNode="True" />
+        <ColumnInfo Id="Customer" PropertyName="Customer" Index="2" Width="111" IsNewNode="True" />
+        <ColumnInfo Id="FromDate" PropertyName="FromDate" Index="3" IsNewNode="True" />
+        <ColumnInfo Id="ToDate" PropertyName="ToDate" Index="4" IsNewNode="True" />
+      </Columns>
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="Cancel" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="ItemStyleSearchParam_Styles_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="CancelItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="IssuedItemStyle" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="ItemStyleSearchParam_Styles_ListView_Packing" ClassName="LS_ERP.EntityFrameworkCore.Entities.ItemStyle" DataAccessMode="Client" MasterDetailMode="ListViewAndDetailView" DetailViewID="ItemStyle_DetailView_Packing" AllowEdit="False" AllowDelete="False" AllowNew="False" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="CreatedAt" PropertyName="CreatedAt" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="CreatedBy" PropertyName="CreatedBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedAt" PropertyName="LastUpdatedAt" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="LastUpdatedBy" PropertyName="LastUpdatedBy" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Number" PropertyName="Number" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="SalesOrderID" PropertyName="SalesOrderID" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="CustomerStyle" PropertyName="CustomerStyle" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="LSStyle" PropertyName="LSStyle" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="ColorName" PropertyName="ColorName" Index="3" Width="115" SortIndex="0" SortOrder="Ascending" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyleStatusCode" PropertyName="ItemStyleStatusCode" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="UnitID" PropertyName="UnitID" Index="5" IsNewNode="True" />
+        <ColumnInfo Id="Remark" PropertyName="Remark" Index="6" IsNewNode="True" />
+        <ColumnInfo Id="ColorCode" PropertyName="ColorCode" Index="7" IsNewNode="True" />
+        <ColumnInfo Id="Description" PropertyName="Description" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="ProductionDescription" PropertyName="ProductionDescription" Index="9" IsNewNode="True" />
+        <ColumnInfo Id="Brand" PropertyName="Brand" Index="10" IsNewNode="True" />
+        <ColumnInfo Id="FabricContent" PropertyName="FabricContent" Index="11" IsNewNode="True" />
+        <ColumnInfo Id="PIC" PropertyName="PIC" Index="12" IsNewNode="True" />
+        <ColumnInfo Id="UE" PropertyName="UE" Index="13" IsNewNode="True" />
+        <ColumnInfo Id="PCB" PropertyName="PCB" Index="14" IsNewNode="True" />
+        <ColumnInfo Id="LabelCode" PropertyName="LabelCode" Index="15" IsNewNode="True" />
+        <ColumnInfo Id="LabelName" PropertyName="LabelName" Index="16" IsNewNode="True" />
+        <ColumnInfo Id="Division" PropertyName="Division" Index="17" IsNewNode="True" />
+        <ColumnInfo Id="Season" PropertyName="Season" Index="18" IsNewNode="True" />
+        <ColumnInfo Id="Gender" PropertyName="Gender" Index="19" IsNewNode="True" />
+        <ColumnInfo Id="MSRP" PropertyName="MSRP" Index="20" IsNewNode="True" />
+        <ColumnInfo Id="Image" PropertyName="Image" Index="21" IsNewNode="True" />
+        <ColumnInfo Id="PriceTermCode" PropertyName="PriceTermCode" Index="22" IsNewNode="True" />
+        <ColumnInfo Id="CustomerCode" PropertyName="CustomerCode" Index="23" IsNewNode="True" />
+        <ColumnInfo Id="CustomerCodeNo" PropertyName="CustomerCodeNo" Index="24" IsNewNode="True" />
+        <ColumnInfo Id="UCustomerCode" PropertyName="UCustomerCode" Index="25" IsNewNode="True" />
+        <ColumnInfo Id="UCustomerCodeNo" PropertyName="UCustomerCodeNo" Index="26" IsNewNode="True" />
+        <ColumnInfo Id="ContractDate" PropertyName="ContractDate" Index="27" IsNewNode="True" />
+        <ColumnInfo Id="ContractNo" PropertyName="ContractNo" Index="28" IsNewNode="True" />
+        <ColumnInfo Id="EstimatedSupplierHandOver" PropertyName="EstimatedSupplierHandOver" Index="29" IsNewNode="True" />
+        <ColumnInfo Id="Packing" PropertyName="Packing" Index="30" IsNewNode="True" />
+        <ColumnInfo Id="HangFlat" PropertyName="HangFlat" Index="31" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryPlace" PropertyName="DeliveryPlace" Index="32" IsNewNode="True" />
+        <ColumnInfo Id="DeliveryDate" PropertyName="DeliveryDate" Index="33" IsNewNode="True" />
+        <ColumnInfo Id="ShipMode" PropertyName="ShipMode" Index="34" IsNewNode="True" />
+        <ColumnInfo Id="ShipTo" PropertyName="ShipTo" Index="35" IsNewNode="True" />
+        <ColumnInfo Id="ShipDate" PropertyName="ShipDate" Index="36" IsNewNode="True" />
+        <ColumnInfo Id="OldShipDate" PropertyName="OldShipDate" Index="37" IsNewNode="True" />
+        <ColumnInfo Id="ShippingMark" PropertyName="ShippingMark" Index="38" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderNumber" PropertyName="PurchaseOrderNumber" Index="39" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderDate" PropertyName="PurchaseOrderDate" Index="40" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderTypeCode" PropertyName="PurchaseOrderTypeCode" Index="41" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderStatusCode" PropertyName="PurchaseOrderStatusCode" Index="42" IsNewNode="True" />
+        <ColumnInfo Id="OldTotalQuantity" PropertyName="OldTotalQuantity" Index="43" IsNewNode="True" />
+        <ColumnInfo Id="TotalQuantity" PropertyName="TotalQuantity" Index="44" IsNewNode="True" />
+        <ColumnInfo Id="IsNew" PropertyName="IsNew" Index="45" IsNewNode="True" />
+        <ColumnInfo Id="IsBomPulled" PropertyName="IsBomPulled" Index="46" IsNewNode="True" />
+        <ColumnInfo Id="IsCalculateRequiredQuantity" PropertyName="IsCalculateRequiredQuantity" Index="47" IsNewNode="True" />
+        <ColumnInfo Id="IsQuantityBalanced" PropertyName="IsQuantityBalanced" Index="48" IsNewNode="True" />
+        <ColumnInfo Id="IsConfirmed" PropertyName="IsConfirmed" Index="49" IsNewNode="True" />
+        <ColumnInfo Id="IsEnoughQuantity" PropertyName="IsEnoughQuantity" Index="50" IsNewNode="True" />
+        <ColumnInfo Id="IsIssued" PropertyName="IsIssued" Index="51" IsNewNode="True" />
+        <ColumnInfo Id="SalesOrder" PropertyName="SalesOrder" Index="52" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderStatus" PropertyName="PurchaseOrderStatus" Index="53" IsNewNode="True" />
+        <ColumnInfo Id="PurchaseOrderType" PropertyName="PurchaseOrderType" Index="54" IsNewNode="True" />
+        <ColumnInfo Id="ItemStyleStatus" PropertyName="ItemStyleStatus" Index="55" IsNewNode="True" />
+        <ColumnInfo Id="PriceTerm" PropertyName="PriceTerm" Index="56" IsNewNode="True" />
+        <ColumnInfo Id="Unit" PropertyName="Unit" Index="57" IsNewNode="True" />
+      </Columns>
+      <HiddenActions IsNewNode="True">
+        <ActionLink ActionId="BalanceQuantityItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="CalculateRequiredQuantityItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="CancelItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="ClearingBomItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="ClearingStyleItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="IssuedItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="PullBomItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="ViewProductionBomItemStyle" IsNewNode="True" />
+      </HiddenActions>
+      <SplitLayout SplitterPosition="800" IsNewNode="True" />
+    </ListView>
+    <DetailView Id="ItemStyleSyncMaster_DetailView_DetailView" CaptionColon=":" EnableCaptionColon="True" CaptionLocation="Default" CaptionHorizontalAlignment="Default" CaptionVerticalAlignment="Default" CaptionWordWrap="Default" EnableLayoutGroupImages="True" GroupStyle="Inherited" RequiredFieldMark="*" ClassName="LS_ERP.EntityFrameworkCore.Entities.ItemStyleSyncMaster" DefaultFocusedItem="ItemStyleSyncActions" IsNewNode="True">
+      <Items IsNewNode="True">
+        <PropertyEditor Id="AccessoriesDate" PropertyName="AccessoriesDate" IsNewNode="True" />
+        <PropertyEditor Id="Brand" PropertyName="Brand" IsNewNode="True" />
+        <PropertyEditor Id="ContractualSupplierHandover" PropertyName="ContractualSupplierHandover" IsNewNode="True" />
+        <PropertyEditor Id="CreatedAt" PropertyName="CreatedAt" IsNewNode="True" />
+        <PropertyEditor Id="CreatedBy" PropertyName="CreatedBy" IsNewNode="True" />
+        <PropertyEditor Id="Customer" PropertyName="Customer" IsNewNode="True" />
+        <PropertyEditor Id="CustomerID" PropertyName="CustomerID" IsNewNode="True" />
+        <PropertyEditor Id="CustomerStyle" PropertyName="CustomerStyle" IsNewNode="True" />
+        <PropertyEditor Id="Cutting" PropertyName="Cutting" IsNewNode="True" />
+        <PropertyEditor Id="DeliveryPlace" PropertyName="DeliveryPlace" IsNewNode="True" />
+        <PropertyEditor Id="Description" PropertyName="Description" IsNewNode="True" />
+        <PropertyEditor Id="EstimateDate" PropertyName="EstimateDate" IsNewNode="True" />
+        <PropertyEditor Id="FabricDate" PropertyName="FabricDate" IsNewNode="True" />
+        <PropertyEditor Id="GarmentColorCode" PropertyName="GarmentColorCode" IsNewNode="True" />
+        <PropertyEditor Id="ID" PropertyName="ID" IsNewNode="True" />
+        <PropertyEditor Id="IssuedDate" PropertyName="IssuedDate" IsNewNode="True" />
+        <PropertyEditor Id="IssuedDateBU" PropertyName="IssuedDateBU" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyle" PropertyName="ItemStyle" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyleNumber" PropertyName="ItemStyleNumber" IsNewNode="True" />
+        <PropertyEditor Id="ItemStyleSyncActions" PropertyName="ItemStyleSyncActions" View="ItemStyleSyncMaster_ItemStyleSyncActions_ListView" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedAt" PropertyName="LastUpdatedAt" IsNewNode="True" />
+        <PropertyEditor Id="LastUpdatedBy" PropertyName="LastUpdatedBy" IsNewNode="True" />
+        <PropertyEditor Id="LSStyle" PropertyName="LSStyle" IsNewNode="True" />
+        <PropertyEditor Id="Merchandiser" PropertyName="Merchandiser" IsNewNode="True" />
+        <PropertyEditor Id="Monthly" PropertyName="Monthly" IsNewNode="True" />
+        <PropertyEditor Id="OldDeliveryPlace" PropertyName="OldDeliveryPlace" IsNewNode="True" />
+        <PropertyEditor Id="OldGarmentColorCode" PropertyName="OldGarmentColorCode" IsNewNode="True" />
+        <PropertyEditor Id="OldLSStyle" PropertyName="OldLSStyle" IsNewNode="True" />
+        <PropertyEditor Id="OldProductionSkedDeliveryDate" PropertyName="OldProductionSkedDeliveryDate" IsNewNode="True" />
+        <PropertyEditor Id="OldPurchaseOrderNumber" PropertyName="OldPurchaseOrderNumber" IsNewNode="True" />
+        <PropertyEditor Id="OldSeason" PropertyName="OldSeason" IsNewNode="True" />
+        <PropertyEditor Id="OldTotalQuantity" PropertyName="OldTotalQuantity" IsNewNode="True" />
+        <PropertyEditor Id="OrderDetailSyncs" PropertyName="OrderDetailSyncs" View="ItemStyleSyncMaster_OrderDetailSyncs_ListView" IsNewNode="True" />
+        <PropertyEditor Id="ProductionDescription" PropertyName="ProductionDescription" IsNewNode="True" />
+        <PropertyEditor Id="ProductionSkedDeliveryDate" PropertyName="ProductionSkedDeliveryDate" IsNewNode="True" />
+        <PropertyEditor Id="ProductType" PropertyName="ProductType" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderNumber" PropertyName="PurchaseOrderNumber" IsNewNode="True" />
+        <PropertyEditor Id="PurchaseOrderType" PropertyName="PurchaseOrderType" IsNewNode="True" />
+        <PropertyEditor Id="Remark" PropertyName="Remark" IsNewNode="True" />
+        <PropertyEditor Id="Season" PropertyName="Season" IsNewNode="True" />
+        <PropertyEditor Id="Sewing" PropertyName="Sewing" IsNewNode="True" />
+        <PropertyEditor Id="TotalQuantity" PropertyName="TotalQuantity" IsNewNode="True" />
+        <PropertyEditor Id="UnitID" PropertyName="UnitID" IsNewNode="True" />
+      </Items>
+      <Layout IsNewNode="True">
+        <LayoutGroup Id="Main" Index="0" ShowCaption="False" RelativeSize="100" TextAlignMode="AlignWithChildren" Caption="Main" IsNewNode="True">
+          <LayoutItem Id="ItemStyleSyncActions" ViewItem="ItemStyleSyncActions" Index="0" RelativeSize="47.19101123595506" IsNewNode="True" />
+          <LayoutItem Id="OrderDetailSyncs" ViewItem="OrderDetailSyncs" Index="1" RelativeSize="52.80898876404494" IsNewNode="True" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ItemStyleSyncMaster_ItemStyleSyncActions_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="85" Index="-1" />
+        <ColumnInfo Id="ID" Width="79" />
+        <ColumnInfo Id="ItemStyleSyncMaster" Width="112" />
+        <ColumnInfo Id="ItemStyleSyncMasterID" Width="164" Index="-1" />
+        <ColumnInfo Id="LastUpdatedAt" Width="112" />
+        <ColumnInfo Id="LastUpdatedBy" Width="112" />
+        <ColumnInfo Id="Action" Width="82" Index="0" />
+        <ColumnInfo Id="ActionDate" Width="84" Index="1" />
+        <ColumnInfo Id="CreatedBy" Width="90" Index="2" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyleSyncMaster_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemStyleNumber" Width="188" Index="-1" />
+        <ColumnInfo Id="Monthly" Index="0" Width="94" />
+        <ColumnInfo Id="Description" Width="169" Index="1" />
+        <ColumnInfo Id="CustomerID" Index="2" Width="135" />
+        <ColumnInfo Id="Brand" Index="3" />
+        <ColumnInfo Id="CustomerStyle" Index="4" />
+        <ColumnInfo Id="LSStyle" Index="5" />
+        <ColumnInfo Id="OldLSStyle" Index="6" />
+        <ColumnInfo Id="PurchaseOrderNumber" Index="7" />
+        <ColumnInfo Id="OldPurchaseOrderNumber" Index="8" />
+        <ColumnInfo Id="ProductionDescription" Index="9" />
+        <ColumnInfo Id="ProductionSkedDeliveryDate" Index="10" />
+        <ColumnInfo Id="OldProductionSkedDeliveryDate" Index="11" />
+        <ColumnInfo Id="ContractualSupplierHandover" Index="12" />
+        <ColumnInfo Id="EstimateDate" Index="13" />
+        <ColumnInfo Id="PurchaseOrderType" Index="14" />
+        <ColumnInfo Id="GarmentColorCode" Index="15" />
+        <ColumnInfo Id="OldGarmentColorCode" Index="16" />
+        <ColumnInfo Id="TotalQuantity" Index="17" />
+        <ColumnInfo Id="OldTotalQuantity" Index="18" />
+        <ColumnInfo Id="UnitID" Index="19" />
+        <ColumnInfo Id="DeliveryPlace" Index="20" />
+        <ColumnInfo Id="OldDeliveryPlace" Index="21" />
+        <ColumnInfo Id="IssuedDate" Index="22" />
+        <ColumnInfo Id="IssuedDateBU" Index="23" />
+        <ColumnInfo Id="Season" Index="24" />
+        <ColumnInfo Id="OldSeason" Index="25" />
+        <ColumnInfo Id="Remark" Index="26" />
+        <ColumnInfo Id="ProductType" Index="27" />
+        <ColumnInfo Id="Merchandiser" Index="28" />
+        <ColumnInfo Id="AccessoriesDate" Index="29" />
+        <ColumnInfo Id="FabricDate" Index="30" />
+        <ColumnInfo Id="Cutting" Index="31" />
+        <ColumnInfo Id="Sewing" Index="32" />
+        <ColumnInfo Id="ItemStyle" Index="33" />
+        <ColumnInfo Id="Customer" Index="34" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyleSyncMaster_OrderDetailSyncs_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemStyleSyncMasterID" Index="-1" />
+        <ColumnInfo Id="GarmentSize" Index="0" Width="116" />
+        <ColumnInfo Id="Quantity" Index="1" Width="95" DisplayFormat="{0:N0}" EditMask="N0" />
+      </Columns>
+    </ListView>
+    <ListView Id="ItemStyleSyncSearchParam_ItemStyles_ListView" MasterDetailMode="ListViewAndDetailView" FreezeColumnIndices="False" AllowDelete="False" AllowEdit="True" AllowNew="False" MasterDetailView="ItemStyleSyncMaster_DetailView_DetailView">
+      <Columns>
+        <ColumnInfo Id="ItemStyleNumber" Width="173" Index="-1" />
+        <ColumnInfo Id="Monthly" Width="120" Index="0" />
+        <ColumnInfo Id="Brand" Index="1" />
+        <ColumnInfo Id="LSStyle" Width="157" Index="2" />
+        <ColumnInfo Id="OldLSStyle" Width="144" Index="3" />
+        <ColumnInfo Id="CustomerStyle" Width="138" Index="4" />
+        <ColumnInfo Id="PurchaseOrderNumber" Width="107" Index="5" />
+        <ColumnInfo Id="OldPurchaseOrderNumber" Index="6" />
+        <ColumnInfo Id="ProductionDescription" Index="7" />
+        <ColumnInfo Id="ProductionSkedDeliveryDate" Index="8" />
+        <ColumnInfo Id="OldProductionSkedDeliveryDate" Index="9" />
+        <ColumnInfo Id="ContractualSupplierHandover" Index="10" />
+        <ColumnInfo Id="EstimateDate" Index="11" />
+        <ColumnInfo Id="PurchaseOrderType" Index="12" />
+        <ColumnInfo Id="GarmentColorCode" Index="13" />
+        <ColumnInfo Id="OldGarmentColorCode" Index="14" />
+        <ColumnInfo Id="Description" Width="142" Index="15" />
+        <ColumnInfo Id="TotalQuantity" Index="16" />
+        <ColumnInfo Id="OldTotalQuantity" Index="17" />
+        <ColumnInfo Id="UnitID" Index="18" />
+        <ColumnInfo Id="DeliveryPlace" Index="19" />
+        <ColumnInfo Id="OldDeliveryPlace" Index="20" />
+        <ColumnInfo Id="IssuedDate" Index="21" />
+        <ColumnInfo Id="IssuedDateBU" Index="22" />
+        <ColumnInfo Id="Season" Index="23" />
+        <ColumnInfo Id="OldSeason" Index="24" />
+        <ColumnInfo Id="Remark" Index="25" />
+        <ColumnInfo Id="ProductType" Index="26" />
+        <ColumnInfo Id="Merchandiser" Index="27" />
+        <ColumnInfo Id="FabricDate" Index="28" />
+        <ColumnInfo Id="AccessoriesDate" Index="29" />
+        <ColumnInfo Id="CustomerID" Width="135" Index="30" />
+        <ColumnInfo Id="Cutting" Index="31" />
+        <ColumnInfo Id="Sewing" Index="32" />
+        <ColumnInfo Id="ItemStyle" Index="33" />
+        <ColumnInfo Id="Customer" Index="34" />
+      </Columns>
+      <SplitLayout SplitterPosition="1200" />
+    </ListView>
+    <ListView Id="JobHead_ProductionBOMs_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemName" Width="203" />
+        <ColumnInfo Id="QuantityPerUnit" Index="15" />
+        <ColumnInfo Id="RequiredQuantity" Index="16" />
+        <ColumnInfo Id="ConsumptionQuantity" Index="17" />
+        <ColumnInfo Id="RemainQuantity" Index="18" />
+        <ColumnInfo Id="ReservedQuantity" Index="19" />
+        <ColumnInfo Id="WareHouseQuantity" Index="20" />
+        <ColumnInfo Id="WastagePercent" Index="21" />
+        <ColumnInfo Id="WastageQuantity" Index="22" />
+        <ColumnInfo Id="LessPercent" Index="23" />
+        <ColumnInfo Id="LessQuantity" Index="24" />
+        <ColumnInfo Id="FreePercent" Index="25" />
+        <ColumnInfo Id="FreeQuantity" Index="26" />
+      </Columns>
+    </ListView>
+    <ListView Id="MaterialRequest_OrderDetails_ListView" AllowEdit="True" />
+    <ListView Id="MaterialSyncMasterSearchParam_ItemStyleSyncMasters_ListView" MasterDetailMode="ListViewOnly" MasterDetailView="ItemStyleSyncMaster_DetailView" />
+    <ListView Id="MaterialTransactionReportDetail_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemName" Width="364" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="CustomerStyle" Index="5" />
+        <ColumnInfo Id="GarmentColorCode" Index="6" />
+        <ColumnInfo Id="GarmentColorName" Index="7" />
+        <ColumnInfo Id="GarmentSize" Index="8" />
+        <ColumnInfo Id="InQuantity" SortIndex="0" SortOrder="Ascending" Index="9" Width="72" />
+        <ColumnInfo Id="OutQuantity" Index="10" Width="64" />
+        <ColumnInfo Id="Specify" Index="11" Width="91" />
+        <ColumnInfo Id="LSStyle" Index="12" />
+        <ColumnInfo Id="Season" Index="13" />
+        <ColumnInfo Id="UnitID" PropertyName="UnitID" Caption="Unit" Index="14" />
+        <ColumnInfo Id="CustomerID" Index="15" />
+        <ColumnInfo Id="StorageCode" Index="16" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PackingLineCreateParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="53.51882160392799">
+            <LayoutGroup Id="PackingLineCreateParam">
+              <LayoutGroup Id="OrderDetails_Group" TextAlignMode="AlignWithChildren" RelativeSize="84.40366972477064" />
+              <LayoutGroup Id="Item1" RelativeSize="15.596330275229358">
+                <LayoutItem Id="TotalQuantity" RelativeSize="25.233644859813083" />
+                <LayoutItem Id="PackingType" RelativeSize="24.49933244325768" />
+                <LayoutItem Id="QuantityPackagePerCarton" RelativeSize="24.49933244325768" />
+                <LayoutItem Id="RemainQuantity" RelativeSize="25.767690253671564" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="PackingRatios" TextAlignMode="AlignWithChildren" RelativeSize="46.48117839607201" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PackingLineCreateParam_PackingRatios_ListView">
+      <Columns>
+        <ColumnInfo Id="Ratio" Width="116" />
+        <ColumnInfo Id="TotalQuantity" Width="122" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PackingList_DetailView">
+      <Items>
+        <PropertyEditor Id="Company" DataSourcePropertyIsNullMode="SelectNothing" />
+        <PropertyEditor Id="PackingListCode" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="42.290748898678416">
+            <LayoutGroup Id="PackingList" RelativeSize="71.48241206030151">
+              <LayoutGroup Id="PackingList_col1" RelativeSize="63.20582877959927">
+                <LayoutItem Id="PackingListCode" RelativeSize="13.654618473895582" />
+                <LayoutItem Id="PackingListDate" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="DeliveryGroup" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="RatioRight" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="RatioLeft" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="RatioBottom" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="DontShortShip" ViewItem="DontShortShip" Index="6" RelativeSize="18.4" Removed="True" />
+                <LayoutItem Id="OrdinalShip" ViewItem="OrdinalShip" Index="6" RelativeSize="9.63855421686747" IsNewNode="True" />
+                <LayoutItem Id="Company" ViewItem="Company" Index="7" RelativeSize="12.449799196787149" IsNewNode="True" />
+                <LayoutGroup Id="Auto5114bc91-81c6-48da-ba73-2c76e41bfc39" ShowCaption="False" Caption="Auto5114bc91-81c6-48da-ba73-2c76e41bfc39(11)" Direction="Vertical" Index="8" RelativeSize="16.06425702811245" TextAlignMode="AlignWithChildren" IsNewNode="True">
+                  <LayoutGroup Id="Auto64c308db-5fca-4672-968a-f864baa4f361" ShowCaption="False" Caption="Auto64c308db-5fca-4672-968a-f864baa4f361(14)" Direction="Horizontal" Index="0" RelativeSize="100" TextAlignMode="AlignWithChildren" IsNewNode="True">
+                    <LayoutItem Id="Confirm" ViewItem="Confirm" Index="0" RelativeSize="23.919308357348704" IsNewNode="True" />
+                    <LayoutItem Id="DontShortShip" ViewItem="DontShortShip" Index="1" RelativeSize="34.293948126801155" IsNewNode="True" />
+                    <LayoutItem Id="BarCodeCompleted" ViewItem="BarCodeCompleted" Index="2" RelativeSize="41.78674351585014" IsNewNode="True" />
+                  </LayoutGroup>
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="PackingList_col2" RelativeSize="36.79417122040073">
+                <LayoutItem Id="Customer" RelativeSize="13.654618473895582" />
+                <LayoutItem Id="SalesOrder" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="ShippingMark1" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="ShippingMark2" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="ShippingMethod" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="LSStyles" RelativeSize="9.63855421686747" />
+                <LayoutItem Id="Confirm" ViewItem="Confirm" Index="6" RelativeSize="18.4" Removed="True" />
+                <LayoutItem Id="Factory" ViewItem="Factory" Index="6" RelativeSize="9.63855421686747" IsNewNode="True" />
+                <LayoutItem Id="PackingUnit" ViewItem="PackingUnit" Index="7" RelativeSize="9.63855421686747" IsNewNode="True" />
+                <LayoutItem Id="SheetName" ViewItem="SheetName" Index="8" RelativeSize="18.87550200803213" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+            <LayoutGroup Id="Auto05df1b5a-eeff-4a0e-b597-bd9452e61732" RelativeSize="28.517587939698494">
+              <LayoutGroup Id="Item1" RelativeSize="52.43055555555556">
+                <LayoutItem Id="CreatedAt" RelativeSize="29.310344827586206" />
+                <LayoutItem Id="CreatedBy" RelativeSize="20.689655172413794" />
+                <LayoutItem Id="LastUpdatedBy" RelativeSize="20.689655172413794" />
+                <LayoutItem Id="LastUpdatedAt" RelativeSize="29.310344827586206" />
+              </LayoutGroup>
+              <LayoutGroup Id="Item2" RelativeSize="47.56944444444444">
+                <LayoutItem Id="TotalQuantity" RelativeSize="32.38095238095238" />
+                <LayoutItem Id="TotalBarCodeCarton" RelativeSize="67.61904761904762" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Autoc5a709d5-cb31-4924-9329-d2355e2b0e14" RelativeSize="57.709251101321584">
+            <TabbedGroup Id="Item3">
+              <LayoutGroup Id="PackingLines" TextAlignMode="AlignWithChildren">
+                <LayoutItem Id="PackingLines" TextAlignMode="AutoSize" />
+              </LayoutGroup>
+              <LayoutGroup Id="ItemStyles" TextAlignMode="AlignWithChildren">
+                <LayoutItem Id="ItemStyles" TextAlignMode="AutoSize" />
+              </LayoutGroup>
+            </TabbedGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PackingList_ListView">
+      <Columns>
+        <ColumnInfo Id="BarCodeCompleted" Index="12" />
+        <ColumnInfo Id="CompanyCode" Index="13" />
+        <ColumnInfo Id="Factory" Index="14" />
+        <ColumnInfo Id="OrdinalShip" Index="15" />
+        <ColumnInfo Id="BrandPurchaseOrder" Index="16" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackingList_PackingLines_ListView">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="123" />
+        <ColumnInfo Id="CreatedBy" Width="123" />
+        <ColumnInfo Id="ID" Width="87" />
+        <ColumnInfo Id="LastUpdatedAt" Width="123" />
+        <ColumnInfo Id="LastUpdatedBy" Width="123" />
+        <ColumnInfo Id="PackingList" Width="123" />
+        <ColumnInfo Id="PackingListCode" Width="171" Index="-1" />
+        <ColumnInfo Id="SequenceNo" Width="70" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="FromNo" Width="69" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="ToNo" Width="57" />
+        <ColumnInfo Id="LSStyle" Width="123" />
+        <ColumnInfo Id="QuantitySize" Width="135" />
+        <ColumnInfo Id="QuantityPerPackage" Width="118" />
+        <ColumnInfo Id="PackagesPerBox" Width="127" />
+        <ColumnInfo Id="QuantityPerCarton" Width="177" />
+        <ColumnInfo Id="TotalQuantity" Width="124" />
+        <ColumnInfo Id="Quantity" Width="94" />
+        <ColumnInfo Id="TotalCarton" Width="105" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Size" Width="81" />
+        <ColumnInfo Id="NetWeight" Width="118" />
+        <ColumnInfo Id="GrossWeight" Width="138" />
+        <ColumnInfo Id="Color" Width="91" />
+        <ColumnInfo Id="PrePack" Width="106" />
+        <ColumnInfo Id="BarCode" Width="227" SortIndex="0" SortOrder="Ascending" Index="16" />
+        <ColumnInfo Id="TotalBarCode" Index="17" />
+        <ColumnInfo Id="BoxDimension" Width="123" Index="18" />
+        <ColumnInfo Id="Length" Width="81" Index="19" />
+        <ColumnInfo Id="Width" Width="73" Index="20" />
+        <ColumnInfo Id="Height" Width="72" Index="21" />
+        <ColumnInfo Id="InnerBoxDimension" Width="123" Index="22" />
+        <ColumnInfo Id="InnerLength" Width="123" Index="23" />
+        <ColumnInfo Id="InnerWidth" Width="123" Index="24" />
+        <ColumnInfo Id="InnerHeight" Width="123" Index="25" />
+        <ColumnInfo Id="DeliveryPlace" Width="123" Index="26" />
+        <ColumnInfo Id="PadCode" Width="105" SortIndex="-1" SortOrder="None" Index="27" />
+        <ColumnInfo Id="Pad" Width="105" Index="28" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PackingListImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" Caption="Control" ActionContainer="PackingAction" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="PackingListImportParam" RelativeSize="100">
+              <LayoutItem Id="Customer" RelativeSize="3.6036036036036037" />
+              <LayoutItem Id="ImportFilePath" Index="1" RelativeSize="2.6208026208026207" />
+              <LayoutGroup Id="Auto87ea7620-185a-4f74-9b48-56fa068f8a14" ShowCaption="False" Caption="Auto87ea7620-185a-4f74-9b48-56fa068f8a14(6)" Direction="Horizontal" Index="2" RelativeSize="93.77559377559378" IsNewNode="True">
+                <LabelItem Id="LabelItem1" Text="  " Index="0" RelativeSize="80.57142857142857" IsNewNode="True" />
+                <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="19.428571428571427" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PackingListSearchParam_PackingLists_ListView" AllowUnlink="False">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="82" />
+        <ColumnInfo Id="CreatedBy" Width="82" />
+        <ColumnInfo Id="ID" Width="58" />
+        <ColumnInfo Id="LastUpdatedAt" Width="82" />
+        <ColumnInfo Id="LastUpdatedBy" Width="82" />
+        <ColumnInfo Id="SheetNameID" Index="-1" />
+        <ColumnInfo Id="PackingListCode" Width="123" Index="0" />
+        <ColumnInfo Id="PackingListDate" Width="109" Index="1" />
+        <ColumnInfo Id="CustomerID" Width="95" Index="2" />
+        <ColumnInfo Id="SalesOrderID" Width="94" Index="3" />
+        <ColumnInfo Id="DeliveryGroup" Width="82" Index="4" />
+        <ColumnInfo Id="RatioLeft" Width="82" Index="5" />
+        <ColumnInfo Id="RatioRight" Width="82" Index="6" />
+        <ColumnInfo Id="RatioBottom" Width="82" Index="7" />
+        <ColumnInfo Id="BarCodeCompleted" Width="111" Index="8" />
+        <ColumnInfo Id="LSStyles" Width="82" Index="9" />
+        <ColumnInfo Id="CompanyCode" Index="10" />
+        <ColumnInfo Id="TotalQuantity" Width="82" Index="11" />
+        <ColumnInfo Id="Confirm" Width="58" Index="12" />
+        <ColumnInfo Id="Factory" Index="13" />
+        <ColumnInfo Id="DontShortShip" Index="14" />
+        <ColumnInfo Id="OrdinalShip" Index="15" />
+        <ColumnInfo Id="SheetName" Index="16" />
+        <ColumnInfo Id="BrandPurchaseOrder" Index="17" />
+        <ColumnInfo Id="TotalBarCodeCarton" Index="18" />
+        <ColumnInfo Id="Customer" Width="82" Index="19" />
+        <ColumnInfo Id="Company" Index="20" />
+        <ColumnInfo Id="SalesOrder" Width="82" Index="21" />
+        <ColumnInfo Id="ShippingMark1" Width="116" Index="22" />
+        <ColumnInfo Id="ShippingMark2" Width="116" Index="23" />
+        <ColumnInfo Id="ShippingMethod" Width="119" Index="24" />
+        <ColumnInfo Id="PackingUnit" Index="25" />
+        <ColumnInfo Id="Invoice" Index="26" />
+      </Columns>
+    </ListView>
+    <ListView Id="PackingRatio_ListView">
+      <Columns>
+        <ColumnInfo Id="Ratio" Width="77" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PartMasterSearchParam_DetailView" AllowEdit="True" />
+    <DetailView Id="PartRevision_DetailView" AllowNew="True" />
+    <ListView Id="PartRevision_ListView" AllowNew="True" />
+    <ListView Id="PartRevision_LookupListView" AllowNew="False" />
+    <ListView Id="PartRevision_PartMaterials_ListView" ShowAutoFilterRow="False">
+      <Columns>
+        <ColumnInfo Id="VendorID" SortIndex="-1" PropertyName="VendorID" />
+      </Columns>
+    </ListView>
+    <ListView Id="PaymentTerm_ListView" AllowEdit="True" NewItemRowPosition="Bottom" />
+    <ListView Id="PriceTerm_ListView" AllowEdit="True" NewItemRowPosition="Bottom">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="0" SortOrder="Ascending" Index="0" Width="111" />
+        <ColumnInfo Id="Description" SortIndex="1" Index="1" Width="280" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ProductionOrderImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" ActionContainer="Unspecified" Caption="Control(11)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="18.166089965397923">
+            <LayoutGroup Id="ProductionOrderImportParam" Caption="ProductionOrderImportParam" RelativeSize="100">
+              <LayoutGroup Id="Item1" ShowCaption="True" CaptionLocation="Top" Direction="Vertical" Index="0" RelativeSize="100" Caption="Param" IsNewNode="True">
+                <LayoutGroup Id="Auto83dde374-1162-48f5-bf8e-272cf96f6748" ShowCaption="False" Caption="" Direction="Horizontal" Index="0" RelativeSize="48.484848484848484" IsNewNode="True">
+                  <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="50" IsNewNode="True" />
+                  <LayoutItem Id="StartDate" ViewItem="StartDate" Index="1" RelativeSize="50" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutGroup Id="Auto6330008d-f240-43c9-b54f-e15c138a3d4a" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="51.515151515151516" IsNewNode="True">
+                  <LayoutItem Id="FilePath" ViewItem="FilePath" Index="0" RelativeSize="84.97983870967742" IsNewNode="True" />
+                  <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="15.02016129032258" IsNewNode="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutItem Id="StartDate" ViewItem="StartDate" Index="0" RelativeSize="37.2093023255814" Removed="True" />
+              <LayoutItem Id="FilePath" ViewItem="FilePath" Index="1" RelativeSize="47.69230769230769" Removed="True" />
+              <LayoutItem Id="Customer" RelativeSize="27.906976744186046" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Lines_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="81.83391003460207">
+            <LayoutItem Id="Lines" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ProductionOrderImportParam_Lines_ListView">
+      <Columns>
+        <ColumnInfo Id="GarmentColorName" Width="111" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseOrder_ListView">
+      <Columns>
+        <ColumnInfo Id="CurrencyID" PropertyName="Currency" LookupProperty="ID" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseOrder_PurchaseOrderLines_ListView">
+      <Columns>
+        <ColumnInfo Id="Quantity" AllowEdit="True" />
+        <ColumnInfo Id="ReservedQuantity" AllowEdit="True" />
+        <ColumnInfo Id="WareHouseQuantity" PropertyName="WareHouseQuantity" IsNewNode="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseOrderGroupLine_PurchaseOrderLines_ListView" AllowNew="False" AllowUnlink="False" AllowDelete="False">
+      <HiddenActions>
+        <ActionLink ActionId="DeletePurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="ExportQuantityPurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="GetForecastMaterialForPurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="GetProductionBomForPurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="GetPurchaseRequestForPurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="MapUPC" IsNewNode="True" />
+        <ActionLink ActionId="UpPricePurchaseOrderLine" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="PurchaseOrderGroupLineSearchParam_PurchaseOrderGroupLines_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="DeletePurchaseOrderGroupLine" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="PurchaseOrderLineSearchParam_PurchaseOrderLines_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="DeletePurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="ExportQuantityPurchaseOrderLine" IsNewNode="True" />
+        <ActionLink ActionId="MapUPC" IsNewNode="True" />
+        <ActionLink ActionId="UpPricePurchaseOrderLine" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <DetailView Id="PurchaseOrderReportSearchParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="13.76">
+            <LayoutGroup Id="PurchaseOrderReportSearchParam">
+              <LayoutGroup Id="Item1">
+                <LayoutItem Id="Customer" RelativeSize="25" />
+                <LayoutItem Id="Vendor" RelativeSize="25" />
+                <LayoutItem Id="FromDate" RelativeSize="24.880382775119617" />
+                <LayoutItem Id="ToDate" RelativeSize="25.119617224880383" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <TabbedGroup Id="Tabs" RelativeSize="43.04">
+            <LayoutGroup Id="ListCharts" TextAlignMode="AlignWithChildren" Direction="Horizontal">
+              <LayoutItem Id="ListCharts" TextAlignMode="AutoSize" RelativeSize="49.880382775119614" />
+              <LayoutItem Id="ListPivot" TextAlignMode="AutoSize" ViewItem="ListPivot" Index="1" RelativeSize="50.119617224880386" IsNewNode="True" />
+            </LayoutGroup>
+            <LayoutGroup Id="ListPivot" TextAlignMode="AlignWithChildren" Index="1" RelativeSize="100" Removed="True">
+              <LayoutItem Id="ListPivot" TextAlignMode="AutoSize" RelativeSize="100" />
+            </LayoutGroup>
+          </TabbedGroup>
+          <LayoutGroup Id="PurchaseOrderReportDetails" RelativeSize="43.2" TextAlignMode="AlignWithChildren">
+            <LayoutItem Id="ReportDetails" ViewItem="ReportDetails" Index="0" RelativeSize="100" IsNewNode="True" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="PurchaseOrderReportSearchParam_ListPivot_ListView">
+      <Columns>
+        <ColumnInfo Id="Description" Index="-1" />
+        <ColumnInfo Id="ID" Index="0" />
+        <ColumnInfo Id="Number" Index="1" />
+        <ColumnInfo Id="OrderDate" Index="2" />
+        <ColumnInfo Id="EstimateShipDate" Index="3" />
+        <ColumnInfo Id="VendorConfirmedDate" Index="4" />
+        <ColumnInfo Id="ShipDate" Index="5" />
+        <ColumnInfo Id="CustomerID" Index="6" />
+        <ColumnInfo Id="InvoiceNo" Index="7" />
+        <ColumnInfo Id="Reason" Index="8" />
+        <ColumnInfo Id="PaymentTermCode" Index="9" />
+        <ColumnInfo Id="PurchaseOrderStatusCode" Index="10" />
+        <ColumnInfo Id="Remark" Index="11" />
+        <ColumnInfo Id="CompanyCode" Index="12" />
+        <ColumnInfo Id="IncoTermCode" Index="13" />
+        <ColumnInfo Id="VendorID" Index="14" />
+        <ColumnInfo Id="SupplierCNUFCode" Index="15" />
+        <ColumnInfo Id="ShipTo" Index="16" />
+        <ColumnInfo Id="ShippingMethodCode" Index="17" />
+        <ColumnInfo Id="ShippingTermCode" Index="18" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseOrderReportSearchParam_ReportDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="ShipDate" Index="-1" />
+        <ColumnInfo Id="VendorConfirmedDate" Index="-1" />
+        <ColumnInfo Id="CustomerID" Index="2" />
+        <ColumnInfo Id="CompanyCode" Index="3" />
+        <ColumnInfo Id="InvoiceNo" Index="4" />
+        <ColumnInfo Id="Remark" Index="5" />
+        <ColumnInfo Id="EstimateShipDate" Index="6" />
+        <ColumnInfo Id="IncoTermCode" Index="7" />
+        <ColumnInfo Id="ShippingTermCode" Index="8" />
+        <ColumnInfo Id="CurrencyExchangeTypeID" Index="9" Width="161" />
+        <ColumnInfo Id="CurrencyExchangeValue" Index="10" Width="136" />
+        <ColumnInfo Id="CurrencyID" Index="11" Width="97" />
+        <ColumnInfo Id="Discount" Index="12" />
+        <ColumnInfo Id="IsIncludedTax" Index="13" Width="95" />
+        <ColumnInfo Id="TaxCode" Index="14" />
+        <ColumnInfo Id="Percentage" Index="15" />
+        <ColumnInfo Id="TotalAmount" Index="16" Width="149" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchasePopupModel_PurchaseGroup_ListView">
+      <Columns>
+        <ColumnInfo Id="entryQuantity" Index="-1" />
+        <ColumnInfo Id="EntryQuantity" Index="15" />
+        <ColumnInfo Id="Roll" Index="16" />
+        <ColumnInfo Id="BinCode" Index="17" />
+        <ColumnInfo Id="LotNumber" Index="18" />
+        <ColumnInfo Id="Remark" Index="19" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchasePopupModel_PurchaseInfor_ListView">
+      <Columns>
+        <ColumnInfo Id="ItemID" Width="145" AllowEdit="False" />
+        <ColumnInfo Id="ItemName" Width="204" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorCode" Width="96" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorName" Width="89" AllowEdit="False" />
+        <ColumnInfo Id="Position" AllowEdit="False" />
+        <ColumnInfo Id="Specify" AllowEdit="False" />
+        <ColumnInfo Id="CustomerStyle" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorCode" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorName" AllowEdit="False" />
+        <ColumnInfo Id="GarmentSize" AllowEdit="False" />
+        <ColumnInfo Id="Season" AllowEdit="False" />
+        <ColumnInfo Id="PurchaseUnitID" AllowEdit="False" />
+        <ColumnInfo Id="PurchaseQuantity" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="PurchaseProductionBOM_ItemStyles_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerStyle" Width="99" />
+        <ColumnInfo Id="Shipdate" Caption="Shipdate" PropertyName="ShipDate" Index="4" IsNewNode="True" />
+        <ColumnInfo Id="Season" Index="5" />
+        <ColumnInfo Id="SalesOrderID" Index="6" />
+        <ColumnInfo Id="UnitID" Index="7" />
+        <ColumnInfo Id="Remark" Index="8" />
+        <ColumnInfo Id="PriceTermCode" Index="9" />
+        <ColumnInfo Id="CustomerCode" Index="10" />
+        <ColumnInfo Id="CustomerCodeNo" Index="11" />
+        <ColumnInfo Id="UCustomerCode" Index="12" />
+        <ColumnInfo Id="UCustomerCodeNo" Index="13" />
+        <ColumnInfo Id="HangFlat" Index="14" />
+        <ColumnInfo Id="ShippingMark" Index="15" />
+        <ColumnInfo Id="PriceTerm" Index="16" />
+        <ColumnInfo Id="Unit" Index="17" />
+        <ColumnInfo Id="DeliveryDate" PropertyName="DeliveryDate" IsNewNode="True" />
+      </Columns>
+      <HiddenActions>
+        <ActionLink ActionId="Cancel" IsNewNode="True" />
+        <ActionLink ActionId="CancelItemStyle" IsNewNode="True" />
+        <ActionLink ActionId="IssuedItemStyle" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="PurchaseRequest_PurchaseRequestLines_ListView">
+      <Columns>
+        <ColumnInfo Id="Quantity" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <DetailView Id="PurchaseRequestLine_DetailView">
+      <Items>
+        <PropertyEditor Id="Quantity" AllowEdit="True" />
+      </Items>
+    </DetailView>
+    <ListView Id="PurchaseRequestMaterial_RequestMaterials_ListView">
+      <Columns>
+        <ColumnInfo Id="Quantity" AllowEdit="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="QualityAssuranceSearchParam_QualityAssurances_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Index="1" Width="121" />
+        <ColumnInfo Id="StorageCode" Index="2" />
+        <ColumnInfo Id="LSStyle" Index="3" />
+        <ColumnInfo Id="Season" Index="6" />
+        <ColumnInfo Id="GarmentColorCode" Index="7" />
+        <ColumnInfo Id="GarmentColorName" Index="8" />
+        <ColumnInfo Id="GarmentSize" Index="9" />
+        <ColumnInfo Id="BinCode" Index="10" />
+        <ColumnInfo Id="OrderQuantity" Index="11" />
+        <ColumnInfo Id="Quantity" Index="12" />
+        <ColumnInfo Id="Percent" Index="13" />
+        <ColumnInfo Id="QualityStatus" Index="14" />
+        <ColumnInfo Id="Remark" Index="15" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Receipt_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="Customer" AllowClear="True" AllowEdit="False" />
+        <PropertyEditor Id="EntriedBy" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+        <PropertyEditor Id="PurchaseOrder" LookupProperty="Number" />
+        <PropertyEditor Id="ReceiptBy" AllowEdit="False" />
+        <PropertyEditor Id="Storage" AllowEdit="False" />
+        <PropertyEditor Id="Vendor" PropertyName="VendorID" Caption="Vendor" />
+        <PropertyEditor Id="VendorAddress" AllowEdit="False" />
+        <PropertyEditor Id="VendorID" PropertyName="Vendor" />
+        <PropertyEditor Id="VendorName" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="43.16163410301954">
+            <LayoutGroup Id="Autof4d97148-58b8-403c-b757-3497425d8419" RelativeSize="68.49507735583686">
+              <LayoutGroup Id="Receipt" RelativeSize="99.58847736625515">
+                <LayoutGroup Id="Receipt_col1" RelativeSize="49.46466809421842">
+                  <LayoutItem Id="Number" ViewItem="Number" Index="0" RelativeSize="17.821782178217823" IsNewNode="True" Removed="True" />
+                  <LayoutItem Id="InvoiceNumber" RelativeSize="12.871287128712872" Index="1" />
+                  <LayoutItem Id="ArrivedDate" RelativeSize="12.871287128712872" Index="2" />
+                  <LayoutItem Id="ReceiptDate" RelativeSize="12.871287128712872" Index="3" />
+                  <LayoutItem Id="EntriedDate" RelativeSize="12.871287128712872" Index="4" />
+                  <LayoutItem Id="EntriedBy" RelativeSize="12.871287128712872" Index="5" />
+                  <LayoutItem Id="ReceiptBy" RelativeSize="17.821782178217823" Index="6" />
+                </LayoutGroup>
+                <LayoutGroup Id="Receipt_col2" RelativeSize="50.53533190578158">
+                  <LayoutItem Id="PurchaseOrder" ViewItem="PurchaseOrder" Index="0" RelativeSize="17.821782178217823" IsNewNode="True" Removed="True" />
+                  <LayoutItem Id="Vendor" RelativeSize="12.871287128712872" Index="1" />
+                  <LayoutItem Id="VendorName" RelativeSize="12.871287128712872" Index="2" />
+                  <LayoutItem Id="VendorAddress" RelativeSize="12.871287128712872" Index="3" />
+                  <LayoutItem Id="Customer" RelativeSize="12.871287128712872" Index="4" />
+                  <LayoutItem Id="Storage" ViewItem="Storage" Index="5" RelativeSize="12.871287128712872" IsNewNode="True" Removed="True" />
+                  <LayoutItem Id="DocumentReferenceNumber" ViewItem="DocumentReferenceNumber" Index="6" RelativeSize="17.821782178217823" IsNewNode="True" Removed="True" />
+                </LayoutGroup>
+              </LayoutGroup>
+              <LayoutGroup Id="Audit" RelativeSize="0.411522633744856" />
+            </LayoutGroup>
+            <LayoutGroup Id="Item1" RelativeSize="31.504922644163152">
+              <LayoutItem Id="CreatedBy" RelativeSize="18.46153846153846" />
+              <LayoutItem Id="LastUpdatedBy" RelativeSize="13.333333333333334" />
+              <LayoutItem Id="CreatedAt" RelativeSize="13.333333333333334" />
+              <LayoutItem Id="LastUpdatedAt" RelativeSize="54.87179487179487" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ReceiptGroupLines_Group" TextAlignMode="AlignWithChildren" RelativeSize="56.83836589698046" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Receipt_ListView">
+      <Columns>
+        <ColumnInfo Id="AccountCreditNumber" Index="-1" Removed="True" />
+        <ColumnInfo Id="AccountDebitNumber" Index="-1" Removed="True" />
+        <ColumnInfo Id="AccountingBy" Index="-1" Removed="True" />
+        <ColumnInfo Id="AcountingDate" Index="-1" Removed="True" />
+        <ColumnInfo Id="PurchaseOrder" Index="-1" Removed="True" />
+        <ColumnInfo Id="Storage" Index="-1" Removed="True" />
+        <ColumnInfo Id="Number" Index="0" />
+        <ColumnInfo Id="StorageCode" Index="1" Caption="Storage" />
+        <ColumnInfo Id="Vendor" Index="2" PropertyName="Vendor.ID" Caption="Vendor" />
+        <ColumnInfo Id="VendorName" Index="3" Width="100" />
+        <ColumnInfo Id="VendorAddress" Index="4" Width="163" />
+        <ColumnInfo Id="DocumentReferenceNumber" Index="5" />
+        <ColumnInfo Id="InvoiceNumber" Index="6" />
+        <ColumnInfo Id="ReceiptDate" Index="7" />
+        <ColumnInfo Id="ArrivedDate" Index="8" />
+        <ColumnInfo Id="EntriedDate" Index="9" />
+        <ColumnInfo Id="ReceiptBy" Index="10" />
+        <ColumnInfo Id="EntriedBy" Index="11" />
+        <ColumnInfo Id="CustomerID" Index="12" Caption="Customer" />
+        <ColumnInfo Id="VendorID" Index="12" Removed="True" />
+        <ColumnInfo Id="PurchaseOrderID" Index="14" Caption="Purchase Order" />
+        <ColumnInfo Id="Customer" Index="15" Removed="True" />
+        <ColumnInfo Id="CreatedAt" Removed="True" />
+        <ColumnInfo Id="CreatedBy" Removed="True" />
+        <ColumnInfo Id="LastUpdatedAt" Removed="True" />
+        <ColumnInfo Id="LastUpdatedBy" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ReceiptGroupLine_DetailView" AllowEdit="False" />
+    <ListView Id="RequestProductionBOM_ItemStyles_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="Cancel" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <ListView Id="SalesContract_ContractDetails_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="SalesContractID" Width="116" Index="-1" />
+        <ColumnInfo Id="LSStyle" Index="0" Width="104" />
+        <ColumnInfo Id="PurchaseOrderNumber" Index="1" />
+        <ColumnInfo Id="CustomerPO" Index="2" />
+        <ColumnInfo Id="CustomerStyle" Index="3" Width="128" Caption="Style No" />
+        <ColumnInfo Id="GarmentColorName" Index="4" Width="354" />
+        <ColumnInfo Id="GarmentColorCode" Index="5" Caption="Color" />
+        <ColumnInfo Id="Quantity" Index="6" />
+        <ColumnInfo Id="UltimateCode" Index="7" />
+        <ColumnInfo Id="ProductTop" Index="8" />
+        <ColumnInfo Id="ProductBottom" Index="9" />
+        <ColumnInfo Id="Year" Index="10" />
+        <ColumnInfo Id="Brand" Index="11" />
+        <ColumnInfo Id="Season" Index="12" />
+        <ColumnInfo Id="Division" Index="13" />
+        <ColumnInfo Id="UnitID" Index="14" />
+        <ColumnInfo Id="Factory" Index="15" />
+        <ColumnInfo Id="CountryName" Index="16" />
+        <ColumnInfo Id="Destination" Index="17" />
+        <ColumnInfo Id="ContractNo" Index="19" />
+        <ColumnInfo Id="MRQDate" Index="20" />
+        <ColumnInfo Id="OrderPlacedDate" Index="21" />
+        <ColumnInfo Id="FactoryDate" Index="22" />
+        <ColumnInfo Id="ReqShipMonth" Index="23" />
+        <ColumnInfo Id="Emboss" Index="24" />
+        <ColumnInfo Id="Transfer" Index="25" />
+        <ColumnInfo Id="Screen" Index="26" />
+        <ColumnInfo Id="Bonding" Index="27" />
+        <ColumnInfo Id="Pad" Index="28" />
+        <ColumnInfo Id="Lazer" Index="29" />
+        <ColumnInfo Id="GmtLeadTime" Index="30" />
+        <ColumnInfo Id="MfrLeadTime" Index="31" />
+        <ColumnInfo Id="LongestMaterialLeadTime" Index="32" />
+        <ColumnInfo Id="TransitLeadTime" Index="33" />
+        <ColumnInfo Id="ShippingMark" Index="34" />
+        <ColumnInfo Id="Remark" Index="35" />
+        <ColumnInfo Id="Updates" Index="36" />
+        <ColumnInfo Id="Unit" Index="37" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesContract_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="Customer" PropertyName="Customer.Name" Caption="Customer Name" RowCount="1" AllowEdit="False" />
+        <PropertyEditor Id="FileName" AllowEdit="False" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="16.09375">
+            <LayoutGroup Id="SalesContract" RelativeSize="100">
+              <LayoutGroup Id="SalesContract_col1" RelativeSize="49.81036662452592" Caption="SalesContract_col1">
+                <LayoutItem Id="Number" RelativeSize="50" Index="0" />
+                <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="50" IsNewNode="True" />
+                <LayoutItem Id="CustomerID" RelativeSize="50" Index="1" Removed="True" />
+                <LayoutItem Id="ID" RelativeSize="36.95652173913044" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="SalesContract_col2" RelativeSize="50.18963337547408" Caption="SalesContract_col2">
+                <LayoutItem Id="FileName" RelativeSize="100" />
+                <LayoutItem Id="Customer" RelativeSize="36.36363636363637" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ContractDetails_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="83.90625">
+            <LayoutItem Id="ContractDetails" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesContract_ListView">
+      <Columns>
+        <ColumnInfo Id="Customer" Index="-1" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="Number" Index="0" Width="186" />
+        <ColumnInfo Id="CustomerID" Index="1" Width="141" />
+        <ColumnInfo Id="CreatedAt" SortIndex="-1" Index="2" Width="125" />
+        <ColumnInfo Id="FileName" Index="2" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="SaveFilePath" Index="3" SortIndex="0" SortOrder="Ascending" Width="133" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesContractDetail_ListView" AllowEdit="True" />
+    <DetailView Id="SalesContractImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" ActionContainer="Unspecified" Caption="Control(7)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SalesContractImportParam" Direction="Vertical" RelativeSize="100" Caption="SalesContractImportParam">
+              <LayoutItem Id="Customer" ViewItem="Customer" Index="0" RelativeSize="7.00218818380744" IsNewNode="True" Removed="True" />
+              <LayoutGroup Id="Auto913ea580-6039-4780-80ee-ccedb06e54ad" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="92.99781181619257" IsNewNode="True">
+                <LayoutItem Id="ImportFilePath" ViewItem="ImportFilePath" Index="0" RelativeSize="77.96352583586626" IsNewNode="True" />
+                <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="22.03647416413374" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="ImportFilePath" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesContractSearchParam_SalesContract_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Index="-1" />
+        <ColumnInfo Id="Number" Width="94" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesOrder_DetailView">
+      <Items>
+        <PropertyEditor Id="Currency" LookupProperty="ID" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors" IsGroupCollapsed="False" RelativeSize="25.889967637540455">
+            <LayoutGroup Id="SalesOrder">
+              <LayoutGroup Id="SalesOrder_col1" RelativeSize="39.26701570680628">
+                <LayoutItem Id="ID" RelativeSize="18.181818181818183" />
+                <LayoutItem Id="Customer" RelativeSize="12.727272727272727" />
+                <LayoutItem Id="Brand" RelativeSize="12.727272727272727" />
+                <LayoutItem Id="Division" RelativeSize="12.727272727272727" />
+                <LayoutItem Id="OrderDate" RelativeSize="12.727272727272727" />
+                <LayoutItem Id="ConfirmDate" RelativeSize="12.727272727272727" />
+                <LayoutItem Id="SalesOrderType" RelativeSize="18.181818181818183" />
+              </LayoutGroup>
+              <LayoutGroup Id="SalesOrder_col2" RelativeSize="60.73298429319372">
+                <LayoutGroup Id="Autof0569e6c-0933-435b-a367-52ef68137eb3">
+                  <LayoutItem Id="PaymentTerm" RelativeSize="18.181818181818183" />
+                  <LayoutItem Id="PriceTerm" RelativeSize="12.727272727272727" />
+                  <LayoutItem Id="Currency" RelativeSize="12.727272727272727" />
+                  <LayoutItem Id="Year" RelativeSize="12.727272727272727" />
+                  <LayoutItem Id="SalesOrderStatus" RelativeSize="12.727272727272727" />
+                  <LayoutItem Id="FileName" RelativeSize="30.90909090909091" />
+                </LayoutGroup>
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="ItemStyles_Group" TextAlignMode="AlignWithChildren" RelativeSize="74.11003236245955" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesOrder_ItemStyles_ListView">
+      <Columns>
+        <ColumnInfo Id="PurchaseOrderDate" Index="0" Width="62" />
+        <ColumnInfo Id="PurchaseOrderNumber" Index="1" Width="0" />
+        <ColumnInfo Id="CustomerStyle" Width="78" Index="2" />
+        <ColumnInfo Id="LSStyle" Width="74" SortIndex="1" SortOrder="Ascending" Index="3" />
+        <ColumnInfo Id="ColorCode" Index="4" Width="83" />
+        <ColumnInfo Id="ColorName" Index="5" Width="86" />
+        <ColumnInfo Id="Description" Index="6" Width="177" />
+        <ColumnInfo Id="ProductionDescription" Index="7" Width="148" />
+        <ColumnInfo Id="Brand" Index="8" />
+        <ColumnInfo Id="Remark" Index="9" />
+        <ColumnInfo Id="FabricContent" Index="10" />
+        <ColumnInfo Id="Division" Index="11" />
+        <ColumnInfo Id="PIC" Index="12" />
+        <ColumnInfo Id="UE" Index="13" />
+        <ColumnInfo Id="PCB" Index="14" />
+        <ColumnInfo Id="LabelCode" Index="15" />
+        <ColumnInfo Id="LabelName" Index="16" />
+        <ColumnInfo Id="ItemStyleStatusCode" Index="17" />
+        <ColumnInfo Id="Season" Index="18" />
+        <ColumnInfo Id="Gender" Index="19" />
+        <ColumnInfo Id="MSRP" Index="20" />
+        <ColumnInfo Id="PriceTermCode" Index="21" />
+        <ColumnInfo Id="CustomerCode" Index="22" />
+        <ColumnInfo Id="CustomerCodeNo" Index="23" />
+        <ColumnInfo Id="UCustomerCode" Index="24" />
+        <ColumnInfo Id="UCustomerCodeNo" Index="25" />
+        <ColumnInfo Id="ContractDate" Index="26" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="ContractNo" Index="27" />
+        <ColumnInfo Id="EstimatedSupplierHandOver" Index="28" />
+        <ColumnInfo Id="DeliveryDate" Index="29" />
+        <ColumnInfo Id="ShipDate" Index="30" />
+        <ColumnInfo Id="OldShipDate" Index="31" />
+        <ColumnInfo Id="Packing" Index="32" />
+        <ColumnInfo Id="HangFlat" Index="33" />
+        <ColumnInfo Id="DeliveryPlace" Index="34" />
+        <ColumnInfo Id="ShipMode" Index="35" />
+        <ColumnInfo Id="ShipTo" Index="36" />
+        <ColumnInfo Id="ShippingMark" Index="37" />
+        <ColumnInfo Id="LastUpdatedBy" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="PurchaseOrderStatus" SortIndex="-1" SortOrder="None" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesOrderOffsetParam_ListView">
+      <Columns>
+        <ColumnInfo Id="FilePath" Width="121" />
+      </Columns>
+    </ListView>
+    <ListView Id="SalesOrderSearchParam_SalesOrders_ListView">
+      <HiddenActions>
+        <ActionLink ActionId="Delete" IsNewNode="True" />
+        <ActionLink ActionId="Link" IsNewNode="True" />
+        <ActionLink ActionId="New" IsNewNode="True" />
+        <ActionLink ActionId="Unlink" IsNewNode="True" />
+      </HiddenActions>
+    </ListView>
+    <DetailView Id="SalesOrderUpdateInformationParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Controls" ActionContainer="Unspecified" Caption="Controls(8)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="8.23045267489712">
+            <LayoutGroup Id="SalesOrderUpdateInformationParam" Direction="Horizontal" RelativeSize="100" Caption="File Path">
+              <LayoutItem Id="FilePath" RelativeSize="80.02853067047076" />
+              <LayoutItem Id="Controls" ViewItem="Controls" Index="1" RelativeSize="19.971469329529246" IsNewNode="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Data_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="91.76954732510288">
+            <LayoutItem Id="Data" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesOrderUpdateParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Controls" ActionContainer="Unspecified" Caption="Controls(7)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SalesOrderUpdateParam" RelativeSize="100" Direction="Vertical" Caption="File">
+              <LayoutGroup Id="Autof3cf74ff-e164-4903-9e9c-1530d3fd3d55" ShowCaption="False" Caption="Autof3cf74ff-e164-4903-9e9c-1530d3fd3d55(5)" Direction="Horizontal" Index="0" RelativeSize="100" IsNewNode="True">
+                <LayoutItem Id="File" ViewItem="File" Index="0" RelativeSize="85.85485854858548" IsNewNode="True" />
+                <LayoutItem Id="Controls" ViewItem="Controls" Index="1" RelativeSize="14.145141451414514" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="File" ViewItem="File" Index="1" RelativeSize="3.1290743155149934" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesOrderUpdateQuantityParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Controls" ActionContainer="Unspecified" Caption="Controls(6)" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="5.459770114942529">
+            <LayoutGroup Id="SalesOrderUpdateQuantityParam" RelativeSize="100">
+              <LayoutItem Id="File" RelativeSize="100" />
+            </LayoutGroup>
+          </LayoutGroup>
+          <LayoutGroup Id="Controls" Caption="Controls" ShowCaption="False" TextAlignMode="AlignWithChildren" Direction="Horizontal" Index="1" RelativeSize="94.54022988505747" IsNewNode="True">
+            <LayoutItem Id="Item1" Index="0" RelativeSize="85.98130841121495" IsNewNode="True" />
+            <LayoutItem Id="Controls" ViewItem="Controls" Index="1" RelativeSize="14.018691588785046" IsNewNode="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="SalesOrderUpdateShipQuantityParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" Caption="Control" Index="" ActionContainer="Unspecified" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SalesOrderUpdateShipQuantityParam" RelativeSize="100" Caption="SalesOrderUpdateShipQuantityParam">
+              <LayoutItem Id="File" ViewItem="File" Index="0" RelativeSize="3.5294117647058822" IsNewNode="True" Removed="True" />
+              <LayoutItem Id="Customer" ViewItem="Customer" Index="1" RelativeSize="2.549019607843137" IsNewNode="True" Removed="True" />
+              <LayoutGroup Id="Autofb7dbdf9-7d10-4a3e-86db-5c13b1a6cd8a" ShowCaption="False" Caption="" Direction="Horizontal" Index="2" RelativeSize="93.92156862745098" IsNewNode="True">
+                <LayoutItem Id="Item1" Index="0" RelativeSize="82.02038924930491" IsNewNode="True" />
+                <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="17.979610750695088" IsNewNode="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesQuote_SalesQuoteDetails_ListView">
+      <Columns>
+        <ColumnInfo Id="ID" Width="82" />
+        <ColumnInfo Id="SalesQuote" Width="82" />
+        <ColumnInfo Id="ItemName" Width="102" />
+        <ColumnInfo Id="ExternalCode" Width="103" />
+        <ColumnInfo Id="SaleQuoteID" Width="103" />
+        <ColumnInfo Id="ItemID" Width="82" />
+        <ColumnInfo Id="Position" Width="82" />
+        <ColumnInfo Id="Consumption" Width="98" />
+        <ColumnInfo Id="UnitPrice" Width="82" />
+        <ColumnInfo Id="WastagePercent" Width="121" />
+        <ColumnInfo Id="Amount" Width="82" />
+        <ColumnInfo Id="Note" Width="82" />
+        <ColumnInfo Id="MaterialTypeCode" Width="135" />
+        <ColumnInfo Id="Type" Width="82" />
+        <ColumnInfo Id="Vendor" Width="82" />
+        <ColumnInfo Id="MaterialType" Width="102" />
+        <ColumnInfo Id="Unit" Width="82" />
+        <ColumnInfo Id="PriceUnit" Removed="True" />
+        <ColumnInfo Id="PriceUnitID" Removed="True" />
+        <ColumnInfo Id="UnitID" Removed="True" />
+        <ColumnInfo Id="VendorID" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="SalesQuoteDetail_DetailView">
+      <Items>
+        <PropertyEditor Id="PriceUnit" Removed="True" />
+        <PropertyEditor Id="PriceUnitID" Removed="True" />
+        <PropertyEditor Id="UnitID" Removed="True" />
+        <PropertyEditor Id="VendorID" Removed="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="SalesQuoteDetail" RelativeSize="100">
+              <LayoutGroup Id="SalesQuoteDetail_col1" RelativeSize="49.528301886792455">
+                <LayoutItem Id="ExternalCode" RelativeSize="7.531380753138075" Index="0" />
+                <LayoutItem Id="SaleQuoteID" RelativeSize="5.439330543933054" Index="1" />
+                <LayoutItem Id="ItemID" RelativeSize="5.439330543933054" Index="2" />
+                <LayoutItem Id="ItemName" RelativeSize="5.439330543933054" Index="3" />
+                <LayoutItem Id="Position" RelativeSize="5.439330543933054" Index="4" />
+                <LayoutItem Id="Consumption" RelativeSize="5.439330543933054" Index="5" />
+                <LayoutItem Id="UnitPrice" RelativeSize="5.439330543933054" Index="6" />
+                <LayoutItem Id="WastagePercent" RelativeSize="59.8326359832636" Index="7" />
+                <LayoutItem Id="ID" RelativeSize="6.622516556291391" Removed="True" />
+                <LayoutItem Id="UnitID" RelativeSize="48.95397489539749" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="SalesQuoteDetail_col2" RelativeSize="50.471698113207545">
+                <LayoutItem Id="Vendor" Index="0" RelativeSize="7.531380753138075" />
+                <LayoutItem Id="Amount" Index="1" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="Note" Index="2" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="MaterialTypeCode" Index="3" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="Type" Index="4" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="SalesQuote" Index="5" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="MaterialType" Index="6" RelativeSize="5.439330543933054" />
+                <LayoutItem Id="Unit" Index="7" RelativeSize="5.439330543933054" />
+                <LayoutGroup Id="Autodfbbf769-35eb-40a0-bff7-b58770cf3ab0" ShowCaption="False" Caption="Autodfbbf769-35eb-40a0-bff7-b58770cf3ab0(25)" Direction="Horizontal" Index="8" RelativeSize="54.39330543933055" IsNewNode="True" />
+                <LayoutItem Id="PriceUnit" Removed="True" />
+                <LayoutItem Id="VendorID" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="SalesQuoteDetail_ListView">
+      <Columns>
+        <ColumnInfo Id="Vendor" PropertyName="Vendor.ID" />
+        <ColumnInfo Id="PriceUnitID" Removed="True" />
+        <ColumnInfo Id="UnitID" Removed="True" />
+        <ColumnInfo Id="VendorID" Removed="True" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ShipmentImportParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ShipmentImportParam">
+              <LayoutGroup Id="Auto74235ca6-4c34-4fba-a5e0-f604eb85c7d0" Caption="Auto74235ca6-4c34-4fba-a5e0-f604eb85c7d0(5)">
+                <LayoutItem Id="ImportFilePath" RelativeSize="84.3073593073593" />
+                <LayoutGroup Id="Autoac0f9a93-3df9-4f8f-99f8-627fb41145f6" ShowCaption="False" Caption="" Index="1" RelativeSize="15.692640692640692" IsNewNode="True">
+                  <LayoutItem Id="Controls" ViewItem="Controls" Index="0" RelativeSize="4.289544235924933" IsNewNode="True" />
+                  <LayoutItem Id="Browse" Index="1" RelativeSize="95.71045576407506" IsNewNode="True" />
+                </LayoutGroup>
+                <LayoutItem Id="Browse" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ShippingMark_ListView" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="Code" SortIndex="0" SortOrder="Ascending" Index="" Width="122" />
+        <ColumnInfo Id="Description" Index="" SortIndex="1" Width="242" />
+      </Columns>
+    </ListView>
+    <ListView Id="ShippingPlan_Details_ListView">
+      <Columns>
+        <ColumnInfo Id="FilePath" Width="96" Index="-1" />
+        <ColumnInfo Id="ID" Width="68" />
+        <ColumnInfo Id="IsError" Width="96" />
+        <ColumnInfo Id="ShippingPlan" Width="96" />
+        <ColumnInfo Id="ShippingPlanID" Width="68" />
+        <ColumnInfo Id="PurchaseOrderNumber" Width="116" />
+        <ColumnInfo Id="GarmentColorCode" Width="96" />
+        <ColumnInfo Id="LSStyle" Width="96" />
+        <ColumnInfo Id="CustomerStyle" Width="96" />
+        <ColumnInfo Id="PCS" Width="68" />
+        <ColumnInfo Id="CTN" Width="68" />
+        <ColumnInfo Id="GrossWeight" Width="68" />
+        <ColumnInfo Id="Volume" Width="68" />
+        <ColumnInfo Id="Dept" Width="68" />
+        <ColumnInfo Id="IsDeActive" Width="68" Index="13" />
+        <ColumnInfo Id="Destination" Width="96" />
+        <ColumnInfo Id="InvoiceNumber" Width="96" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ShippingPlan_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Details_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="95.68627450980392">
+            <LayoutItem Id="Details" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ShippingPlanDetail_ListView">
+      <Columns>
+        <ColumnInfo Id="FilePath" Index="-1" />
+        <ColumnInfo Id="ShippingPlan" Index="-1" />
+        <ColumnInfo Id="IsDeActive" Index="13" />
+      </Columns>
+    </ListView>
+    <ListView Id="Size_ListView">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Width="91" />
+        <ColumnInfo Id="SequeneceNumber" Width="82" />
+      </Columns>
+    </ListView>
+    <ListView Id="Storage_StorageDetails_ListView" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="ItemCode" AllowEdit="False" />
+        <ColumnInfo Id="CustomerStyle" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorCode" AllowEdit="False" />
+        <ColumnInfo Id="CustomerID" AllowEdit="False" />
+        <ColumnInfo Id="GarmentColorName" AllowEdit="False" />
+        <ColumnInfo Id="GarmentSize" AllowEdit="False" />
+        <ColumnInfo Id="ItemID" AllowEdit="False" />
+        <ColumnInfo Id="ItemName" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorCode" AllowEdit="False" />
+        <ColumnInfo Id="ItemColorName" AllowEdit="False" />
+        <ColumnInfo Id="Position" AllowEdit="False" />
+        <ColumnInfo Id="Specify" AllowEdit="False" />
+        <ColumnInfo Id="UnitID" AllowEdit="False" />
+        <ColumnInfo Id="Season" AllowEdit="False" />
+        <ColumnInfo Id="OnHandQuantity" AllowEdit="True" />
+        <ColumnInfo Id="ReseveredQuantity" AllowEdit="False" />
+        <ColumnInfo Id="CanUseQuantity" AllowEdit="False" />
+        <ColumnInfo Id="CanReUseQuantity" AllowEdit="False" />
+        <ColumnInfo Id="PurchaseOrderNumber" AllowEdit="False" />
+      </Columns>
+    </ListView>
+    <ListView Id="StorageDetail_ListView" AllowEdit="False" />
+    <DetailView Id="StyleNetWeight_DetailView">
+      <Items>
+        <PropertyEditor Id="CreatedAt" AllowEdit="False" />
+        <PropertyEditor Id="CreatedBy" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedAt" AllowEdit="False" />
+        <PropertyEditor Id="LastUpdatedBy" AllowEdit="False" />
+      </Items>
+    </DetailView>
+    <ListView Id="StyleNetWeight_ListView" NewItemRowPosition="Top" IsGroupPanelVisible="False" GroupSummary="Empty" AllowEdit="True">
+      <Columns>
+        <ColumnInfo Id="CustomerStyle" Width="159" SortOrder="Ascending" GroupIndex="-1" Caption="Style" SortIndex="0" />
+        <ColumnInfo Id="Size" Width="96" />
+        <ColumnInfo Id="NetWeight" Width="131" />
+      </Columns>
+    </ListView>
+    <ListView Id="SupplierCNUF_ListView">
+      <Columns>
+        <ColumnInfo Id="Code" Index="0" />
+        <ColumnInfo Id="Name" Width="172" />
+      </Columns>
+    </ListView>
+    <ListView Id="SupplierCNUF_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Code" PropertyName="Code" SortIndex="0" SortOrder="Ascending" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="Name" PropertyName="Name" SortIndex="1" SortOrder="Ascending" Index="1" IsNewNode="True" Removed="True" />
+      </Columns>
+    </ListView>
+    <ListView Id="Tax_ListView" AllowEdit="True" NewItemRowPosition="Bottom" />
+    <ListView Id="Unit_ListView" NewItemRowPosition="Bottom" AllowEdit="True" />
+    <DetailView Id="UPCImportParam_DetailView">
+      <Items>
+        <ActionContainerViewItem Id="Control" ActionContainer="Unspecified" Caption="Controls" IsNewNode="True" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="SimpleEditors" RelativeSize="100">
+            <LayoutGroup Id="UPCImportParam" Caption="UPCImportParam" RelativeSize="100">
+              <LayoutItem Id="Customer" RelativeSize="6.361829025844931" />
+              <LayoutGroup Id="Auto6873fb36-1f6d-4b8c-ab39-d6e55f4502f9" ShowCaption="False" Caption="" Direction="Horizontal" Index="1" RelativeSize="93.63817097415507" IsNewNode="True">
+                <LayoutItem Id="FilePath" ViewItem="FilePath" Index="0" RelativeSize="77.34375" IsNewNode="True" />
+                <LayoutItem Id="Control" ViewItem="Control" Index="1" RelativeSize="22.65625" IsNewNode="True" />
+              </LayoutGroup>
+              <LayoutItem Id="FilePath" Removed="True" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Vendor_ListView" AllowEdit="True" NewItemRowPosition="Bottom" />
+    <ListView Id="ViewProductionBomParam_ProductionBOMs_ListView">
+      <Columns>
+        <ColumnInfo Id="ExternalCode" Width="60" />
+        <ColumnInfo Id="ItemID" Width="123" />
+        <ColumnInfo Id="ItemName" Width="144" />
+        <ColumnInfo Id="MaterialTypeClass" Index="9" />
+        <ColumnInfo Id="Position" Index="10" />
+        <ColumnInfo Id="FabricWeight" Index="11" />
+        <ColumnInfo Id="FabricWidth" Index="12" />
+        <ColumnInfo Id="QuantityPerUnit" Index="13" />
+        <ColumnInfo Id="RequiredQuantity" Index="14" />
+        <ColumnInfo Id="ConsumptionQuantity" Index="15" />
+        <ColumnInfo Id="ReservedQuantity" Index="16" />
+        <ColumnInfo Id="RemainQuantity" Index="17" />
+        <ColumnInfo Id="WastagePercent" Index="18" />
+        <ColumnInfo Id="WastageQuantity" Index="19" />
+        <ColumnInfo Id="LessPercent" Index="20" />
+        <ColumnInfo Id="LessQuantity" Index="21" />
+        <ColumnInfo Id="FreePercent" Index="22" />
+        <ColumnInfo Id="FreeQuantity" Index="23" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ViewStyleNetWeightParam_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" RelativeSize="100">
+          <LayoutGroup Id="Weights_Group" Caption="Weights" Direction="Vertical" RelativeSize="100" TextAlignMode="AlignWithChildren">
+            <LayoutItem Id="Weights" ViewItem="Weights" Index="0" RelativeSize="100" IsNewNode="True" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="ViewStyleNetWeightParam_Weights_ListView" IsGroupPanelVisible="False">
+      <Columns>
+        <ColumnInfo Id="CreatedAt" Width="96" />
+        <ColumnInfo Id="CreatedBy" Width="96" />
+        <ColumnInfo Id="ID" Width="68" />
+        <ColumnInfo Id="LastUpdatedAt" Width="96" />
+        <ColumnInfo Id="LastUpdatedBy" Width="96" />
+        <ColumnInfo Id="CustomerStyle" Width="115" SortOrder="Ascending" GroupIndex="0" />
+        <ColumnInfo Id="Size" Width="56" />
+        <ColumnInfo Id="NetWeight" Width="101" />
+      </Columns>
+    </ListView>
+    <ListView Id="WastageSetting_ListView" AllowEdit="True" NewItemRowPosition="Top">
+      <Columns>
+        <ColumnInfo Id="CustomerID" Width="80" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

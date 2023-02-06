@@ -1,0 +1,243 @@
+﻿@{
+    ViewData["Title"] = "Bảng thông tin sản xuất";
+}
+@model List<DailyTargetModel>
+@*<meta http-equiv="refresh" content="7">*@
+<div id="carouselDailyTarget" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner"> 
+           
+        @{
+            var i = 0;
+            foreach(DailyTargetModel dailyTargetModel in Model.OrderBy(m=>m.WorkCenterName))
+            {
+                var itemClass = i++ == 0 ? "item active" : "item";
+                        <div class="carousel-@itemClass">
+                            <div class="content-header py-2">
+                                <div class="container-fluid">
+                                    <div class="row mb-2 w-100 m-0">
+                                        <div class="col-sm-6 px-0">
+                                            <h1 class="m-0">Production Information Board</h1>
+                                        </div>
+                                        <div class="col-sm-6 px-0">
+                                            <h1 class="m-0 float-left text-success"><b>@dailyTargetModel.WorkCenterName</b></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                    <div class="container-fluid">
+                                    <table class="table bg-white table-bordered border-primary mb-0" style="border-color:black;">
+                                        <tbody>
+                                            <tr>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Style/Mã hàng:</h4>
+                                                        <h1 class="m-0 text-success">@dailyTargetModel.StyleNO</h1>
+                                                    </div>
+                                                </td>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Target/Mục tiêu:</h4>
+                                                        <h1 class="m-0 text-success">@((int)dailyTargetModel.TotalTargetQuantity)</h1>
+                                                    </div>
+                                                </td>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Quantity/Số lượng:</h4>
+                                                        <h1 class="m-0 text-danger">@((int)dailyTargetModel.TotalQuantity)</h1>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Task Time/Thời gian yêu cầu:</h4>
+                                                        <h1 class="m-0 text-warning">N/A</h1>
+                                                    </div>
+                                                </td>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Inline Date/Ngày lên chuyền:</h4>
+                                                        <h1 class="m-0 text-info">@dailyTargetModel.InlineDate.ToString("dd/MM/yyyy")</h1>
+                                                    </div>
+                                                </td>
+                                                <td class="p-0 h-100" style="width: 30%;">
+                                                    <div class="p-2 d-flex justify-content-around align-items-center">
+                                                        <h4 class="m-0">Manpower/Nhân lực:</h4>
+                                                        <h1 class="m-0 text-info">@dailyTargetModel.NumberOfWorker</h1>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="container-fluid mt-2">
+                                    <div class="row mb-2 w-100 m-0">
+                                        <div class="col-md-8 px-0">
+                                            <h3 class="m-0 mb-2">Efficiency And Quality Status At End Of Line</h3>
+                                    
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered bg-white m-0 mb-1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 20%" class="p-1 h5 font-weight-bold text-info" scope="col">Working Time<br/>Thời gian</th>
+                                                            <th style="width: 10%" class="p-1 h5 font-weight-bold text-info" scope="col">Target<br/>Mục tiêu</th>
+                                                            <th style="width: 10%" class="p-1 h5 font-weight-bold text-info" scope="col">Actual<br/>Sản lượng</th>
+                                                            <th style="width: 10%" class="p-1 h5 font-weight-bold text-info" scope="col">Efficiency<br/>Hiệu suất</th>
+                                                            <th style="width: 20%" class="p-1 h5 font-weight-bold text-info" scope="col">Status<br/>Trạng thái</th>
+                                                            <th style="width: 30%" class="p-1 h5 font-weight-bold text-info" scope="col"><span class="text-danger">Problem</span><br/>Vấn đề</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                                
+                                                        @foreach(var Job in dailyTargetModel.JobOutput.OrderBy(j=>j.WorkingTimeID))
+                                                {
+                                                            <tr>
+                                                                <td class="m-0 p-1">
+                                                                    <p class="h4 m-0">@Job.WorkingTimeName</p>
+                                                                </td>
+                                                                <td class="m-0 p-1">
+                                                                    <p class="h4 m-0">@((int?)Job.TargetQuantity)</p>
+                                                                </td>
+                                                                <td class="m-0 p-1">
+                                                                    <p class="h4 m-0">@((int?)Job.Quantity)</p>
+                                                                </td>
+                                                                <td class="m-0 p-1">  
+                                                                    @if (Job.Efficiency != null) 
+                                                            {
+                                                                        <p class="h4 m-0">@Job.Efficiency %</p>                                                        
+                                                            }
+                                                                else
+                                                            {
+                                                                        <p class="h4 m-0"></p>
+                                                            }   
+                                                                </td>
+                                                                <td class="m-0 p-1">
+                                                                    <p class="h4 m-0"></p>
+                                                                </td>
+                                                                <td class="m-0 p-1">
+                                                                    <p class="h4 m-0">@Job.Problem</p>
+                                                                </td>
+                                                            </tr>
+                                                } 
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="card p-0">
+                                                <div class="card-body p-1">
+                                                    <div class="row m-0 w-100">
+                                                        <div class="col-md-3">
+                                                            <button class="btn btn-success w-100" onclick="onPrev()">
+                                                                <span class="h4"><i class="fas fa-angle-double-left"></i> BACK</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button class="btn btn-success w-100" onclick="onNext()">
+                                                                <span class="h4">NEXT <i class="fas fa-angle-double-right"></i></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button class="btn btn-primary w-100" onclick="goToDetail()">
+                                                                <span class="h4">REFRESH <i class="fas fa-redo"></i></span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button class="btn btn-danger w-100" onclick="onPause()">
+                                                                <span class="h4">PAUSE <i class="fas fa-pause"></i></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pr-0">
+                                            <h3 class="m-0 mb-2">Report History</h3>
+                                            <table class="table table-bordered bg-white m-0 mb-1">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 20%" class="p-1 h5 font-weight-bold text-info" scope="col">Employee<br/>Nhân viên</th>
+                                                        <th style="width: 10%" class="p-1 h5 font-weight-bold text-info" scope="col">Time<br/>Thời gian</th>
+                                                        <th style="width: 10%" class="p-1 h5 font-weight-bold text-info" scope="col">Actual<br/>Sản lượng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                        @foreach(var Job in dailyTargetModel.JobOutput.OrderBy(j=>j.WorkingTimeID))
+                                                {
+                                                        <tr>
+                                                            <td class="m-0 p-1">                                                                
+                                                                @if (Job.Efficiency != null) 
+                                                        {
+                                                                        <p class="h4 m-0">@Job.LastUpdatedBy</p>                                                        
+                                                        }
+                                                        else
+                                                        {
+                                                                        <p class="h4 m-0">&oline; </p>
+                                                        }      
+                                                            </td>
+                                                            <td class="m-0 p-1">
+                                                                @if (Job.Efficiency != null) 
+                                                        {
+                                                                        <p class="h4 m-0">@Job.LastUpdatedAt?.ToString("HH:mm")</p>                                                        
+                                                        }
+                                                        else
+                                                        {
+                                                                        <p class="h4 m-0"> &oline; </p>
+                                                        }                                                      
+                                                            </td>
+                                                            <td class="m-0 p-1">
+                                                                <p class="h4 m-0">@((int?)Job.Quantity)</p>
+                                                            </td>
+                                                        </tr>
+                                            }                                        
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            }
+        }
+  </div>
+</div>
+<script>
+    var refresh = localStorage.getItem('refresh');
+   
+    var slidestr = localStorage.getItem('slide');
+    var slide = parseInt(slidestr);
+  
+    $(document).ready(function() {
+        $('#overview-menu').removeClass('nav-link-active');
+        $('#compare-menu').removeClass('nav-link-active');
+        $('#board-menu').addClass('nav-link-active');
+        $('#chart-menu').removeClass('nav-link-active');
+        $('#config-menu').removeClass('nav-link-active');
+
+        $('.carousel').carousel({
+            interval: slide
+        });
+       
+    });
+    function autoRefresh() {
+            window.location = window.location.href;
+        }
+    //setInterval('autoRefresh()', refresh);
+    //setInterval('goToDetail()', refresh);
+    onPrev = () => {
+        $("#carouselDailyTarget").carousel("prev");
+    }
+    onNext = () => {
+        $("#carouselDailyTarget").carousel("next");
+    }
+    onPause = () => {
+        $("#carouselDailyTarget").carousel("pause");
+    }
+    onRefresh = () => {
+        window.location = window.location.href;
+    }
+</script>
+
+

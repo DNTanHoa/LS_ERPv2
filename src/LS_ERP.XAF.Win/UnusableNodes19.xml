@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="PartRevision_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="PartRevision">
+              <LayoutGroup Id="PartRevision_col1">
+                <LayoutItem Id="CustomerID" ViewItem="CustomerID" Index="2" RelativeSize="36.84863523573201" Removed="True" />
+                <LayoutItem Id="EffectDate" Index="3" RelativeSize="23.590333716915996" Removed="True" />
+              </LayoutGroup>
+              <LayoutGroup Id="PartRevision_col2">
+                <LayoutItem Id="Customer" Index="0" RelativeSize="45.714285714285715" />
+                <LayoutItem Id="PullBomType" Index="1" RelativeSize="54.285714285714285" />
+                <LayoutItem Id="PullBomTypeCode" Removed="True" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="MaterialRequest_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="Details_Group" ShowCaption="False" Caption="Details" Index="3" RelativeSize="37.94392523364486" Removed="True">
+            <LayoutItem Id="Details" Removed="True" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PurchaseOrder_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Item1" RelativeSize="34.8127600554785">
+              <LayoutItem Id="CreatedBy" RelativeSize="9.94475138121547" />
+              <LayoutItem Id="LastUpdatedBy" RelativeSize="7.18232044198895" />
+              <LayoutItem Id="CreatedAt" RelativeSize="7.18232044198895" />
+              <LayoutItem Id="LastUpdatedAt" RelativeSize="75.69060773480663" />
+            </LayoutGroup>
+            <LayoutGroup Id="PurchaseOrder">
+              <LayoutGroup Id="PurchaseOrder_col2">
+                <LayoutItem Id="Currency" RelativeSize="9.94475138121547" />
+                <LayoutItem Id="CurrencyExchangeType" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="CurrencyExchangeValue" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Tax" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="PaymentTerm" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="IncoTerm" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="PurchaseOrderStatus" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="SupplierCNUF" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="ShippingMethod" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="ShippingTerm" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="Company" RelativeSize="7.18232044198895" />
+                <LayoutItem Id="ShipTo" RelativeSize="18.23204419889503" />
+              </LayoutGroup>
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

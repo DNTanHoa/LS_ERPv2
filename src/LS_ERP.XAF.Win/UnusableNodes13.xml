@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="DailyTargetDetailSummaryByDate_DetailView">
+      <Layout Id="Layout">
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="lstDailyTargetDetailSummaryByDateDtos_Group" TextAlignMode="AlignWithChildren" Direction="Vertical" RelativeSize="87.48180494905385" Caption="Chart Daily Target Detail Summary By Date">
+            <LayoutItem Id="lstDailyTargetDetailSummaryByDateDtos" RelativeSize="100" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

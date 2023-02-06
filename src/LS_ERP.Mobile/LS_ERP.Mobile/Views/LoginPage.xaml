@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Name="LoginPageView"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:custom="clr-namespace:LS_ERP.Mobile.Custom"
+             x:Class="LS_ERP.Mobile.Views.LoginPage">
+    <StackLayout>
+        <StackLayout VerticalOptions="Start"
+                     Margin="10,10"
+                     Padding="0"
+                     Spacing="0"
+                     HorizontalOptions="StartAndExpand">
+            <Label Text="Leading Star"
+                   FontSize="22"
+                   TextColor="DarkGreen"
+                   LineHeight="1.5"
+                   TextTransform="Uppercase"
+                   FontAttributes="Bold"
+                   Margin="0"
+                   Padding="0"
+                   FontFamily="Mulish"></Label>
+            <Label Text="A family for happy employees"
+                   FontSize="16"
+                   Margin="0"
+                   Padding="0"
+                   LineHeight="1.5"
+                   TextTransform="Default"
+                   TextColor="Black"
+                   FontFamily="Mulish"></Label>
+        </StackLayout>
+        <StackLayout VerticalOptions="CenterAndExpand"
+                     Margin="10,0">
+            <Frame  CornerRadius="20"
+                    Margin="0"
+                    BackgroundColor="ForestGreen">
+                <StackLayout>
+                    <Label Text="Đăng Nhập"
+                           TextColor="White"
+                           Margin="0,10"
+                           FontAttributes="Bold"
+                           FontSize="Title"></Label>
+                    <Frame BackgroundColor="Transparent"
+                           Margin="0,10"
+                           BorderColor="White"
+                           CornerRadius="10"
+                           Padding="8">
+                        <StackLayout Orientation="Horizontal">
+                            <!--<Image HeightRequest="40"
+                                   Source="user.png"
+                                   WidthRequest="40"/>-->
+                            <custom:CustomEntry Placeholder="Mã nhân viên"
+                                PlaceholderColor="White"
+                                Text="{Binding UserName}"
+                                TextColor="White"></custom:CustomEntry>
+                        </StackLayout>
+
+                    </Frame>
+                    <Frame BackgroundColor="Transparent"
+                           Margin="0,10"
+                           BorderColor="White"
+                           CornerRadius="10"
+                           Padding="8">
+                        <StackLayout Orientation="Horizontal">
+                            <!--<Image HeightRequest="40"
+                                   Source="key.png"
+                                   WidthRequest="40"/>-->
+                            <custom:CustomEntry Placeholder="Mật khẩu"
+                                IsPassword="True"
+                                Text="{Binding PassWord}"
+                                PlaceholderColor="White"
+                                TextColor="White"></custom:CustomEntry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame BackgroundColor="White"
+                           Padding="8"
+                           CornerRadius="40">
+                        <StackLayout Orientation="Horizontal"
+                                     Margin="0"
+                                     HorizontalOptions="Center">
+                            <Label Text="Đăng nhập"
+                                Margin="0,10"
+                                TextColor="ForestGreen"
+                                FontSize="18"
+                                FontAttributes="Bold"></Label>
+                            <ActivityIndicator IsVisible="{Binding IsBusy, UpdateSourceEventName=PropertyChanged}" 
+                                               IsRunning="{Binding IsBusy, UpdateSourceEventName=PropertyChanged}" 
+                                               HeightRequest="30"
+                                               WidthRequest="30"
+                                               Color="ForestGreen"/>
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference LoginPageView}, 
+                                    Path=BindingContext.LoginCommand}"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <StackLayout HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Spacing="0"
+                     Orientation="Horizontal">
+                <Label Text="Quên mật khẩu?"
+                   VerticalOptions="Center"
+                   FontSize="16"></Label>
+                <Button Margin="2,0"
+                    BackgroundColor="Transparent"
+                    TextTransform="None"
+                    Padding="0"
+                    TextColor="DarkGreen"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    Text="Khôi phục mật khẩu">
+                </Button>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout VerticalOptions="End"
+                     Margin="10,10">
+            <Label Text="Copyright © 2021, Leading Star Co, Ltd"
+                   HorizontalOptions="Center"
+                   TextColor="Black"></Label>
+            <!--<Label Text="Một sản phẩm của ERP Team"
+                   TextColor="DarkGreen"></Label>-->
+            <Label Text="{Binding Version}"
+                   HorizontalOptions="Center"
+                   TextColor="DarkGreen"></Label>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

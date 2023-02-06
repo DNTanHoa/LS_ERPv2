@@ -1,0 +1,300 @@
+﻿@{
+    ViewData["Title"] = "Thống kê";
+}
+@model DailyTargetDetailSearchModel
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thống kê</h1>
+            </div>
+        </div>
+        <div class="row w-100 m-0">
+            <div class="card w-100 p-0">
+                <div class="card-body p-2">
+                    <form id="job-output-search-form">
+                        <div class="row">
+                            <div class="col-3 col-md-1">
+                                <label class="mt-1"><b>Công ty</b></label>
+                            </div>
+                            <div class="col-9 col-md-3">
+                                <div class="dx-field-value w-100">
+                                    @(Html.DevExtreme().SelectBoxFor(m=>m.CompanyId)
+                                    .ID("CompanyId")
+                                    .DataSource(d => d.Mvc()
+                                        .Controller("Company")
+                                        .LoadAction("GetCompany")
+                                        .LoadMode(DataSourceLoadMode.Raw)
+                                        .Key("id"))
+                                    .DisplayExpr("shortName")
+                                    .ValueExpr("id")  
+                                    .OnValueChanged("onSearch")
+                                    )
+                                </div>
+                            </div>
+                            <div class="col-3 col-md-1">
+                                <label class="mt-1"><b>Ngày</b></label>
+                            </div>
+                            <div class="col-9 col-md-3">
+                                <div class="dx-field-value w-100">
+                                    @(Html.DevExtreme().DateBoxFor(m=>m.ProduceDate)
+                                        .ID("AtDate")
+                                        .Type(DateBoxType.Date)
+                                        .OnValueChanged("onSearch")
+                                    )
+                                </div>
+                            </div>                            
+                            <div class="col-4 col-md-2 mt-1 mt-md-0">
+                                <button class="btn btn-outline-primary mt-1 mt-md-0 w-100" type="button" onclick="onSearch()">
+                                    <i class="fas fa-search"></i>
+                                    Xem
+                                </button>
+                            </div>                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row w-100 m-0">
+             <div class="col-md-6">  
+                <div class="card w-100 p-0">
+                    <div class="card-body p-2">
+                       @(Html.DevExtreme().Chart()
+                            .ID("chart")                                               
+                            .Series(s => {
+                                s.Add()
+                                    .Name("Quantity")
+                                    .ArgumentField("workCenterName")
+                                    .ValueField("quantity")
+                                    .Axis("Quantity")
+                                    .Type(SeriesType.Bar)
+                                    .Color("#ffaa66") 
+                                    .Label(l => l
+                                        .Visible(true)
+                                        .Position(RelativePosition.Inside)
+                                        .CustomizeText(@<text>
+                                            function (){
+                                                return this.valueText  + " pcs";
+                                            }
+                                        </text>))
+                                    ;
+                                s.Add()
+                                    .Name("Efficiency")
+                                    .ArgumentField("workCenterName")
+                                    .ValueField("efficiency")   
+                                    .Axis("Efficiency")
+                                    .Type(SeriesType.Spline)
+                                    .Color("#6b71c3") 
+                                    .Label(l => l
+                                        .Visible(true)
+                                        .CustomizeText(@<text>
+                                            function (){
+                                                return this.valueText  + "%";
+                                            }
+                                        </text>))
+                                    ;
+                            }) 
+                            .Title("TOP 3 LINES LOWEST EFFICIENCY")
+                            .ArgumentAxis(a => a
+                                .Label(l => l
+                                    .OverlappingBehavior(OverlappingBehavior.Stagger)
+                                )
+                            )
+                            .ValueAxis(a => {
+                                a.Add()
+                                    .Name("Quantity")
+                                    .Position(Position.Left)                                
+                                    .Title(t => t.Text("Pcs"));
+                                a.Add()
+                                    .Name("Efficiency")
+                                    .Position(Position.Right)  
+                                    .ShowZero(true)
+                                    .Label(l => l
+                                        .CustomizeText(
+                                            @<text>
+                                                function(info) {
+                                                    return info.valueText + "%";
+                                                }
+                                            </text>)
+                                     )
+                                    .Title(t => t.Text("Efficiency"));
+                            })                          
+                            @*.Tooltip(t => t
+                                .Enabled(true)
+                                .Shared(true)
+                                .Format(f => f.Type(Format.LargeNumber).Precision(2))
+                                .CustomizeTooltip(
+                                        @<text>
+                                            function(info) {
+                                                return {
+                                                    html: "<div><div class='tooltip-header'>" +
+                                                    info.argumentText + "</div>" +
+                                                    "<div class='tooltip-body'><div class='series-name'>" +
+                                                    "<span class='top-series-name'>" + info.points[0].seriesName + "</span>" +
+                                                    ": </div><div class='value-text'>" +
+                                                    "<span class='top-series-value'>" + info.points[0].valueText + "</span>" +
+                                                    "</div><div class='series-name'>" +
+                                                    "<span class='bottom-series-name'>" + info.points[1].seriesName + "</span>" +
+                                                    ": </div><div class='value-text'>" +
+                                                    "<span class='bottom-series-value'>" + info.points[1].valueText + "</span>" +
+                                                    "% </div></div></div>"
+                                                };
+                                            }
+                                        </text>)
+                                )
+                            .Legend(l => l
+                                .VerticalAlignment(VerticalEdge.Bottom)
+                                .HorizontalAlignment(HorizontalAlignment.Center)
+                            )*@
+                            .DataSource(new List<JobOutputSummaryModel>())  
+                        )
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">  
+                <div class="card w-100 p-0">
+                    <div class="card-body p-2">
+                       @(Html.DevExtreme().DataGrid<JobOutputByCustomerModel>()
+                        .ID("grid-customer-quantity")
+                        .ShowBorders(true)
+                        .DataSource(new List<JobOutputByCustomerModel>())
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .Columns(columns => {
+                            columns.Add()
+                            .DataField("customerName")
+                            .Caption("Customer")
+                            .DataType(GridColumnDataType.String);
+                            columns.Add()
+                            .DataField("quantity")
+                            .Caption("Quantity")
+                            .DataType(GridColumnDataType.Number);
+                            columns.Add()
+                            .DataField("lines")
+                            .Caption("Lines")
+                            .DataType(GridColumnDataType.Number);                       
+                        })
+                        .Summary(s => s.TotalItems(items => {
+                            items.Add()
+                                .Column("customerName") 
+                                .DisplayFormat("Total")
+                                .SummaryType(SummaryType.Count)
+                                ;
+                            items.Add()
+                                .Column("quantity")
+                                .SummaryType(SummaryType.Sum)
+                                .ValueFormat(Format.Decimal)
+                                .DisplayFormat("{0}");
+                            items.Add()
+                                .Column("lines")
+                                .SummaryType(SummaryType.Sum)
+                                .DisplayFormat("{0}");
+                            })
+                        )
+                    )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="modal-area-content"></div>
+<script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
+<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.10.1/polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.8.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+    var formatDate = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric" }).format;
+</script>
+<script>
+    $(document).ready(() => {
+        $('#overview-menu').removeClass('nav-link-active');
+        $('#compare-menu').removeClass('nav-link-active');
+        $('#board-menu').removeClass('nav-link-active');
+        $('#chart-menu').addClass('nav-link-active');
+        $('#config-menu').removeClass('nav-link-active');
+    });
+    onSearch = () => {
+        $.blockUI({ message: 'Hệ thống đang xử lý vui lòng chờ...'})
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetTopMinDailyTargetDetailSummaryByDate","Dashboard")',
+            data: $('#job-output-search-form').serialize(),
+            success: (res) => { 
+
+                var dataSource = new DevExpress.data.DataSource({
+                       getDataSource:res
+                    });
+                $("#chart").dxChart({
+                    dataSource: dataSource
+                });
+                dataSource.load();
+                var a = $("#chart").dxChart({}).dxChart("instance").getDataSource();   
+                $("#chart").dxChart("option", "dataSource", res);
+                $("#chart").dxChart({}).dxChart("instance").getDataSource().reload();                
+                var data = $("#chart").dxChart("instance").getDataSource();              
+                $("#chart").dxChart("refresh");
+
+            },
+            error: (xhr, err) => {
+                $.unblockUI();
+                swal({
+                    title: "Lỗi",
+                    text: "Có lỗi trong quá trình xử lý, vui lòng thử lại sau",
+                    icon: "error"
+                });
+                console.log(xhr.responseText);
+            }
+        }).done(() => {
+            $.unblockUI();
+        })
+        //////
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetDailyTargetDetailSummaryGroupByCustomerByDate","Dashboard")',
+            data: $('#job-output-search-form').serialize(),
+            success: (res) => { 
+                var dataGrid = $("#grid-customer-quantity").dxDataGrid({}).dxDataGrid("instance");
+                    var dataSource = dataGrid.getDataSource();
+                    var details = dataSource.store();
+                    details._array = [];
+                    res.forEach((item, index) => {
+                        details.insert(item).then(() => {
+                            dataSource.reload();
+                        });
+                    });
+                    dataSource.reload();
+
+            },
+            error: (xhr, err) => {
+                $.unblockUI();
+                swal({
+                    title: "Lỗi",
+                    text: "Có lỗi trong quá trình xử lý, vui lòng thử lại sau",
+                    icon: "error"
+                });
+                console.log(xhr.responseText);
+            }
+        }).done(() => {
+            $.unblockUI();
+        })
+    }
+    onReload = () => {
+        var chartContainer = $("#chart");
+        var dataSource = chartContainer.dxChart("instance").getDataSource();
+        //dataSource.filter(["WorkCenterName", ""]);
+        $("#chart").dxChart({}).dxChart("instance").getDataSource().reload();
+        dataSource.reload();
+        chartContainer.dxChart("refresh");
+        
+    }
+    onEdit = (e) => {
+        var id = e.row.data.id;
+        var url = '@Url.Action("Detail","JobOutput")' + '?id=' + id;
+        window.location.href = url;
+    }
+</script>

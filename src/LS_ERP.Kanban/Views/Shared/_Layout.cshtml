@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@ViewBag.Title - Hệ thống hỗ trợ công việc - Leading Star Viet Nam</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="~/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="~/css/site.css">
+      <!--Devextreme theme-->
+    <link href="~/css/devextreme/dx.common.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+    <script src="~/js/devextreme/jquery.js"></script>
+    <script src="~/js/devextreme/bootstrap.js"></script>
+    <script src="~/js/devextreme/dx.all.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
+    <script src="~/service-worker.js"> </script>
+
+</head>
+<body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+            <div class="container-fluid">
+                <a asp-action="Index" asp-controller="Home" class="navbar-brand">
+                    <img src="~/images/ls.png" alt="Leading Star Viet Nam" class="brand-image logo img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text-custom font-weight">Leading Star</span>
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a id="overview-menu" asp-action="Index" asp-controller="Dashboard" class="nav-link h5 m-0 nav-link-active"><b>OVERVIEW</b></a>
+                    </li>
+                    <li class="nav-item">                        
+                        <a id="compare-menu" asp-action="Compare" asp-controller="Dashboard" class="nav-link h5 m-0"><b>COMPARE</b></a>
+                    </li>
+                    <li class="nav-item">                       
+                        <a id="board-menu" asp-action="Detail"  asp-controller="Dashboard" asp-route-ids="abc" class="nav-link h5 m-0"><b>BOARD</b></a>                         
+                    </li>
+                    <li class="nav-item">                        
+                        <a id="chart-menu" asp-action="Chart" asp-controller="Dashboard"   class="nav-link h5 m-0"><b>CHART</b></a>
+                    </li>
+                    <li class="nav-item">                        
+                        <a id="config-menu" asp-action="Config" asp-controller="Dashboard"   class="nav-link h5 m-0"><b>CONFIG</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link h5 m-0 text-danger" asp-action="Logout" asp-controller="Authenticate">
+                            <i class="fas fa-power-off"></i>
+                            Thoát
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+        <div class="content-wrapper mb-0">
+            @RenderBody()
+        </div>
+        <footer class="main-footer py-2">
+            <div class="float-right d-none d-sm-inline">
+                Hệ thống nội bộ
+            </div>
+            <strong>Bản quyền &copy; @DateTime.Now.Year. Leading Star Viet Nam</strong>. Bảo lưu tất cả quyền.
+        </footer>
+    </div>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/dist/js/adminlte.min.js"></script>
+    <script>
+        //goToDetail = () => {
+        //    var retrievedObject = localStorage.getItem('listWorkCenterID');
+        //    var listWorkCenterID = JSON.parse(retrievedObject)
+        //    var url = "@Url.Action("Detail","Dashboard")" + "?ids="+retrievedObject;
+        //    window.location.href = url;  
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: '@Url.Action("Detail","Dashboard")',
+        //        data: {
+        //            listWorkCenterID: retrievedObject,
+        //        },
+        //        success: (res) => {
+        //            window.location.href = "/Dashboard/Detail";
+        //            window.location.href = url;
+        //        },
+        //    });
+        //}
+        getListId = () => {
+            return localStorage.getItem('listWorkCenterID');
+        }
+        $(document).ready(function() {
+            var retrievedObject = localStorage.getItem('listWorkCenterID');
+            var url = "/Dashboard/Detail?ids=" + retrievedObject;
+            $('#board-menu').attr('href', url); 
+           
+        });
+      
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

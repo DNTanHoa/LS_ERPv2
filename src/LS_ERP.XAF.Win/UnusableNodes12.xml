@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="DailyTargetDetailSummaryByDate_DailyTargetDetailSummaryByDateDtoss_ListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="ID" Index="0" Width="64" />
+        <ColumnInfo Id="Name" Width="117" Index="1" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="DailyTargetID" Width="107" />
+        <ColumnInfo Id="CustomerID" Width="103" />
+        <ColumnInfo Id="CustomerName" Width="124" />
+        <ColumnInfo Id="StyleNO" Width="126" />
+        <ColumnInfo Id="WorkCenterID" Width="107" />
+        <ColumnInfo Id="WorkCenterName" SortIndex="0" SortOrder="Ascending" Width="118" />
+        <ColumnInfo Id="TotalTargetQuantity" Width="128" />
+        <ColumnInfo Id="TotalOrderQuantity" Width="120" />
+        <ColumnInfo Id="NumberOfWorker" Width="150" />
+        <ColumnInfo Id="ProduceDate" Width="118" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

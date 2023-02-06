@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="21.2.6.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="FBRequestReport" Landscape="true" Margins="0, 0, 20, 20" PaperKind="A4" PageWidth="1169" PageHeight="827" Version="21.2" Font="Arial, 9.75pt">
+  <Extensions>
+    <Item1 Ref="1" Key="VSReportExtInfo" Value=".vsrepx" />
+  </Extensions>
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" HeightF="20" />
+    <Item2 Ref="3" ControlType="BottomMarginBand" Name="BottomMargin" SnapLinePadding="0,0,10,10,100" HeightF="20" />
+    <Item3 Ref="4" ControlType="DetailBand" Name="Detail" HeightF="32.29167">
+      <Controls>
+        <Item1 Ref="5" ControlType="XRTable" Name="xrTable2" SizeF="1148.99988,32.29167" LocationFloat="9.999974,0" Padding="2,2,0,0,96" Borders="Left, Right, Bottom">
+          <Rows>
+            <Item1 Ref="6" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="7" ControlType="XRTableCell" Name="xrTableCell7" Weight="0.42697855346875979" Multiline="true" TextAlignment="MiddleCenter" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="8" EventName="BeforePrint" PropertyName="Text" Expression="[No]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="9" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="10" ControlType="XRTableCell" Name="xrTableCell8" Weight="1.0123320992912304" Multiline="true" Text="xrTableCell8" TextAlignment="MiddleLeft" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="11" EventName="BeforePrint" PropertyName="Text" Expression="[CustomerStyleNumber]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="12" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="13" ControlType="XRTableCell" Name="xrTableCell9" Weight="1.3765919052099109" Multiline="true" Text="xrTableCell9" TextAlignment="MiddleLeft" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="14" EventName="BeforePrint" PropertyName="Text" Expression="[OrderNumber]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="15" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="16" ControlType="XRTableCell" Name="xrTableCell10" Weight="2.5249809504403231" TextFormatString="{0:G29}" Multiline="true" Text="xrTableCell10" TextAlignment="MiddleLeft" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="17" EventName="BeforePrint" PropertyName="Text" Expression="[FabricColor]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="18" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="19" ControlType="XRTableCell" Name="tableCell9" Weight="0.91723513660135447" Multiline="true" Text="[ItemColorCode]" TextAlignment="MiddleLeft" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <StylePriority Ref="20" UseFont="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="21" ControlType="XRTableCell" Name="tableCell8" Weight="0.55310769941777793" TextFormatString="{0:#,##0.######}" Multiline="true" Text="[OrderQuantity]" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="22" EventName="BeforePrint" PropertyName="Text" Expression="[OrderQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="23" UseFont="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="24" ControlType="XRTableCell" Name="tableCell10" Weight="0.728475915206598" TextFormatString="{0:#,##0.######}" Multiline="true" Text="[RequestQuantity]" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="25" EventName="BeforePrint" PropertyName="Text" Expression="[RequestQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="26" UseFont="false" UseTextAlignment="false" />
+                </Item7>
+                <Item8 Ref="27" ControlType="XRTableCell" Name="tableCell14" Weight="0.728475915206598" TextFormatString="{0:#,##0.######}" Multiline="true" Text="tableCell14" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="28" EventName="BeforePrint" PropertyName="Text" Expression="[SemiFinishedProductQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="29" UseFont="false" UseTextAlignment="false" />
+                </Item8>
+                <Item9 Ref="30" ControlType="XRTableCell" Name="tableCell11" Weight="0.75612572784643506" TextFormatString="{0:#,##0.######}" Multiline="true" Text="[StreakRequestQuantity]" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="31" EventName="BeforePrint" PropertyName="Text" Expression="[StreakRequestQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="32" UseFont="false" UseTextAlignment="false" />
+                </Item9>
+                <Item10 Ref="33" ControlType="XRTableCell" Name="tableCell12" Weight="0.44324535499875756" TextFormatString="{0:#,##0.######}" Multiline="true" Text="[PercentPrintQuantity]" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="34" EventName="BeforePrint" PropertyName="Text" Expression="[PercentPrintQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="35" UseFont="false" UseTextAlignment="false" />
+                </Item10>
+                <Item11 Ref="36" ControlType="XRTableCell" Name="tableCell2" Weight="0.70568909402843638" TextFormatString="{0:#,##0.######}" Multiline="true" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="37" EventName="BeforePrint" PropertyName="Text" Expression="[CustomerConsumption]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="38" UseFont="false" UseTextAlignment="false" />
+                </Item11>
+                <Item12 Ref="39" ControlType="XRTableCell" Name="xrTableCell11" Weight="0.6513988139313418" TextFormatString="{0:#,##0.######}" Multiline="true" Text="xrTableCell11" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <Summary Ref="40" Running="Group" />
+                  <ExpressionBindings>
+                    <Item1 Ref="41" EventName="BeforePrint" PropertyName="Text" Expression="[BalanceQuantity]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="42" UseFont="false" UseTextAlignment="false" />
+                </Item12>
+                <Item13 Ref="43" ControlType="XRTableCell" Name="xrTableCell12" Weight="0.54434489322368218" Multiline="true" Text="xrTableCell12" TextAlignment="MiddleRight" Font="Microsoft Sans Serif, 9.75pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="44" EventName="BeforePrint" PropertyName="Text" Expression="[BreadthWidth]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="45" UseFont="false" UseTextAlignment="false" />
+                </Item13>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="46" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="47" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="220.562576">
+      <Controls>
+        <Item1 Ref="48" ControlType="XRTable" Name="xrTable1" TextAlignment="MiddleCenter" SizeF="1149.00012,88.54167" LocationFloat="9.999974,132.0209" Font="Times New Roman, 11.25pt, style=Bold, charSet=0" BackColor="YellowGreen" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="49" ControlType="XRTableRow" Name="xrTableRow1" Weight="1.6654259688515387">
+              <Cells>
+                <Item1 Ref="50" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.52412651582664038" Multiline="true" Text="STT" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="51" UseFont="false" />
+                </Item1>
+                <Item2 Ref="52" ControlType="XRTableCell" Name="xrTableCell2" Weight="1.2426624053702116" Multiline="true" Text="MÃ HÀNG" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="53" UseFont="false" />
+                </Item2>
+                <Item3 Ref="54" ControlType="XRTableCell" Name="xrTableCell3" Weight="1.6897996354586879" Multiline="true" Text="ĐƠN HÀNG" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="55" UseFont="false" />
+                </Item3>
+                <Item4 Ref="56" ControlType="XRTableCell" Name="xrTableCell4" Weight="3.099475530063931" Multiline="true" Text="MÀU VẢI" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="57" UseFont="false" />
+                </Item4>
+                <Item5 Ref="58" ControlType="XRTableCell" Name="tableCell7" Weight="1.1259290177715102" Multiline="true" Text="CODE VẢI" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="59" UseFont="false" />
+                </Item5>
+                <Item6 Ref="60" ControlType="XRTableCell" Name="tableCell1" Weight="0.67895172219365785" Multiline="true" Text="SLĐH&#xD;&#xA;(pcs)" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="61" UseFont="false" />
+                </Item6>
+                <Item7 Ref="62" ControlType="XRTableCell" Name="xrTableCell5" Weight="0.894222567850117" Multiline="true" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <ExpressionBindings>
+                    <Item1 Ref="63" EventName="BeforePrint" PropertyName="Text" Expression="'SL CẦN &#xA;(' + FormatString('{0:#,##0.######}',[PercentWastage])  + '%) yard'" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="64" UseFont="false" />
+                </Item7>
+                <Item8 Ref="65" ControlType="XRTableCell" Name="tableCell13" Weight="0.894222567850117" Multiline="true" Text="SL BÁN THÀNH PHẨM &#xD;&#xA;(pcs)" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="66" UseFont="false" />
+                </Item8>
+                <Item9 Ref="67" ControlType="XRTableCell" Name="tableCell3" Weight="0.92816287423378974" Multiline="true" Text="SL CẮT VIỀN &#xD;&#xA;(yard)" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="68" UseFont="false" />
+                </Item9>
+                <Item10 Ref="69" ControlType="XRTableCell" Name="tableCell6" Weight="0.54409370637807231" Multiline="true" Text="SL % In" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="70" UseFont="false" />
+                </Item10>
+                <Item11 Ref="71" ControlType="XRTableCell" Name="tableCell4" Weight="0.86625047008045664" Multiline="true" Text="CONS" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="72" UseFont="false" />
+                </Item11>
+                <Item12 Ref="73" ControlType="XRTableCell" Name="tableCell5" Weight="0.79960779104780622" Multiline="true" Text="CÂN BẰNG" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="74" UseFont="false" />
+                </Item12>
+                <Item13 Ref="75" ControlType="XRTableCell" Name="xrTableCell6" Weight="0.66819809492253379" Multiline="true" Text="KHỔ VẢI" Font="Microsoft Sans Serif, 11.25pt, charSet=0">
+                  <StylePriority Ref="76" UseFont="false" />
+                </Item13>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="77" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="78" ControlType="XRLabel" Name="xrLabel1" Multiline="true" TextAlignment="MiddleCenter" SizeF="816.0001,82.8125" LocationFloat="163.194427,10.0000067" Font="Times New Roman, 21.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="79" EventName="BeforePrint" PropertyName="Text" Expression="'PHIẾU ĐỀ XUẤT VẢI PHÒNG CẮT + VIỀN &#xA;'+ [FBRequestReportModel].[CompanyShortName] +' &#xA;' + [FBRequestReportModel].[Reason]" />
+          </ExpressionBindings>
+          <StylePriority Ref="80" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item4>
+    <Item5 Ref="81" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="51.0416679">
+      <Controls>
+        <Item1 Ref="82" ControlType="XRLabel" Name="label1" Multiline="true" Text="Ngày xuất:" TextAlignment="MiddleCenter" SizeF="125.333244,23" LocationFloat="22.4999828,10.0000067" Font="Times New Roman, 14.25pt, charSet=0" Padding="2,2,0,0,100">
+          <StylePriority Ref="83" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="84" ControlType="XRLabel" Name="xrLabel12" TextFormatString="{0:MMMM d, yyyy}" Multiline="true" Text="Tên người nhận (receiver):" TextAlignment="MiddleLeft" SizeF="249.7084,23" LocationFloat="163.194427,10.0000067" Font="Times New Roman, 14.25pt, style=Italic, charSet=0" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="85" EventName="BeforePrint" PropertyName="Text" Expression="[FBRequestReportModel].[RequestDate]" />
+          </ExpressionBindings>
+          <StylePriority Ref="86" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item5>
+  </Bands>
+</XtraReportsLayoutSerializer>

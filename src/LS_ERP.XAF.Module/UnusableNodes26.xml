@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <ListView Id="PackingList_LookupListView">
+      <Columns Id="Columns">
+        <ColumnInfo Id="PackingListCode" Width="120" />
+        <ColumnInfo Id="ShippingMethod" LookupProperty="Code" />
+        <ColumnInfo Id="ShippingMark1Code" Removed="True" />
+        <ColumnInfo Id="ShippingMark2Code" Removed="True" />
+        <ColumnInfo Id="ShippingMethodCode" Removed="True" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

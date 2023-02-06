@@ -1,0 +1,227 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controllers\PartRevision\ImportPartRevisionAction_ViewController.cs~RF1e1bac8d.TMP" />
+    <None Remove="Model.DesignedDiffs.xafml" />
+    <None Remove="Report\FabricRequest\FBRequestReport.vsrepx" />
+    <None Remove="Report\Issued\FBIssuedReport.vsrepx" />
+    <None Remove="Report\Issued\FBIssuedReportDE.vsrepx" />
+    <None Remove="Report\Issued\IssuedReport.vsrepx" />
+    <None Remove="Report\PackingList\PackingList_Report.vsrepx" />
+    <None Remove="Report\PurchaseOrder\PurchaseOrder_Default_Report.vsrepx" />
+    <None Remove="Report\PurchaseOrder\PurchaseOrder_DE_Report.vsrepx" />
+    <None Remove="Report\PurchaseOrder\PurchaseOrder_HA_Report.vsrepx" />
+    <None Remove="Report\SalesQuote\SalesQuote_Report.vsrepx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml" />
+    <EmbeddedResource Include="Report\FabricRequest\FBRequestReport.vsrepx" />
+    <EmbeddedResource Include="Report\Issued\FBIssuedReport.vsrepx" />
+    <EmbeddedResource Include="Report\Issued\FBIssuedReportDE.vsrepx" />
+    <EmbeddedResource Include="Report\Issued\IssuedReport.vsrepx" />
+    <EmbeddedResource Include="Report\PackingList\PackingList_Report.vsrepx" />
+    <EmbeddedResource Include="Report\PurchaseOrder\PurchaseOrder_Default_Report.vsrepx" />
+    <EmbeddedResource Include="Report\PurchaseOrder\PurchaseOrder_HA_Report.vsrepx" />
+    <EmbeddedResource Include="Report\PurchaseOrder\PurchaseOrder_DE_Report.vsrepx" />
+    <EmbeddedResource Include="Report\SalesQuote\SalesQuote_Report.vsrepx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="DevExpress.ExpressApp" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.Chart" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.ConditionalAppearance" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.EFCore" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.PivotChart" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.PivotGrid" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.TreeListEditors" Version="22.2.3" />
+    <PackageReference Include="DevExpress.ExpressApp.Validation" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Persistent.Base" Version="22.2.3" />
+    <PackageReference Include="DevExpress.Persistent.BaseImpl.EFCore" Version="22.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.3" />
+    <PackageReference Include="RPN.Net" Version="1.2.3" />
+    <PackageReference Include="SqlKata" Version="2.4.0" />
+    <PackageReference Include="SqlKata.Execution" Version="2.4.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LS-ERP.EntityFrameworkCore.Shared\LS-ERP.EntityFrameworkCore.Shared.csproj" />
+    <ProjectReference Include="..\LS-ERP.EntityFrameworkCore.SqlServer\LS-ERP.EntityFrameworkCore.SqlServer.csproj" />
+    <ProjectReference Include="..\LS-ERP.EntityFrameworkCore\LS-ERP.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\LS-ERP.Service\LS-ERP.Service.csproj" />
+    <ProjectReference Include="..\Ultils\Ultils.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BusinessObjects\Entities\" />
+    <Folder Include="Controllers\Consignee\" />
+    <Folder Include="Controllers\ShippingPlanDetail\" />
+    <Folder Include="Dtos\DailyTarget\" />
+    <Folder Include="Service\CurrencyExchangeType\Request\" />
+    <Folder Include="Service\FabricRequest\Response\" />
+    <Folder Include="Service\MaterialRequest\Response\" />
+    <Folder Include="Service\PurchaseRequest\Response\" />
+    <Folder Include="Service\Shipment\Response\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Drawing.v22.2">
+      
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.Reports.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.ExpressApp.Reports.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.Win.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.ExpressApp.Win.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v22.2.Core">
+      
+    </Reference>
+    <Reference Include="DevExpress.Data.v22.2">
+      
+    </Reference>
+    <Reference Include="DevExpress.Utils.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.Utils.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.XtraEditors.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.XtraGrid.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.XtraPrinting.v22.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v22.2">
+      <HintPath>C:\Program Files\DevExpress 22.2\Components\Bin\Framework\DevExpress.XtraReports.v22.2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Report\FabricRequest\FBRequestReport.cs">
+      <DependentUpon>FBRequestReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\FabricRequest\FBRequestReport.Designer.cs">
+      <DependentUpon>FBRequestReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\FBIssuedReport.cs">
+      <DependentUpon>FBIssuedReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\FBIssuedReport.Designer.cs">
+      <DependentUpon>FBIssuedReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\FBIssuedReportDE.cs">
+      <DependentUpon>FBIssuedReportDE.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\FBIssuedReportDE.Designer.cs">
+      <DependentUpon>FBIssuedReportDE.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\IssuedReport.cs">
+      <DependentUpon>IssuedReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\Issued\IssuedReport.Designer.cs">
+      <DependentUpon>IssuedReport.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PackingList\PackingList_Report.cs">
+      <DependentUpon>PackingList_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PackingList\PackingList_Report.Designer.cs">
+      <DependentUpon>PackingList_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_Default_Report.cs">
+      <DependentUpon>PurchaseOrder_Default_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_Default_Report.Designer.cs">
+      <DependentUpon>PurchaseOrder_Default_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_DE_Report.cs">
+      <DependentUpon>PurchaseOrder_DE_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_DE_Report.Designer.cs">
+      <DependentUpon>PurchaseOrder_DE_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_HA_Report.cs">
+      <DependentUpon>PurchaseOrder_HA_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\PurchaseOrder\PurchaseOrder_HA_Report.Designer.cs">
+      <DependentUpon>PurchaseOrder_HA_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\SalesQuote\SalesQuote_Report.cs">
+      <DependentUpon>SalesQuote_Report.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Report\SalesQuote\SalesQuote_Report.Designer.cs">
+      <DependentUpon>SalesQuote_Report.vsrepx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="UnusableNodes.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes1.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes10.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes11.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes12.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes13.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes14.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes15.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes17.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes19.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes2.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes20.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes22.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes24.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes3.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes4.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes5.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes6.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes7.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes8.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+    <None Update="UnusableNodes9.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevExpress.ExpressApp.CodeAnalysis" Version="22.2.3" />
+  </ItemGroup>
+</Project>

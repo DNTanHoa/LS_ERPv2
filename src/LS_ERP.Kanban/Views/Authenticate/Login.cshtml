@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập hệ thống";
+    Layout = "~/Views/Shared/_AuthenticateLayout.cshtml";
+}
+@model LoginViewModel
+
+<div class="login-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <p class="h1"><b>Đăng Nhập</b></p>
+        </div>
+        <div class="card-body">
+            <form id="login-form">
+                <div class="input-group mb-3">
+                    <input type="hidden" asp-for="ReturnUrl"/>
+                    <input type="hidden" asp-for="ErrorUrl"/>
+                    <input type="text" class="form-control" placeholder="Tài khoản" asp-for="Username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Mật khẩu" asp-for="Password" id="password" name="password" onkeydown="onKeyDown()">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                Lưu mật khẩu
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" onclick="loginSubmit()" class="btn btn-primary btn-block">Đăng Nhập</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery.blockUI/jquery.blockUI.min.js"></script>
+<script src="~/lib/sweetalert/sweetalert.min.js"></script>
+<script>
+    loginSubmit = () => {
+        $.blockUI({ message: 'Hệ thống đang xử lý vui lòng chờ...'})
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("LoginSubmit")',
+            data: $('#login-form').serialize(),
+            success: (res) => {
+                console.log(res);
+                if(res.success == true) {
+                    window.location = res.data.redirectUrl;
+                }
+                else {
+                    swal({
+                        title: "Lỗi",
+                        text: res.message,
+                        icon: "error"
+                    });
+                }
+            },
+            error: (xhr, err) => {
+                $.unblockUI();
+                swal({
+                    title: "Lỗi",
+                    text: "Có lỗi trong quá trình xử lý, vui lòng thử lại sau",
+                    icon: "error"
+                });
+                console.log(xhr.responseText);
+            }
+        }).done(() => {
+            $.unblockUI();
+        })
+    }
+    
+    onKeyDown = () => {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13') {
+            loginSubmit(); 
+        }
+    }
+</script>
